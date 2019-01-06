@@ -23,3 +23,6 @@ Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_do
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/open_rtb_ecto](https://hexdocs.pm/open_rtb_ecto).
 
+### OpenRTB Example Payloads
+https://wiki.smaato.com/pages/viewpage.action?pageId=1770079
+

@@ -2,13 +2,20 @@ defmodule OpenRtbEcto.V2.BidRequestTest do
   use OpenRtbEcto.OpenRtbCase, async: true
 
   alias OpenRtbEcto.V2.BidRequest
+  alias OpenRtbEcto.V2.BidRequest.{App, Impression, Device, User}
 
   describe "valid data" do
     test "cast from map" do
-      data_1 = test_data("request", "example-request-app-android-1.json")
-      data_2 = test_data("request", "example-request-app-android-2.json")
-      assert {:ok, casted_1} = OpenRtbEcto.cast(BidRequest, data_1)
-      assert {:ok, casted_2} = OpenRtbEcto.cast(BidRequest, data_2)
+      data = test_data("request", "example-request-app-android-1.json", :map)
+      assert {:ok, %BidRequest{} = req} = OpenRtbEcto.cast(BidRequest, data)
+      assert req.id == "7979d0c78074638bbdf739ffdf285c7e1c74a691"
+      assert [%Impression{}] = req.imp
+      assert %App{id: "20625"} = req.app
+      assert %Device{make: "Samsung"} = req.device
+      assert %User{id: "bd5adc55dcbab4bf090604df4f543d90b09f0c88"} = req.user
+
+      data = test_data("request", "example-request-app-android-2.json", :map)
+      assert {:ok, %BidRequest{}} = OpenRtbEcto.cast(BidRequest, data)
     end
   end
 
