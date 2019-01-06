@@ -19,6 +19,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Video do
     field(:h, :integer)
     field(:startdelay, :integer)
     field(:sequence, :integer, default: 1)
+    field(:btype, {:array, :integer})
     field(:battr, {:array, :integer})
     field(:maxextended, :integer)
     field(:minbitrate, :integer)
@@ -43,6 +44,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Video do
       :h,
       :startdelay,
       :sequence,
+      :btye,
       :battr,
       :maxextended,
       :minbitrate,
@@ -58,12 +60,13 @@ defmodule OpenRtbEcto.V2.BidRequest.Video do
     |> validate_inclusion(:linearity, 1..2)
     |> validate_inclusion(:protocol, 1..6)
     |> validate_inclusion(:startdelay, -2..0)
-    |> validate_number(:battr, greater_than_or_equal_to: 1, less_than_or_equal_to: 16)
-    |> validate_number(:maxextended, greater_than_or_equal_to: -1)
     |> validate_inclusion(:boxingallowed, 0..1)
-    |> validate_inclusion(:playbackmethod, 1..4)
-    |> validate_inclusion(:delivery, 1..2)
     |> validate_inclusion(:pos, 0..3)
-    |> validate_inclusion(:api, 1..4)
+    |> validate_number(:maxextended, greater_than_or_equal_to: -1)
+    |> validate_subset(:btype, 1..4)
+    |> validate_subset(:battr, 1..16)
+    |> validate_subset(:playbackmethod, 1..4)
+    |> validate_subset(:delivery, 1..2)
+    |> validate_subset(:api, 1..4)
   end
 end

@@ -53,6 +53,6 @@ defmodule OpenRtbEcto.V2.BidResponse.Bid do
       :ext
     ])
     |> validate_required([:id, :impid, :price])
-    |> validate_number(:attr, greater_than_or_equal_to: 1, less_than_or_equal_to: 16)
+    |> validate_subset(:attr, 1..16)
   end
 end

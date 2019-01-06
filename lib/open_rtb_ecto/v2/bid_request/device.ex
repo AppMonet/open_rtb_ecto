@@ -31,9 +31,9 @@ defmodule OpenRtbEcto.V2.BidRequest.Device do
     field(:model)
     field(:os)
     field(:osv)
-    field(:js)
-    field(:connectiontype)
-    field(:devicetype)
+    field(:js, :integer)
+    field(:connectiontype, :integer)
+    field(:devicetype, :integer)
     field(:flashver)
   end
 

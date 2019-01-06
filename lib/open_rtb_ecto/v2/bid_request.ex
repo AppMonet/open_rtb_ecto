@@ -41,7 +41,6 @@ defmodule OpenRtbEcto.V2.BidRequest do
     |> validate_inclusion(:allimps, 0..1)
   end
 
-  # TODO put this somewhere common as it is used in v2 & v3
   defp validate_auction_type(changeset) do
     case get_change(changeset, :at) do
       nil -> changeset

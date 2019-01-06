@@ -6,4 +6,28 @@ defmodule OpenRtbEcto do
 
   [OpenRTB 3.0 Spec](https://iabtechlab.com/wp-content/uploads/2017/09/OpenRTB-3.0-Draft-Framework-for-Public-Comment.pdf)
   """
+
+  @spec cast(Ecto.Schema.t(), map() | binary()) :: {:ok, struct()} | {:error, map()}
+  def cast(schema, %{} = data) do
+    with %{valid?: true} = changeset <- schema.changeset(struct(schema, %{}), data) do
+      {:ok, Ecto.Changeset.apply_changes(changeset)}
+    else
+      %Ecto.Changeset{} = invalid_changeset ->
+        {:error, format_invalid_changeset(invalid_changeset)}
+    end
+  end
+
+  def cast(schema, json) when is_binary(json) do
+    with {:ok, decoded} <- Jason.decode(json) do
+      cast(schema, decoded)
+    end
+  end
+
+  defp format_invalid_changeset(changeset) do
+    Ecto.Changeset.traverse_errors(changeset, fn {msg, opts} ->
+      Enum.reduce(opts, msg, fn {key, value}, acc ->
+        String.replace(acc, "%{#{key}}", to_string(value))
+      end)
+    end)
+  end
 end

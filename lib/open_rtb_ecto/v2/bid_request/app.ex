@@ -11,6 +11,8 @@ defmodule OpenRtbEcto.V2.BidRequest.App do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias OpenRtbEcto.V2.BidRequest.{Publisher, Content}
+
   @primary_key false
   embedded_schema do
     field(:id)
@@ -39,7 +41,7 @@ defmodule OpenRtbEcto.V2.BidRequest.App do
       :pagecat,
       :ver,
       :bundle,
-      :privacy_policy,
+      :privacypolicy,
       :paid,
       :keywords
     ])

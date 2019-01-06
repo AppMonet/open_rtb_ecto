@@ -7,9 +7,13 @@ defmodule OpenRtbEcto.MixProject do
       version: "0.1.0",
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      elixirc_paths: elixirc_paths(Mix.env())
     ]
   end
+
+  defp elixirc_paths(:test), do: ["test/support", "lib"]
+  defp elixirc_paths(_), do: ["lib"]
 
   def application do
     [
@@ -20,7 +24,8 @@ defmodule OpenRtbEcto.MixProject do
   defp deps do
     [
       {:ecto, "~> 3.0"},
-      {:ex_doc, "~> 0.19", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.19", only: :dev, runtime: false},
+      {:jason, "~> 1.1", only: :test}
     ]
   end
 end

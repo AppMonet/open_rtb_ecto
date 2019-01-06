@@ -29,8 +29,9 @@ defmodule OpenRtbEcto.V2.BidRequest.Banner do
     banner
     |> cast(attrs, [:w, :h, :id, :pos, :btype, :battr, :mimes, :topframe, :expdir, :api])
     |> validate_number(:topframe, greater_than_or_equal_to: 0, less_than_or_equal_to: 1)
-    |> validate_number(:btype, greater_than_or_equal_to: 1, less_than_or_equal_to: 4)
-    |> validate_number(:battr, greater_than_or_equal_to: 1, less_than_or_equal_to: 16)
-    |> validate_number(:expdir, greater_than_or_equal_to: 1, less_than_or_equal_to: 4)
+    |> validate_subset(:btype, 1..4)
+    |> validate_subset(:expdir, 1..4)
+
+    # |> validate_subset(:battr, 1..16)
   end
 end
