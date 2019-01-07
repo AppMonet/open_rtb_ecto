@@ -2,7 +2,7 @@
 
 [OpenRTB 2.0 Spec](https://www.iab.com/wp-content/uploads/2015/06/OpenRTB_API_Specification_Version2_0_FINAL.pdf)
 
-[OpenRTB 3.0 Spec](https://iabtechlab.com/wp-content/uploads/2017/09/OpenRTB-3.0-Draft-Framework-for-Public-Comment.pdf)
+[OpenRTB 3.0 Spec](https://github.com/InteractiveAdvertisingBureau/openrtb/blob/master/OpenRTB%20v3.0%20FINAL.md)
 
 **TODO: Add description**
 
@@ -26,3 +26,6 @@ be found at [https://hexdocs.pm/open_rtb_ecto](https://hexdocs.pm/open_rtb_ecto)
 ### OpenRTB Example Payloads
 https://wiki.smaato.com/pages/viewpage.action?pageId=1770079
 
+
+### Details
+1. We do NOT attempt to validate ISO-4217 currency codes in `cur` fields
