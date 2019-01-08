@@ -1,33 +1,33 @@
 defmodule OpenRtbEcto.V2.BidRequest.App do
   @moduledoc """
-  An “app” object should be included if the ad supported content is part of a mobile application
-  (as opposed to a mobile website). A bid request must not contain both an “app” object and a
-  “site” object.
-  The app object itself and all of its parameters are optional, so default values are not provided. If
-  an optional parameter is not specified, it should be considered unknown. . At a minimum, it’s
-  useful to provide an App ID or bundle, but this is not strictly required.
+  This object should be included if the ad supported content is a non-browser application (typically in
+  mobile) as opposed to a website. A bid request must not contain both an App and a Site object. At a
+  minimum, it is useful to provide an App ID or bundle, but this is not strictly required.
   """
 
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias OpenRtbEcto.Types.TinyInt
   alias OpenRtbEcto.V2.BidRequest.{Publisher, Content}
 
   @primary_key false
   embedded_schema do
     field(:id)
     field(:name)
+    field(:bundle)
     field(:domain)
+    field(:storeurl)
     field(:cat, {:array, :string})
     field(:sectioncat, {:array, :string})
     field(:pagecat, {:array, :string})
     field(:ver)
-    field(:bundle)
-    field(:privacypolicy, :integer)
+    field(:privacypolicy, TinyInt)
     field(:paid)
     embeds_one(:publisher, Publisher)
     embeds_one(:content, Content)
     field(:keywords)
+    field(:ext, :map)
   end
 
   def changeset(app, attrs \\ %{}) do
@@ -35,18 +35,19 @@ defmodule OpenRtbEcto.V2.BidRequest.App do
     |> cast(attrs, [
       :id,
       :name,
+      :bundle,
       :domain,
+      :storeurl,
       :cat,
       :sectioncat,
       :pagecat,
       :ver,
-      :bundle,
       :privacypolicy,
       :paid,
-      :keywords
+      :keywords,
+      :ext
     ])
     |> cast_embed(:publisher)
     |> cast_embed(:content)
-    |> validate_number(:privacypolicy, greater_than_or_equal_to: 0, less_than_or_equal_to: 1)
   end
 end

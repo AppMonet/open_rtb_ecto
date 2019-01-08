@@ -1,15 +1,14 @@
 defmodule OpenRtbEcto.V2.BidRequest.Site do
   @moduledoc """
-  A site object should be included if the ad supported content is part of a website (as opposed to
-  an application). A bid request must not contain both a site object and an app object.
-  The site object itself and all of its parameters are optional, so default values are not provided. If
-  an optional parameter is not specified, it should be considered unknown. At a minimum, it’s
-  useful to provide a page URL or a site ID, but this is not strictly required.
+  This object should be included if the ad supported content is a website as opposed to a non-browser
+  application. A bid request must not contain both a Site and an App object. At a minimum, it is useful
+  to provide a site ID or page URL, but this is not strictly required.
   """
 
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias OpenRtbEcto.Types.TinyInt
   alias OpenRtbEcto.V2.BidRequest.{Publisher, Content}
 
   @primary_key false
@@ -21,15 +20,16 @@ defmodule OpenRtbEcto.V2.BidRequest.Site do
     field(:sectioncat, {:array, :string})
     field(:pagecat, {:array, :string})
     field(:page)
-    field(:privacypolicy, :integer)
     field(:ref)
     field(:search)
+    field(:mobile, TinyInt)
+    field(:privacypolicy, TinyInt)
     embeds_one(:publisher, Publisher)
     embeds_one(:content, Content)
     field(:keywords)
+    field(:ext, :map)
   end
 
-  # TODO validate categories?
   def changeset(site, attrs \\ %{}) do
     site
     |> cast(attrs, [
@@ -40,13 +40,14 @@ defmodule OpenRtbEcto.V2.BidRequest.Site do
       :sectioncat,
       :pagecat,
       :page,
-      :privacypolicy,
       :ref,
       :search,
-      :keywords
+      :mobile,
+      :privacypolicy,
+      :keywords,
+      :ext
     ])
     |> cast_embed(:publisher)
     |> cast_embed(:content)
-    |> validate_inclusion(:privacypolicy, 0..1)
   end
 end

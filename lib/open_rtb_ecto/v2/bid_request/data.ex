@@ -1,11 +1,9 @@
 defmodule OpenRtbEcto.V2.BidRequest.Data do
   @moduledoc """
-  The data and segment objects together allow data about the user to be passed to bidders in the
-  bid request. This data may be from multiple sources (e.g., the exchange itself, third party
-  providers) as specified by the data object ID field. A bid request can mix data objects from
-  multiple providers.
-  The data object itself and all of its parameters are optional, so default values are not provided.
-  If an optional parameter is not specified, it should be considered unknown.
+  The data and segment objects together allow additional data about the related object (e.g., user,
+  content) to be specified. This data may be from multiple sources whether from the exchange itself or
+  third parties as specified by the id field. A bid request can mix data objects from multiple providers.
+  The specific data providers in use should be published by the exchange a priori to its bidders.
   """
 
   use Ecto.Schema
@@ -18,11 +16,12 @@ defmodule OpenRtbEcto.V2.BidRequest.Data do
     field(:id)
     field(:name)
     embeds_many(:segment, Segment)
+    field(:ext, :map)
   end
 
   def changeset(data, attrs \\ %{}) do
     data
-    |> cast(attrs, [:id, :name])
+    |> cast(attrs, [:id, :name, :ext])
     |> cast_embed(:segment)
   end
 end

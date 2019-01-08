@@ -1,10 +1,8 @@
 defmodule OpenRtbEcto.V2.BidRequest.Segment do
   @moduledoc """
-  The data and segment objects together allow data about the user to be passed to bidders in the
-  bid request. Segment objects convey specific units of information from the provider identified
-  in the parent data object.
-  The segment object itself and all of its parameters are optional, so default values are not
-  provided; if an optional parameter is not specified, it should be considered unknown.
+  Segment objects are essentially key-value pairs that convey specific units of data. The parent Data
+  object is a collection of such values from a given data provider. The specific segment names and value
+  options must be published by the exchange a priori to its bidders.
   """
 
   use Ecto.Schema
@@ -15,11 +13,12 @@ defmodule OpenRtbEcto.V2.BidRequest.Segment do
     field(:id)
     field(:name)
     field(:value)
+    field(:ext, :map)
   end
 
   #
   def changeset(producer, attrs \\ %{}) do
     producer
-    |> cast(attrs, [:id, :name, :value])
+    |> cast(attrs, [:id, :name, :value, :ext])
   end
 end

@@ -1,20 +1,7 @@
 defmodule OpenRtbEcto.V2.BidResponse.Bid do
   @moduledoc """
-  For each bid, the “nurl” attribute contains the win notice URL. If the bidder wins the impression,
-  the exchange calls this notice URL a) to inform the bidder of the win and b) to convey certain
-  information using substitution macros (see Section 4.6 Substitution Macros).
-  The “adomain” attribute can be used to check advertiser block list compliance. The “iurl”
-  attribute can provide a link to an image that is representative of the campaign’s content
-  (irrespective of whether the campaign may have multiple creatives). This enables human review
-  for spotting inappropriate content. The “cid” attribute can be used to block ads that were
-  previously identified as inappropriate; essentially a safety net beyond the block lists. The “crid”
-  attribute can be helpful in reporting creative issues back to bidders. Finally, the “attr” array
-  indicates the creative attributes that describe the ad to be served.
-
-  #### BEST PRACTICE:
-  Substitution macros may allow a bidder to use a static notice URL for all of its
-  bids. Thus, exchanges should offer the option of a default notice URL that can be preconfigured
-  per bidder to reduce redundant data transfer.
+  A SeatBid object contains one or more Bid objects, each of which relates to a specific impression in the
+  bid request via the impid attribute and constitutes an offer to buy that impression for a given price.
   """
 
   use Ecto.Schema
@@ -25,14 +12,28 @@ defmodule OpenRtbEcto.V2.BidResponse.Bid do
     field(:id)
     field(:impid)
     field(:price, :float)
-    field(:adid)
     field(:nurl)
+    field(:burl)
+    field(:lurl)
     field(:adm)
+    field(:adid)
     field(:adomain, {:array, :string})
+    field(:bundle)
     field(:iurl)
     field(:cid)
     field(:crid)
-    field(:attr, {:array, :integer})
+    field(:tactic)
+    field(:cat, {:array, :string})
+    field(:api, :integer)
+    field(:protocol, :integer)
+    field(:qagmediarating, :integer)
+    field(:language)
+    field(:dealid)
+    field(:w, :integer)
+    field(:h, :integer)
+    field(:wratio, :integer)
+    field(:hratio, :integer)
+    field(:exp, :integer)
     field(:ext, :map)
   end
 
@@ -42,17 +43,35 @@ defmodule OpenRtbEcto.V2.BidResponse.Bid do
       :id,
       :impid,
       :price,
-      :adid,
       :nurl,
+      :burl,
+      :lurl,
       :adm,
+      :adid,
       :adomain,
+      :bundle,
       :iurl,
       :cid,
       :crid,
+      :tactic,
+      :cat,
       :attr,
+      :api,
+      :protocol,
+      :qagmediarating,
+      :language,
+      :dealid,
+      :w,
+      :h,
+      :wratio,
+      :hratio,
+      :exp,
       :ext
     ])
     |> validate_required([:id, :impid, :price])
-    |> validate_subset(:attr, 1..16)
+    |> validate_subset(:attr, 1..17)
+    |> validate_inclusion(:api, 1..6)
+    |> validate_inclusion(:protocol, 1..10)
+    |> validate_inclusion(:qagmediarating, 1..3)
   end
 end

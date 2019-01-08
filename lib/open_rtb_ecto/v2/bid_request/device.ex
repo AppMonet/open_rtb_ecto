@@ -1,70 +1,86 @@
 defmodule OpenRtbEcto.V2.BidRequest.Device do
   @moduledoc """
-  The “device” object provides information pertaining to the device including its hardware,
-  platform, location, and carrier. This device can refer to a mobile handset, a desktop computer,
-  set top box or other digital device.
-  The device object itself and all of its parameters are optional, so default values are not provided.
-  If an optional parameter is not specified, it should be considered unknown.
-  In general, the most essential fields are either the IP address (to enable geo-lookup for the
-  bidder), or providing geo information directly in the geo object.
+  This object provides information pertaining to the device through which the user is interacting. Device
+  information includes its hardware, platform, location, and carrier data. The device can refer to a mobile
+  handset, a desktop computer, set top box, or other digital device.
   """
 
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias OpenRtbEcto.Types.TinyInt
   alias OpenRtbEcto.V2.BidRequest.Geo
 
   @primary_key false
   embedded_schema do
-    field(:dnt, :integer)
     field(:ua)
-    field(:ip)
     embeds_one(:geo, Geo)
-    field(:didsha1)
-    field(:didmd5)
-    field(:dpidsha1)
-    field(:dpidmd5)
+    field(:dnt, TinyInt)
+    field(:lmt, TinyInt)
+    field(:ip)
     field(:ipv6)
-    field(:carrier)
-    field(:language)
+    field(:devicetype, :integer)
     field(:make)
     field(:model)
     field(:os)
     field(:osv)
-    field(:js, :integer)
-    field(:connectiontype, :integer)
-    field(:devicetype, :integer)
+    field(:hwv)
+    field(:h, :integer)
+    field(:w, :integer)
+    field(:ppi, :integer)
+    field(:pxratio, :float)
+    field(:js, TinyInt)
+    field(:geofetch, TinyInt)
     field(:flashver)
+    field(:language)
+    field(:carrier)
+    field(:mccmnc)
+    field(:connectiontype, :integer)
+    field(:ifa)
+    field(:didsha1)
+    field(:didmd5)
+    field(:dpidsha1)
+    field(:dpidmd5)
+    field(:macsha1)
+    field(:macmd5)
+    field(:ext, :map)
   end
 
-  # TODO:
-  # validate language is alpha-2/ISO 639-1?
   def changeset(device, attrs \\ %{}) do
     device
     |> cast(attrs, [
-      :dnt,
       :ua,
+      :dnt,
+      :lmt,
       :ip,
-      :didsha1,
-      :didmd5,
-      :dpidsha1,
-      :dpidmd5,
       :ipv6,
-      :carrier,
-      :language,
+      :devicetype,
       :make,
       :model,
       :os,
       :osv,
+      :hwv,
+      :h,
+      :w,
+      :ppi,
+      :pxratio,
       :js,
+      :geofetch,
+      :flashver,
+      :language,
+      :carrier,
+      :mccmnc,
       :connectiontype,
-      :devicetype,
-      :flashver
+      :ifa,
+      :didsha1,
+      :didmd5,
+      :dpidsha1,
+      :dpidmd5,
+      :macsha1,
+      :macmd5
     ])
     |> cast_embed(:geo)
-    |> validate_number(:dnt, greater_than_or_equal_to: 0, less_than_or_equal_to: 1)
-    |> validate_number(:js, greater_than_or_equal_to: 0, less_than_or_equal_to: 1)
-    |> validate_number(:connectiontype, greater_than_or_equal_to: 0, less_than_or_equal_to: 6)
-    |> validate_number(:devicetype, greater_than_or_equal_to: 1, less_than_or_equal_to: 3)
+    |> validate_inclusion(:devicetype, 1..7)
+    |> validate_inclusion(:connectiontype, 0..6)
   end
 end

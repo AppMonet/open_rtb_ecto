@@ -1,22 +1,17 @@
 defmodule OpenRtbEcto.V2.BidRequest.Content do
   @moduledoc """
-  The content object itself and all of its parameters are optional, so default values are not
-  provided. If an optional parameter is not specified, it should be considered unknown. This
-  object describes the content in which the impression will appear (may be syndicated or nonsyndicated
-  content).
-  This object may be useful in the situation where syndicated content contains impressions and
-  does not necessarily match the publisher’s general content. The exchange might or might not
-  have knowledge of the page where the content is running, as a result of the syndication
-  method. (For example, video impressions embedded in an iframe on an unknown web property
-  or device.)
+  This object describes the content in which the impression will appear, which may be syndicated or nonsyndicated
+  content. This object may be useful when syndicated content contains impressions and does
+  not necessarily match the publisher’s general content. The exchange might or might not have
+  knowledge of the page where the content is running, as a result of the syndication method. For
+  example might be a video impression embedded in an iframe on an unknown web property or device.
   """
 
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias OpenRtbEcto.V2.BidRequest.Producer
-
-  @valid_contexts MapSet.new(["1", "2", "3", "4", "5", "6", "7"])
+  alias OpenRtbEcto.Types.TinyInt
+  alias OpenRtbEcto.V2.BidRequest.{Producer, Data}
 
   @primary_key false
   embedded_schema do
@@ -25,21 +20,29 @@ defmodule OpenRtbEcto.V2.BidRequest.Content do
     field(:title)
     field(:series)
     field(:season)
+    field(:artist)
+    field(:genre)
+    field(:album)
+    field(:isrc)
+    embeds_one(:producer, Producer)
     field(:url)
     field(:cat, {:array, :string})
+    field(:prodq, :integer)
     field(:videoquality, :integer)
-    field(:keywords)
+    field(:context, :integer)
     field(:contentrating)
     field(:userrating)
-    field(:context)
-    field(:livestream, :integer)
-    field(:sourcerelationship, :integer)
-    embeds_one(:producer, Producer)
+    field(:qagmediarating, :integer)
+    field(:keywords)
+    field(:livestream, TinyInt)
+    field(:sourcerelationship, TinyInt)
     field(:len, :integer)
+    field(:language)
+    field(:embeddable, TinyInt)
+    embeds_many(:data, Data)
+    field(:ext, :map)
   end
 
-  # TODO
-  # do we want/need to validate cat values are valid IAB categories?
   def changeset(content, attrs \\ %{}) do
     content
     |> cast(attrs, [
@@ -48,21 +51,30 @@ defmodule OpenRtbEcto.V2.BidRequest.Content do
       :title,
       :series,
       :season,
+      :artist,
+      :genre,
+      :album,
+      :isrc,
       :url,
       :cat,
+      :prodq,
       :videoquality,
-      :keywords,
+      :context,
       :contentrating,
       :userrating,
-      :context,
+      :qagmediarating,
+      :keywords,
       :livestream,
       :sourcerelationship,
-      :len
+      :len,
+      :language,
+      :embeddable,
+      :ext
     ])
     |> cast_embed(:producer)
-    |> validate_number(:videoquality, greater_than_or_equal_to: 0, less_than_or_equal_to: 3)
-    |> validate_number(:livestream, greater_than_or_equal_to: 0, less_than_or_equal_to: 1)
-    |> validate_number(:sourcerelationship, greater_than_or_equal_to: 0, less_than_or_equal_to: 1)
-    |> validate_inclusion(:context, @valid_contexts)
+    |> validate_inclusion(:videoquality, 0..3)
+    |> validate_inclusion(:prodq, 0..3)
+    |> validate_inclusion(:context, 1..7)
+    |> validate_inclusion(:qagmediarating, 1..3)
   end
 end

@@ -1,10 +1,8 @@
 defmodule OpenRtbEcto.V2.BidRequest.Producer do
   @moduledoc """
-  The producer is useful when content where the ad is shown is syndicated, and may appear on a
-  completely different publisher. The producer object itself and all of its parameters are optional,
-  so default values are not provided. If an optional parameter is not specified, it should be
-  considered unknown. This object is optional, but useful if the content producer is different
-  from the site publisher.
+  This object defines the producer of the content in which the ad will be shown. This is particularly useful
+  when the content is syndicated and may be distributed through different publishers and thus when the
+  producer and publisher are not necessarily the same entity.
   """
 
   use Ecto.Schema
@@ -16,11 +14,11 @@ defmodule OpenRtbEcto.V2.BidRequest.Producer do
     field(:name)
     field(:cat, {:array, :string})
     field(:domain)
+    field(:ext, :map)
   end
 
-  # TODO validate categories?
   def changeset(producer, attrs \\ %{}) do
     producer
-    |> cast(attrs, [:id, :name, :cat, :domain])
+    |> cast(attrs, [:id, :name, :cat, :domain, :ext])
   end
 end

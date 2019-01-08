@@ -1,12 +1,14 @@
 defmodule OpenRtbEcto.V2.BidResponse do
   @moduledoc """
-  The top-level bid response object is defined below. The “id” attribute is a reflection of the bid
-  request ID for logging purposes. Similarly, “bidid” is an optional response tracking ID for
-  bidders. If specified, it can be included in the subsequent win notice call if the bidder wins. At
-  least one “seatbid” object is required, which contains a bid on at least one impression. Other
-  attributes are optional since an exchange may establish default values.
-  No-Bids on all impressions should be indicated as a HTTP 204 response. For no-bids on specific
-  impressions, the bidder should omit these from the bid response.
+  This object is the top-level bid response object (i.e., the unnamed outer JSON object). The id attribute
+  is a reflection of the bid request ID for logging purposes. Similarly, bidid is an optional response
+  tracking ID for bidders. If specified, it can be included in the subsequent win notice call if the bidder
+  wins. At least one seatbid object is required, which contains at least one bid for an impression. Other
+  attributes are optional.
+
+  To express a “no-bid”, the options are to return an empty response with HTTP 204. Alternately if the
+  bidder wishes to convey to the exchange a reason for not bidding, just a BidResponse object is
+  returned with a reason code in the nbr attribute.
   """
 
   use Ecto.Schema
@@ -21,6 +23,7 @@ defmodule OpenRtbEcto.V2.BidResponse do
     field(:bidid)
     field(:cur)
     field(:customdata)
+    field(:nbr, :integer)
     field(:ext, :map)
   end
 
@@ -29,5 +32,6 @@ defmodule OpenRtbEcto.V2.BidResponse do
     |> cast(attrs, [:id, :bidid, :cur, :customdata, :ext])
     |> cast_embed(:seatbid)
     |> validate_required([:id, :seatbid])
+    |> validate_inclusion(:nbr, 0..10)
   end
 end

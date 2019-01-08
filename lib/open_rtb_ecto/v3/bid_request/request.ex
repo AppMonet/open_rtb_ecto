@@ -80,21 +80,22 @@ defmodule OpenRtbEcto.V3.BidRequest.Request do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias OpenRtbEcto.Types.TinyInt
   alias OpenRtbEcto.V3.BidRequest.{Source, Item}
 
   @primary_key false
   embedded_schema do
     field(:id)
-    field(:test, :integer, default: 0)
-    field(:tmax, :integer)
+    field(:test, TinyInt, default: 0)
+    field(:tmax, TinyInt)
     field(:at, :integer, default: 2)
     field(:cur, {:array, :string}, default: ["USD"])
     field(:seat, {:array, :string})
-    field(:wseat, :integer, default: 1)
+    field(:wseat, TinyInt, default: 1)
     field(:cdata)
     embeds_one(:source, Source)
     embeds_many(:item, Item)
-    field(:package, :integer)
+    field(:package, TinyInt)
     # TODO finish context
     field(:context)
   end
@@ -105,9 +106,6 @@ defmodule OpenRtbEcto.V3.BidRequest.Request do
     |> cast_embed(:source)
     |> cast_embed(:item, required: true)
     |> validate_required(:id)
-    |> validate_inclusion(:test, 0..1)
-    |> validate_inclusion(:wseat, 0..1)
-    |> validate_inclusion(:package, 0..1)
     |> validate_auction_type()
   end
 

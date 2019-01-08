@@ -34,12 +34,13 @@ defmodule OpenRtbEcto.V3.BidResponse.SeatBid do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias OpenRtbEcto.Types.TinyInt
   alias OpenRtbEcto.BidResponse.Bid
 
   @primary_key false
   embedded_schema do
     field(:seat)
-    field(:package, :integer, default: 0)
+    field(:package, TinyInt, default: 0)
     embeds_many(:bid, Bid)
     field(:ext, :map)
   end
@@ -47,8 +48,6 @@ defmodule OpenRtbEcto.V3.BidResponse.SeatBid do
   def changeset(seat_bid, attrs \\ %{}) do
     seat_bid
     |> cast(attrs, [:seat, :package, :ext])
-    |> validate_inclusion(:package, 0..1)
     |> cast_embed(:bid, required: true)
-    |> validate_length(:bid, min: 1)
   end
 end

@@ -1,6 +1,6 @@
 # OpenRtbEcto
 
-[OpenRTB 2.0 Spec](https://www.iab.com/wp-content/uploads/2015/06/OpenRTB_API_Specification_Version2_0_FINAL.pdf)
+[OpenRTB 2.5 Spec](https://www.iab.com/wp-content/uploads/2016/03/OpenRTB-API-Specification-Version-2-5-FINAL.pdf)
 
 [OpenRTB 3.0 Spec](https://github.com/InteractiveAdvertisingBureau/openrtb/blob/master/OpenRTB%20v3.0%20FINAL.md)
 
@@ -27,5 +27,8 @@ be found at [https://hexdocs.pm/open_rtb_ecto](https://hexdocs.pm/open_rtb_ecto)
 https://wiki.smaato.com/pages/viewpage.action?pageId=1770079
 
 
-### Details
+### Notes
 1. We do NOT attempt to validate ISO-4217 currency codes in `cur` fields
+1. In these [examples](https://github.com/openrtb/examples/tree/master/spotxchange): 
+  - the deprecated `protocol` field is used, but the data is an int array, like the new `protocols` field...
+  - `content.season` is sent as an int instead of a string
