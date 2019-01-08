@@ -31,7 +31,7 @@ defmodule OpenRtbEcto.V2.BidResponse do
     response
     |> cast(attrs, [:id, :bidid, :cur, :customdata, :ext])
     |> cast_embed(:seatbid)
-    |> validate_required([:id, :seatbid])
+    |> validate_required(:id)
     |> validate_inclusion(:nbr, 0..10)
   end
 end

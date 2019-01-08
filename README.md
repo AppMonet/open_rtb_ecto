@@ -1,10 +1,11 @@
 # OpenRtbEcto
+Ecto schemas for [OpenRTB](https://www.iab.com/guidelines/real-time-bidding-rtb-project/).
+
+2.5 is complete, but 3.0 is in progress...
 
 [OpenRTB 2.5 Spec](https://www.iab.com/wp-content/uploads/2016/03/OpenRTB-API-Specification-Version-2-5-FINAL.pdf)
 
 [OpenRTB 3.0 Spec](https://github.com/InteractiveAdvertisingBureau/openrtb/blob/master/OpenRTB%20v3.0%20FINAL.md)
-
-**TODO: Add description**
 
 ## Installation
 
@@ -19,16 +20,13 @@ def deps do
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/open_rtb_ecto](https://hexdocs.pm/open_rtb_ecto).
+Docs can be found at [https://hexdocs.pm/open_rtb_ecto](https://hexdocs.pm/open_rtb_ecto).
 
 ### OpenRTB Example Payloads
 https://wiki.smaato.com/pages/viewpage.action?pageId=1770079
 
-
 ### Notes
-1. We do NOT attempt to validate ISO-4217 currency codes in `cur` fields
+1. We do NOT attempt to validate ISO-4217 currency codes
 1. In these [examples](https://github.com/openrtb/examples/tree/master/spotxchange): 
   - the deprecated `protocol` field is used, but the data is an int array, like the new `protocols` field...
   - `content.season` is sent as an int instead of a string

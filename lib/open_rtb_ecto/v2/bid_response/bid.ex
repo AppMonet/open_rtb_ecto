@@ -24,6 +24,7 @@ defmodule OpenRtbEcto.V2.BidResponse.Bid do
     field(:crid)
     field(:tactic)
     field(:cat, {:array, :string})
+    field(:attr, {:array, :integer})
     field(:api, :integer)
     field(:protocol, :integer)
     field(:qagmediarating, :integer)

@@ -2,11 +2,11 @@ defmodule OpenRtbEcto.V2.BidRequestTest do
   use OpenRtbEcto.OpenRtbCase, async: true
 
   alias OpenRtbEcto.V2.BidRequest
-  alias OpenRtbEcto.V2.BidRequest.{App, Imp, Device, User}
+  alias OpenRtbEcto.V2.BidRequest.{App, Imp, Device, User, Pmp, Video}
 
   describe "valid data" do
-    test "cast from map" do
-      data = test_data("request", "example-request-app-android-1.json", :map)
+    test "android requests" do
+      data = test_data("v2/request", "example-request-app-android-1.json")
       assert {:ok, %BidRequest{} = req} = OpenRtbEcto.cast(BidRequest, data)
       assert req.id == "7979d0c78074638bbdf739ffdf285c7e1c74a691"
       assert [%Imp{}] = req.imp
@@ -14,20 +14,38 @@ defmodule OpenRtbEcto.V2.BidRequestTest do
       assert %Device{make: "Samsung"} = req.device
       assert %User{id: "bd5adc55dcbab4bf090604df4f543d90b09f0c88"} = req.user
 
-      data = test_data("request", "example-request-app-android-2.json", :map)
+      data = test_data("v2/request", "example-request-app-android-2.json")
       assert {:ok, %BidRequest{}} = OpenRtbEcto.cast(BidRequest, data)
+    end
 
-      data = test_data("request", "multi-imp.json", :map)
+    test "iphone request" do
+      data = test_data("v2/request", "iphone.json")
       assert {:ok, %BidRequest{}} = OpenRtbEcto.cast(BidRequest, data)
+    end
 
-      data = test_data("request", "pmp.json", :map)
-      assert {:ok, %BidRequest{}} = OpenRtbEcto.cast(BidRequest, data)
+    test "multiple imps" do
+      data = test_data("v2/request", "multi-imp.json")
+      assert {:ok, %BidRequest{} = req} = OpenRtbEcto.cast(BidRequest, data)
+      assert [%Imp{}, %Imp{}, %Imp{}] = req.imp
+    end
+
+    test "with pmp" do
+      data = test_data("v2/request", "pmp.json")
+      assert {:ok, %BidRequest{} = req} = OpenRtbEcto.cast(BidRequest, data)
+      assert [%Imp{pmp: %Pmp{}, video: %Video{boxingallowed: 1}}] = req.imp
+    end
+
+    test "pc" do
+      data = test_data("v2/response", "pc.json")
+      assert {:ok, %BidRequest{} = req} = OpenRtbEcto.cast(BidRequest, data)
+      assert %User{} = req.user
+      assert %Device{} = req.device
     end
   end
 
   describe "invalid data" do
     test "returns error tuple with friendly error map" do
-      data = test_data("request", "example-request-app-android-1.json")
+      data = test_data("v2/request", "example-request-app-android-1.json")
 
       invalid =
         data

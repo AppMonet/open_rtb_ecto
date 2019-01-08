@@ -6,7 +6,7 @@ defmodule OpenRtbEcto.OpenRtbCase do
       defp test_data(type, filename, format \\ :map)
 
       defp test_data(type, filename, :json) do
-        Path.join([File.cwd!(), "test", "data", "v2", type, filename])
+        Path.join([File.cwd!(), "test", "data", type, filename])
         |> File.read!()
       end
 
