@@ -5,7 +5,7 @@ defmodule OpenRtbEcto.V2.BidResponseTest do
 
   test "mobile" do
     data = test_data("v2/response", "mobile.json")
-    assert {:ok, %BidResponse{seatbid: %{bid: [bid]}}} = OpenRtbEcto.cast(BidResponse, data)
+    assert {:ok, %BidResponse{seatbid: [%{bid: [bid]}]}} = OpenRtbEcto.cast(BidResponse, data)
     assert bid.id == "1"
     assert bid.impid == "1"
     assert bid.price == 0.751371

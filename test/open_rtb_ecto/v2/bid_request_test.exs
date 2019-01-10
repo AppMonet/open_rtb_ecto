@@ -34,13 +34,6 @@ defmodule OpenRtbEcto.V2.BidRequestTest do
       assert {:ok, %BidRequest{} = req} = OpenRtbEcto.cast(BidRequest, data)
       assert [%Imp{pmp: %Pmp{}, video: %Video{boxingallowed: 1}}] = req.imp
     end
-
-    test "pc" do
-      data = test_data("v2/response", "pc.json")
-      assert {:ok, %BidRequest{} = req} = OpenRtbEcto.cast(BidRequest, data)
-      assert %User{} = req.user
-      assert %Device{} = req.device
-    end
   end
 
   describe "invalid data" do
@@ -54,6 +47,12 @@ defmodule OpenRtbEcto.V2.BidRequestTest do
 
       assert {:error, reasons} = OpenRtbEcto.cast(BidRequest, invalid)
       assert %{allimps: ["is invalid"], id: ["can't be blank"]} = reasons
+    end
+  end
+
+  describe "json encoding" do
+    test "fields with nil values are omitted" do
+      assert "{\"allimps\":0,\"at\":2,\"imp\":[],\"test\":0}" == Jason.encode!(%BidRequest{})
     end
   end
 end
