@@ -60,6 +60,7 @@ defimpl Jason.Encoder,
     |> Enum.reduce(%{}, fn {k, v}, acc ->
       case v do
         nil -> acc
+        [] -> acc
         _ -> Map.put(acc, k, v)
       end
     end)
