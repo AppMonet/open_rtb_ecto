@@ -78,7 +78,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Video do
     |> validate_subset(:protocols, 1..10)
     |> validate_inclusion(:placement, 1..5)
     |> validate_number(:startdelay, greater_than_or_equal_to: -2)
-    |> validate_inclusion(:pos, 0..7)
+    |> validate_number(:pos, greater_than: -1, less_than: 8)
     |> validate_number(:maxextended, greater_than_or_equal_to: -1)
     |> validate_subset(:battr, 1..17)
     |> validate_subset(:playbackmethod, 1..6)
