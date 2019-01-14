@@ -1,11 +1,14 @@
 defmodule OpenRtbEcto.V2.BidResponse.Bid do
   @moduledoc """
-  A SeatBid object contains one or more Bid objects, each of which relates to a specific impression in the
-  bid request via the impid attribute and constitutes an offer to buy that impression for a given price.
+  A SeatBid object contains one or more Bid objects, each of which relates to a specific impression
+  in the bid request via the impid attribute and constitutes an offer to buy that impression for a 
+  given price.
   """
 
   use Ecto.Schema
   import Ecto.Changeset
+
+  @type t :: %__MODULE__{}
 
   @primary_key false
   embedded_schema do

@@ -1,8 +1,8 @@
 defmodule OpenRtbEcto.V2.BidRequest.Content do
   @moduledoc """
-  This object describes the content in which the impression will appear, which may be syndicated or nonsyndicated
-  content. This object may be useful when syndicated content contains impressions and does
-  not necessarily match the publisher’s general content. The exchange might or might not have
+  This object describes the content in which the impression will appear, which may be syndicated or
+  nonsyndicated content. This object may be useful when syndicated content contains impressions and
+  does not necessarily match the publisher’s general content. The exchange might or might not have
   knowledge of the page where the content is running, as a result of the syndication method. For
   example might be a video impression embedded in an iframe on an unknown web property or device.
   """
@@ -12,6 +12,8 @@ defmodule OpenRtbEcto.V2.BidRequest.Content do
 
   alias OpenRtbEcto.Types.TinyInt
   alias OpenRtbEcto.V2.BidRequest.{Producer, Data}
+
+  @type t :: %__MODULE__{}
 
   @primary_key false
   embedded_schema do

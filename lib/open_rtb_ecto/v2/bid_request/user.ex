@@ -1,15 +1,17 @@
 defmodule OpenRtbEcto.V2.BidRequest.User do
   @moduledoc """
   This object contains information known or derived about the human user of the device (i.e., the
-  audience for advertising). The user id is an exchange artifact and may be subject to rotation or other
-  privacy policies. However, this user ID must be stable long enough to serve reasonably as the basis for
-  frequency capping and retargeting.
+  audience for advertising). The user id is an exchange artifact and may be subject to rotation or
+  other privacy policies. However, this user ID must be stable long enough to serve reasonably as
+  the basis for frequency capping and retargeting.
   """
 
   use Ecto.Schema
   import Ecto.Changeset
 
   alias OpenRtbEcto.V2.BidRequest.{Geo, Data}
+
+  @type t :: %__MODULE__{}
 
   @primary_key false
   embedded_schema do

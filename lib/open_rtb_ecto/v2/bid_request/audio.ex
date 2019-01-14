@@ -18,6 +18,8 @@ defmodule OpenRtbEcto.V2.BidRequest.Audio do
   alias OpenRtbEcto.Types.TinyInt
   alias OpenRtbEcto.V2.BidRequest.Banner
 
+  @type t :: %__MODULE__{}
+
   @primary_key false
   embedded_schema do
     field(:mimes, {:array, :string})

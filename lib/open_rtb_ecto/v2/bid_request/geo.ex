@@ -1,16 +1,19 @@
 defmodule OpenRtbEcto.V2.BidRequest.Geo do
   @moduledoc """
-  This object encapsulates various methods for specifying a geographic location. When subordinate to a
-  Device object, it indicates the location of the device which can also be interpreted as the user’s current
-  location. When subordinate to a User object, it indicates the location of the user’s home base (i.e., not
-  necessarily their current location).
+  This object encapsulates various methods for specifying a geographic location. When subordinate
+  to a Device object, it indicates the location of the device which can also be interpreted as the
+  user’s current location. When subordinate to a User object, it indicates the location of the 
+  user’s home base (i.e., not necessarily their current location).
 
   The lat/lon attributes should only be passed if they conform to the accuracy depicted in the type
-  attribute. For example, the centroid of a geographic region such as postal code should not be passed.<Paste>
+  attribute. For example, the centroid of a geographic region such as postal code should not be 
+  passed.
   """
 
   use Ecto.Schema
   import Ecto.Changeset
+
+  @type t :: %__MODULE__{}
 
   @primary_key false
   embedded_schema do

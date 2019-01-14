@@ -1,8 +1,8 @@
 defmodule OpenRtbEcto.V2.BidRequest.Site do
   @moduledoc """
-  This object should be included if the ad supported content is a website as opposed to a non-browser
-  application. A bid request must not contain both a Site and an App object. At a minimum, it is useful
-  to provide a site ID or page URL, but this is not strictly required.
+  This object should be included if the ad supported content is a website as opposed to a
+  non-browser application. A bid request must not contain both a Site and an App object. At a
+  minimum, it is useful to provide a site ID or page URL, but this is not strictly required.
   """
 
   use Ecto.Schema
@@ -10,6 +10,8 @@ defmodule OpenRtbEcto.V2.BidRequest.Site do
 
   alias OpenRtbEcto.Types.TinyInt
   alias OpenRtbEcto.V2.BidRequest.{Publisher, Content}
+
+  @type t :: %__MODULE__{}
 
   @primary_key false
   embedded_schema do

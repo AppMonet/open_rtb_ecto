@@ -11,6 +11,8 @@ defmodule OpenRtbEcto.V2.BidRequest.App do
   alias OpenRtbEcto.Types.TinyInt
   alias OpenRtbEcto.V2.BidRequest.{Publisher, Content}
 
+  @type t :: %__MODULE__{}
+
   @primary_key false
   embedded_schema do
     field(:id)

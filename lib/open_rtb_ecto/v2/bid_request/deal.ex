@@ -1,12 +1,14 @@
 defmodule OpenRtbEcto.V2.BidRequest.Deal do
   @moduledoc """
-  This object constitutes a specific deal that was struck a priori between a buyer and a seller. Its presence
-  with the Pmp collection indicates that this impression is available under the terms of that deal. Refer to
-  Section 7.3 for more details.
+  This object constitutes a specific deal that was struck a priori between a buyer and a seller.
+  Its presence with the Pmp collection indicates that this impression is available under the 
+  terms of that deal. Refer to Section 7.3 for more details.
   """
 
   use Ecto.Schema
   import Ecto.Changeset
+
+  @type t :: %__MODULE__{}
 
   @primary_key false
   embedded_schema do

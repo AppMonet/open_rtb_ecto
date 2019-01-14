@@ -1,8 +1,8 @@
 defmodule OpenRtbEcto.V2.BidRequest.Device do
   @moduledoc """
-  This object provides information pertaining to the device through which the user is interacting. Device
-  information includes its hardware, platform, location, and carrier data. The device can refer to a mobile
-  handset, a desktop computer, set top box, or other digital device.
+  This object provides information pertaining to the device through which the user is interacting.
+  Device information includes its hardware, platform, location, and carrier data. The device can
+  refer to a mobile handset, a desktop computer, set top box, or other digital device.
   """
 
   use Ecto.Schema
@@ -10,6 +10,8 @@ defmodule OpenRtbEcto.V2.BidRequest.Device do
 
   alias OpenRtbEcto.Types.TinyInt
   alias OpenRtbEcto.V2.BidRequest.Geo
+
+  @type t :: %__MODULE__{}
 
   @primary_key false
   embedded_schema do

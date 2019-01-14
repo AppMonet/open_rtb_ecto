@@ -16,6 +16,8 @@ defmodule OpenRtbEcto.V2.BidResponse do
 
   alias OpenRtbEcto.V2.BidResponse.SeatBid
 
+  @type t :: %__MODULE__{}
+
   @primary_key false
   embedded_schema do
     field(:id)
