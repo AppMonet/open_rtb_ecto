@@ -7,7 +7,10 @@ defmodule OpenRtbEcto do
   [OpenRTB 3.0 Spec](https://iabtechlab.com/wp-content/uploads/2017/09/OpenRTB-3.0-Draft-Framework-for-Public-Comment.pdf)
   """
 
-  @spec cast(Ecto.Schema.t(), map() | binary()) :: {:ok, struct()} | {:error, map()}
+  @typedoc "Any of the schemas defined in the library"
+  @type open_rtb_schema :: term()
+
+  @spec cast(open_rtb_schema(), map() | binary()) :: {:ok, struct()} | {:error, map()}
   def cast(schema, %{} = data) do
     with %{valid?: true} = changeset <- schema.changeset(struct(schema, %{}), data) do
       {:ok, Ecto.Changeset.apply_changes(changeset)}
