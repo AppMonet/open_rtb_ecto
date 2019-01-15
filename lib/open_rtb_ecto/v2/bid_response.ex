@@ -23,7 +23,7 @@ defmodule OpenRtbEcto.V2.BidResponse do
     field(:id)
     embeds_many(:seatbid, SeatBid)
     field(:bidid)
-    field(:cur)
+    field(:cur, :string, default: "USD")
     field(:customdata)
     field(:nbr, :integer)
     field(:ext, :map)
