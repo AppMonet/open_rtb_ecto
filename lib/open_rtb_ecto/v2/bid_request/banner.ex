@@ -34,7 +34,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Banner do
     field(:battr, {:array, :integer})
     field(:pos, :integer)
     field(:mimes, {:array, :string})
-    field(:topframe, TinyInt, default: 0)
+    field(:topframe, TinyInt)
     field(:expdir, {:array, :integer})
     field(:api, {:array, :integer})
     field(:id)
