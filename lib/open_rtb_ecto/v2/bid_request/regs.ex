@@ -14,7 +14,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Regs do
   @primary_key false
   embedded_schema do
     field(:coppa, TinyInt)
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(regs, attrs \\ %{}) do

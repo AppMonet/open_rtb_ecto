@@ -20,7 +20,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Source do
     field(:fd, TinyInt)
     field(:tid)
     field(:pchain)
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(source, attrs \\ %{}) do

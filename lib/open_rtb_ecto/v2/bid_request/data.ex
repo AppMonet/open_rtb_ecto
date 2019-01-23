@@ -19,7 +19,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Data do
     field(:id)
     field(:name)
     embeds_many(:segment, Segment)
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(data, attrs \\ %{}) do

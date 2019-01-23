@@ -39,7 +39,7 @@ defmodule OpenRtbEcto.V3.BidRequest.Metric do
     field(:type)
     field(:value, :float)
     field(:vendor)
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(metric, attrs \\ %{}) do

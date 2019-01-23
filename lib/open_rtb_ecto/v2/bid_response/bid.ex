@@ -38,7 +38,7 @@ defmodule OpenRtbEcto.V2.BidResponse.Bid do
     field(:wratio, :integer)
     field(:hratio, :integer)
     field(:exp, :integer)
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(bid, attrs \\ %{}) do

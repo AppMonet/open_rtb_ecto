@@ -47,7 +47,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Video do
     embeds_many(:companionad, Banner)
     field(:api, {:array, :integer})
     field(:companiontype, {:array, :integer})
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(video, attrs \\ %{}) do

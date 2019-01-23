@@ -19,7 +19,7 @@ defmodule OpenRtbEcto.V2.BidResponse.SeatBid do
     embeds_many(:bid, Bid)
     field(:seat)
     field(:group, TinyInt, default: 0)
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(seat_bid, attrs \\ %{}) do

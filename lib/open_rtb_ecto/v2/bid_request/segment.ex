@@ -13,7 +13,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Segment do
     field(:id)
     field(:name)
     field(:value)
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   #

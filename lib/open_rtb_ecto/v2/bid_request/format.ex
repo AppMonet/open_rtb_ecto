@@ -18,7 +18,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Format do
     field(:wratio, :integer)
     field(:hratio, :integer)
     field(:wmin, :integer)
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(format, attrs \\ %{}) do

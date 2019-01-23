@@ -45,7 +45,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Device do
     field(:dpidmd5)
     field(:macsha1)
     field(:macmd5)
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(device, attrs \\ %{}) do

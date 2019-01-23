@@ -29,7 +29,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Site do
     embeds_one(:publisher, Publisher)
     embeds_one(:content, Content)
     field(:keywords)
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(site, attrs \\ %{}) do

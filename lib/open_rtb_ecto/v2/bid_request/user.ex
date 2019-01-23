@@ -23,7 +23,7 @@ defmodule OpenRtbEcto.V2.BidRequest.User do
     field(:customdata)
     embeds_one(:geo, Geo)
     embeds_many(:data, Data)
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(user, attrs \\ %{}) do

@@ -66,7 +66,7 @@ defmodule OpenRtbEcto.V3.BidRequest.Source do
     field(:cert)
     field(:digest)
     field(:pchain)
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(source, attrs \\ %{}) do

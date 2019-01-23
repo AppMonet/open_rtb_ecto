@@ -39,7 +39,7 @@ defmodule OpenRtbEcto.V2.BidRequest do
     field(:bapp, {:array, :string})
     embeds_one(:source, Source)
     embeds_one(:regs, Regs)
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(request, attrs \\ %{}) do

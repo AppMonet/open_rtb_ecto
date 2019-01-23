@@ -26,7 +26,7 @@ defmodule OpenRtbEcto.V2.BidResponse do
     field(:cur, :string, default: "USD")
     field(:customdata)
     field(:nbr, :integer)
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(response, attrs \\ %{}) do

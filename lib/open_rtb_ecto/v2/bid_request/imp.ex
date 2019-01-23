@@ -38,7 +38,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Imp do
     field(:secure, TinyInt)
     field(:iframebuster, {:array, :string})
     field(:exp, :integer)
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(impression, attrs \\ %{}) do

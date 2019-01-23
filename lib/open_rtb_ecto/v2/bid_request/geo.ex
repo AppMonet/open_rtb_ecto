@@ -30,7 +30,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Geo do
     field(:city)
     field(:zip)
     field(:utcoffset, :integer)
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(geo, attrs \\ %{}) do

@@ -15,7 +15,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Publisher do
     field(:name)
     field(:cat, {:array, :string})
     field(:domain)
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(publisher, attrs \\ %{}) do

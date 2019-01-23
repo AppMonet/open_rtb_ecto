@@ -61,6 +61,7 @@ defimpl Jason.Encoder,
       case v do
         nil -> acc
         [] -> acc
+        %{} = map when map_size(map) == 0 -> acc
         _ -> Map.put(acc, k, v)
       end
     end)

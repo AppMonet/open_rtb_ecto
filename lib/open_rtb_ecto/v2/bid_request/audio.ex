@@ -40,7 +40,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Audio do
     field(:feed, :integer)
     field(:stitched, TinyInt)
     field(:nvol, :integer)
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(video, attrs \\ %{}) do

@@ -59,7 +59,7 @@ defmodule OpenRtbEcto.V3.BidResponse.Response do
     field(:cur, :string, default: "USD")
     field(:cdata)
     embeds_many(:seatbid, Seatbid)
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(response, attrs \\ %{}) do

@@ -18,7 +18,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Deal do
     field(:at, :integer)
     field(:wseat, {:array, :integer})
     field(:wadomain, {:array, :string})
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(deal, attrs \\ %{}) do

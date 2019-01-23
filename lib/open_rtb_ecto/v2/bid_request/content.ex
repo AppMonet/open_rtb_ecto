@@ -42,7 +42,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Content do
     field(:language)
     field(:embeddable, TinyInt)
     embeds_many(:data, Data)
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(content, attrs \\ %{}) do

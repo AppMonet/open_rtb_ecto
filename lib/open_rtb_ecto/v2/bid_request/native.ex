@@ -27,7 +27,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Native do
     field(:ver)
     field(:api, {:array, :integer})
     field(:battr, {:array, :integer})
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(native, attrs \\ %{}) do

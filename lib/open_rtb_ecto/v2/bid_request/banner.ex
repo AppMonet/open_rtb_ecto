@@ -39,7 +39,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Banner do
     field(:api, {:array, :integer})
     field(:id)
     field(:vcm, TinyInt)
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(banner, attrs \\ %{}) do

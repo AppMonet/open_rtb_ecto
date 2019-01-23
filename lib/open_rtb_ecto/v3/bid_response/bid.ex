@@ -103,7 +103,7 @@ defmodule OpenRtbEcto.V3.BidResponse.Bid do
     embeds_many(:macro, Macro)
     # TODO finsih domain obj
     field(:media, :map)
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(bid, attrs \\ %{}) do

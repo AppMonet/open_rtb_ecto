@@ -33,7 +33,7 @@ defmodule OpenRtbEcto.V3.BidResponse.Macro do
   embedded_schema do
     field(:key)
     field(:value)
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(macro, attrs \\ %{}) do

@@ -16,7 +16,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Producer do
     field(:name)
     field(:cat, {:array, :string})
     field(:domain)
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(producer, attrs \\ %{}) do

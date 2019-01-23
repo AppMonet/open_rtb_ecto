@@ -16,7 +16,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Pmp do
   embedded_schema do
     field(:private_auction, :integer, default: 0)
     embeds_many(:deals, Deal)
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(pmp, attrs \\ %{}) do
