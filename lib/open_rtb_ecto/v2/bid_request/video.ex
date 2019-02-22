@@ -3,7 +3,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Video do
   This object represents an in-stream video impression. Many of the fields are non-essential for
   minimally viable transactions, but are included to offer fine control when needed. Video in
   OpenRTB generally assumes compliance with the VAST standard. As such, the notion of companion ads
-  is supported by optionally including an array of Banner objects (refer to the Banner object in 
+  is supported by optionally including an array of Banner objects (refer to the Banner object in
   Section 3.2.6) that define these companion ads.
 
   The presence of a Video as a subordinate of the Imp object indicates that this impression is
@@ -81,7 +81,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Video do
       :ext
     ])
     |> cast_embed(:companionad)
-    |> validate_required([:mimes, :linearity, :minduration, :maxduration])
+    |> validate_required([:mimes])
     |> validate_inclusion(:linearity, 1..2)
     |> validate_inclusion(:protocol, 1..10)
     |> validate_subset(:protocols, 1..10)
