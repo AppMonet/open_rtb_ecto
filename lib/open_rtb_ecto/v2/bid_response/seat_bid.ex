@@ -14,7 +14,6 @@ defmodule OpenRtbEcto.V2.BidResponse.SeatBid do
 
   @type t :: %__MODULE__{}
 
-  @primary_key false
   embedded_schema do
     embeds_many(:bid, Bid)
     field(:seat)
