@@ -37,7 +37,6 @@ defmodule OpenRtbEcto.V3.BidResponse.SeatBid do
   alias OpenRtbEcto.Types.TinyInt
   alias OpenRtbEcto.BidResponse.Bid
 
-  @primary_key false
   embedded_schema do
     field(:seat)
     field(:package, TinyInt, default: 0)
