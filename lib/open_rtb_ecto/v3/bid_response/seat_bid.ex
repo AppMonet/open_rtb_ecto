@@ -37,7 +37,9 @@ defmodule OpenRtbEcto.V3.BidResponse.SeatBid do
   alias OpenRtbEcto.Types.TinyInt
   alias OpenRtbEcto.BidResponse.Bid
 
+  @primary_key false
   embedded_schema do
+    field(:id)
     field(:seat)
     field(:package, TinyInt, default: 0)
     embeds_many(:bid, Bid)
@@ -46,7 +48,7 @@ defmodule OpenRtbEcto.V3.BidResponse.SeatBid do
 
   def changeset(seat_bid, attrs \\ %{}) do
     seat_bid
-    |> cast(attrs, [:seat, :package, :ext])
+    |> cast(attrs, [:id, :seat, :package, :ext])
     |> cast_embed(:bid, required: true)
   end
 end

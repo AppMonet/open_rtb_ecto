@@ -14,8 +14,10 @@ defmodule OpenRtbEcto.V2.BidResponse.SeatBid do
 
   @type t :: %__MODULE__{}
 
+  @primary_key false
   embedded_schema do
     embeds_many(:bid, Bid)
+    field(:id)
     field(:seat)
     field(:group, TinyInt, default: 0)
     field(:ext, :map, default: %{})
@@ -23,7 +25,7 @@ defmodule OpenRtbEcto.V2.BidResponse.SeatBid do
 
   def changeset(seat_bid, attrs \\ %{}) do
     seat_bid
-    |> cast(attrs, [:seat, :group, :ext])
+    |> cast(attrs, [:id, :seat, :group, :ext])
     |> cast_embed(:bid, required: true)
   end
 end
