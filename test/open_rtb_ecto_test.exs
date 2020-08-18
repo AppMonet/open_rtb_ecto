@@ -3,6 +3,7 @@ defmodule OpenRtbEctoTest do
   doctest OpenRtbEcto
 
   alias OpenRtbEcto.V2.BidRequest
+  alias OpenRtbEcto.V2.BidResponse.Bid
 
   describe "cast/2" do
     test "valid map" do
@@ -17,6 +18,16 @@ defmodule OpenRtbEctoTest do
 
     test "invalid json" do
       assert {:error, %Jason.DecodeError{}} = OpenRtbEcto.cast(BidRequest, "blarg{")
+    end
+  end
+
+  describe "format_invalid_changeset/1" do
+    test "properly formats invalid validate_inclusion" do
+      assert {:error, error} = OpenRtbEcto.cast(Bid, %{attr: [18]})
+
+      assert %{
+               attr: ["has an invalid entry, got [18]"]
+             } = error
     end
   end
 end
