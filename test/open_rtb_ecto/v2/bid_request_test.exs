@@ -46,7 +46,7 @@ defmodule OpenRtbEcto.V2.BidRequestTest do
         |> Map.delete("id")
 
       assert {:error, reasons} = OpenRtbEcto.cast(BidRequest, invalid)
-      assert %{allimps: ["is invalid"], id: ["can't be blank"]} = reasons
+      assert %{allimps: ["is invalid, got 0"], id: ["can't be blank, got nil"]} = reasons
     end
   end
 
