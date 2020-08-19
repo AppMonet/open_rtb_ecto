@@ -23,10 +23,10 @@ defmodule OpenRtbEctoTest do
 
   describe "format_invalid_changeset/1" do
     test "properly formats invalid validate_inclusion" do
-      assert {:error, error} = OpenRtbEcto.cast(Bid, %{attr: [18]})
+      assert {:error, error} = OpenRtbEcto.cast(Bid, %{api: 18})
 
       assert %{
-               attr: ["has an invalid entry, got [18]"]
+               api: ["is invalid, got 18"]
              } = error
     end
   end
