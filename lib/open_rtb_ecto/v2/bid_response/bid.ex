@@ -9,6 +9,7 @@ defmodule OpenRtbEcto.V2.BidResponse.Bid do
   import Ecto.Changeset
 
   @type t :: %__MODULE__{}
+  @default_crid "1"
 
   @primary_key false
   embedded_schema do
@@ -24,7 +25,7 @@ defmodule OpenRtbEcto.V2.BidResponse.Bid do
     field(:bundle)
     field(:iurl)
     field(:cid)
-    field(:crid)
+    field(:crid, :string, default: @default_crid)
     field(:tactic)
     field(:cat, {:array, :string})
     field(:attr, {:array, :integer})
@@ -76,5 +77,13 @@ defmodule OpenRtbEcto.V2.BidResponse.Bid do
     |> validate_inclusion(:api, 1..6)
     |> validate_inclusion(:protocol, 1..10)
     |> validate_inclusion(:qagmediarating, 1..3)
+    |> ensure_crid()
+  end
+
+  defp ensure_crid(changeset) do
+    case get_field(changeset, :crid) do
+      nil -> put_change(changeset, :crid, @default_crid)
+      _ -> changeset
+    end
   end
 end
