@@ -24,7 +24,7 @@ defmodule OpenRtbEcto.V2.BidResponseTest do
 
   test "single vast response" do
     data = test_data("v2/response", "vast.json")
-    assert {:ok, %BidResponse{} = req} = OpenRtbEcto.cast(BidResponse, data)
+    assert {:ok, %BidResponse{}} = OpenRtbEcto.cast(BidResponse, data)
   end
 
   test "multi vast response" do
