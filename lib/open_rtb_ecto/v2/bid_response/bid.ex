@@ -74,9 +74,6 @@ defmodule OpenRtbEcto.V2.BidResponse.Bid do
       :ext
     ])
     |> validate_required([:id, :impid, :price])
-    |> validate_inclusion(:api, 1..6)
-    |> validate_inclusion(:protocol, 1..10)
-    |> validate_inclusion(:qagmediarating, 1..3)
     |> ensure_crid()
   end
 
