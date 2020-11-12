@@ -9,8 +9,7 @@ Ecto schemas for [OpenRTB](https://www.iab.com/guidelines/real-time-bidding-rtb-
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `open_rtb_ecto` to your list of dependencies in `mix.exs`:
+The package can be installed by adding `open_rtb_ecto` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
