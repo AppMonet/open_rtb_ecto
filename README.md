@@ -14,7 +14,7 @@ The package can be installed by adding `open_rtb_ecto` to your list of dependenc
 ```elixir
 def deps do
   [
-    {:open_rtb_ecto, "~> 0.1.0"}
+    {:open_rtb_ecto, "~> 0.1.1"}
   ]
 end
 ```
