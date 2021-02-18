@@ -25,7 +25,7 @@ defmodule OpenRtbEcto.V2.BidRequest.App do
     field(:pagecat, {:array, :string})
     field(:ver)
     field(:privacypolicy, TinyInt)
-    field(:paid)
+    field(:paid, TinyInt)
     embeds_one(:publisher, Publisher)
     embeds_one(:content, Content)
     field(:keywords)
