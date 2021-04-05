@@ -17,11 +17,11 @@ defmodule OpenRtbEcto.Types.TinyInt do
   def cast(0), do: {:ok, 0}
   def cast(_), do: :error
 
-  def embed_as(type), do: type
+  def embed_as(_), do: :self
 
   def equal?(a, b), do: a == b
 
-  def load(val), do: val
+  def load(val), do: {:ok, val}
 
-  def dump(val), do: val
+  def dump(val), do: {:ok, val}
 end
