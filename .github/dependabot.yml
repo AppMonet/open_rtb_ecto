@@ -1,0 +1,26 @@
+version: 2
+registries:
+  hex-organization-appmonet:
+    type: hex-organization
+    organization: appmonet
+    key: "${{secrets.HEX_ORGANIZATION_APPMONET_KEY}}"
+
+updates:
+- package-ecosystem: mix
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "10:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: ex_doc
+    versions:
+    - 0.24.0
+    - 0.24.1
+  - dependency-name: ecto
+    versions:
+    - 3.5.6
+    - 3.5.7
+    - 3.5.8
+  registries:
+  - hex-organization-appmonet
