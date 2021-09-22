@@ -29,7 +29,7 @@ defmodule OpenRtbEcto do
   defp format_invalid_changeset(changeset) do
     Ecto.Changeset.traverse_errors(changeset, fn chg, atom, {msg, opts} ->
       input = Ecto.Changeset.get_field(chg, atom)
-      msg = msg <> ", got #{inspect(input)}"
+      msg = msg <> ", got #{inspect(input, charlists: :as_lists)}"
 
       Enum.reduce(opts, msg, fn
         {key, value}, acc ->

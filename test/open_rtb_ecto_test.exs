@@ -3,6 +3,7 @@ defmodule OpenRtbEctoTest do
   doctest OpenRtbEcto
 
   alias OpenRtbEcto.V2.BidRequest
+  alias OpenRtbEcto.V2.BidRequest.Video
 
   describe "cast/2" do
     test "valid map" do
@@ -17,6 +18,11 @@ defmodule OpenRtbEctoTest do
 
     test "invalid json" do
       assert {:error, %Jason.DecodeError{}} = OpenRtbEcto.cast(BidRequest, "blarg{")
+    end
+
+    test "charlists in errors are displayed as lists" do
+      assert {:error, reason} = OpenRtbEcto.cast(Video, "{\"api\":[7]}")
+      assert %{api: ["has an invalid entry, got [7]"]} = reason
     end
   end
 end
