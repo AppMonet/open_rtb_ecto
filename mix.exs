@@ -2,7 +2,7 @@ defmodule OpenRtbEcto.MixProject do
   use Mix.Project
 
   @name "OpenRtbEcto"
-  @version "0.1.3"
+  @version "0.2.0"
   @repo_url "https://github.com/AppMonet/open_rtb_ecto"
 
   def project do
