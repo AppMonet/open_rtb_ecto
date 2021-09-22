@@ -93,7 +93,21 @@ defmodule OpenRtbEcto.V2.BidRequest.Video do
     |> validate_subset(:playbackmethod, 1..6)
     |> validate_inclusion(:playbackend, 1..3)
     |> validate_subset(:delivery, 1..3)
-    |> validate_subset(:api, 1..6)
+    |> validate_list_of_pos_ints(:api)
     |> validate_subset(:companiontype, 1..3)
+  end
+
+  defp validate_list_of_pos_ints(changeset, field) do
+    case get_change(changeset, field) do
+      nil ->
+        changeset
+
+      values ->
+        if Enum.all?(values, fn v -> is_integer(v) and v > 0 end) do
+          changeset
+        else
+          add_error(changeset, field, "has an invalid entry")
+        end
+    end
   end
 end
