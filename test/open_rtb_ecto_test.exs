@@ -21,8 +21,8 @@ defmodule OpenRtbEctoTest do
     end
 
     test "charlists in errors are displayed as lists" do
-      assert {:error, reason} = OpenRtbEcto.cast(Video, "{\"api\":[7]}")
-      assert %{api: ["has an invalid entry, got [7]"]} = reason
+      assert {:error, reason} = OpenRtbEcto.cast(Video, "{\"companiontype\":[4]}")
+      assert %{companiontype: ["has an invalid entry, got [4]"]} = reason
     end
   end
 end
