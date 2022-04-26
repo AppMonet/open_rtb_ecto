@@ -25,6 +25,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Audio do
     field(:mimes, {:array, :string})
     field(:minduration, :integer)
     field(:maxduration, :integer)
+    field(:rqddurs, {:array, :integer})
     field(:protocols, {:array, :integer})
     field(:startdelay, :integer)
     field(:sequence, :integer)
@@ -49,6 +50,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Audio do
       :mimes,
       :minduration,
       :maxduration,
+      :rqddurs,
       :protocols,
       :startdelay,
       :sequence,
