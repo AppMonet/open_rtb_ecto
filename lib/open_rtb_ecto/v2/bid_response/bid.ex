@@ -34,6 +34,7 @@ defmodule OpenRtbEcto.V2.BidResponse.Bid do
     field(:protocol, :integer)
     field(:qagmediarating, :integer)
     field(:language)
+    field(:langb)
     field(:dealid)
     field(:w, :integer)
     field(:h, :integer)
@@ -67,6 +68,7 @@ defmodule OpenRtbEcto.V2.BidResponse.Bid do
       :protocol,
       :qagmediarating,
       :language,
+      :langb,
       :dealid,
       :w,
       :h,

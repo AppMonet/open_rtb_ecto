@@ -41,6 +41,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Content do
     field(:sourcerelationship, TinyInt)
     field(:len, :integer)
     field(:language)
+    field(:langb)
     field(:embeddable, TinyInt)
     embeds_many(:data, Data)
     field(:ext, :map, default: %{})
@@ -72,6 +73,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Content do
       :sourcerelationship,
       :len,
       :language,
+      :langb,
       :embeddable,
       :ext
     ])

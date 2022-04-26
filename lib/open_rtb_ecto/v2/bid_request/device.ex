@@ -35,6 +35,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Device do
     field(:geofetch, TinyInt)
     field(:flashver)
     field(:language)
+    field(:langb)
     field(:carrier)
     field(:mccmnc)
     field(:connectiontype, :integer)
@@ -70,6 +71,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Device do
       :geofetch,
       :flashver,
       :language,
+      :langb,
       :carrier,
       :mccmnc,
       :connectiontype,
