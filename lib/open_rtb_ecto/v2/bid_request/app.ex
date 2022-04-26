@@ -20,6 +20,7 @@ defmodule OpenRtbEcto.V2.BidRequest.App do
     field(:bundle)
     field(:domain)
     field(:storeurl)
+    field(:cattax, :integer)
     field(:cat, {:array, :string})
     field(:sectioncat, {:array, :string})
     field(:pagecat, {:array, :string})
@@ -40,6 +41,7 @@ defmodule OpenRtbEcto.V2.BidRequest.App do
       :bundle,
       :domain,
       :storeurl,
+      :cattax,
       :cat,
       :sectioncat,
       :pagecat,

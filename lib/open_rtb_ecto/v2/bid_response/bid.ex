@@ -27,6 +27,7 @@ defmodule OpenRtbEcto.V2.BidResponse.Bid do
     field(:cid)
     field(:crid, :string, default: @default_crid)
     field(:tactic)
+    field(:cattax, :integer)
     field(:cat, {:array, :string})
     field(:attr, {:array, :integer})
     field(:api, :integer)
@@ -59,6 +60,7 @@ defmodule OpenRtbEcto.V2.BidResponse.Bid do
       :cid,
       :crid,
       :tactic,
+      :cattax,
       :cat,
       :attr,
       :api,

@@ -14,6 +14,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Producer do
   embedded_schema do
     field(:id)
     field(:name)
+    field(:cattax, :integer)
     field(:cat, {:array, :string})
     field(:domain)
     field(:ext, :map, default: %{})
@@ -21,6 +22,6 @@ defmodule OpenRtbEcto.V2.BidRequest.Producer do
 
   def changeset(producer, attrs \\ %{}) do
     producer
-    |> cast(attrs, [:id, :name, :cat, :domain, :ext])
+    |> cast(attrs, [:id, :name, :cattax, :cat, :domain, :ext])
   end
 end

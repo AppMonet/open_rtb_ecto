@@ -28,6 +28,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Content do
     field(:isrc)
     embeds_one(:producer, Producer)
     field(:url)
+    field(:cattax, :integer)
     field(:cat, {:array, :string})
     field(:prodq, :integer)
     field(:videoquality, :integer)
@@ -58,6 +59,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Content do
       :album,
       :isrc,
       :url,
+      :cattax,
       :cat,
       :prodq,
       :videoquality,

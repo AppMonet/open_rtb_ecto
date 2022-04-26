@@ -34,6 +34,7 @@ defmodule OpenRtbEcto.V2.BidRequest do
     field(:allimps, TinyInt, default: 0)
     field(:cur, {:array, :string})
     field(:wlang, {:array, :string})
+    field(:cattax, :integer)
     field(:bcat, {:array, :string})
     field(:badv, {:array, :string})
     field(:bapp, {:array, :string})
@@ -57,7 +58,8 @@ defmodule OpenRtbEcto.V2.BidRequest do
       :bcat,
       :badv,
       :bapp,
-      :ext
+      :ext,
+      :cattax
     ])
     |> cast_embed(:imp, required: true)
     |> cast_embed(:site)
