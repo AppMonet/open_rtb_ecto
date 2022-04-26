@@ -21,7 +21,15 @@ alias OpenRtbEcto.V2.BidRequest.{
   Site,
   Source,
   User,
-  Video
+  Video,
+  BrandVersion,
+  Channel,
+  Network,
+  SupplyChain,
+  SupplyChainNode,
+  Uid,
+  Eids,
+  UserAgent
 }
 
 alias OpenRtbEcto.V2.BidResponse.{Bid, SeatBid}
@@ -52,7 +60,15 @@ defimpl Jason.Encoder,
     User,
     Video,
     Bid,
-    SeatBid
+    SeatBid,
+    BrandVersion,
+    Channel,
+    Network,
+    SupplyChain,
+    SupplyChainNode,
+    Uid,
+    Eids,
+    UserAgent
   ] do
   def encode(struct, opts) do
     struct

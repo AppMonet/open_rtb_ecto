@@ -22,7 +22,7 @@ defmodule OpenRtbEcto.V2.BidRequest.UserAgent do
     field(:bitness)
     field(:model)
     field(:source, :integer)
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(user_agent, attrs \\ %{}) do

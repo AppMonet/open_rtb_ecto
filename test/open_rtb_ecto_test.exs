@@ -25,4 +25,13 @@ defmodule OpenRtbEctoTest do
       assert %{companiontype: ["has an invalid entry, got [4]"]} = reason
     end
   end
+
+  describe "json encoding" do
+    test "all structs have Jason.Encoder implementations" do
+      {:ok, all} = :application.get_key(:open_rtb_ecto, :modules)
+      mods = for mod <- all, String.starts_with?(to_string(mod), "Elixir.OpenRtbEcto.V"), do: mod
+      assert length(mods) > 1
+      assert Enum.all?(mods, &Jason.encode!/1)
+    end
+  end
 end

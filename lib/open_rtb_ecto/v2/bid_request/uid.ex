@@ -12,7 +12,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Uid do
   embedded_schema do
     field(:id)
     field(:atype, :integer)
-    field(:ext, :map)
+    field(:ext, :map, default: %{})
   end
 
   def changeset(uid, attrs \\ %{}) do
