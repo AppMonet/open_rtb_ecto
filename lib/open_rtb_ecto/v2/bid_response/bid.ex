@@ -31,6 +31,7 @@ defmodule OpenRtbEcto.V2.BidResponse.Bid do
     field(:cat, {:array, :string})
     field(:attr, {:array, :integer})
     field(:api, :integer)
+    field(:apis, {:array, :integer})
     field(:protocol, :integer)
     field(:qagmediarating, :integer)
     field(:language)
@@ -41,6 +42,9 @@ defmodule OpenRtbEcto.V2.BidResponse.Bid do
     field(:wratio, :integer)
     field(:hratio, :integer)
     field(:exp, :integer)
+    field(:dur, :integer)
+    field(:mtype, :integer)
+    field(:slotinpod, :integer)
     field(:ext, :map, default: %{})
   end
 
@@ -65,6 +69,7 @@ defmodule OpenRtbEcto.V2.BidResponse.Bid do
       :cat,
       :attr,
       :api,
+      :apis,
       :protocol,
       :qagmediarating,
       :language,
@@ -75,6 +80,9 @@ defmodule OpenRtbEcto.V2.BidResponse.Bid do
       :wratio,
       :hratio,
       :exp,
+      :dur,
+      :mtype,
+      :slotinpod,
       :ext
     ])
     |> validate_required([:id, :impid, :price])

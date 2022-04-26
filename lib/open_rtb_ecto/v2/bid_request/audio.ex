@@ -28,6 +28,12 @@ defmodule OpenRtbEcto.V2.BidRequest.Audio do
     field(:rqddurs, {:array, :integer})
     field(:protocols, {:array, :integer})
     field(:startdelay, :integer)
+    field(:maxseq, :integer)
+    field(:poddur, :integer)
+    field(:podid, :integer)
+    field(:podseq, :integer)
+    field(:mincpmpersec, :float)
+    field(:slotinpod, :integer)
     field(:sequence, :integer)
     field(:battr, {:array, :integer})
     field(:maxextended, :integer)
@@ -37,7 +43,6 @@ defmodule OpenRtbEcto.V2.BidRequest.Audio do
     embeds_many(:companionad, Banner)
     field(:api, {:array, :integer})
     field(:companiontype, {:array, :integer})
-    field(:maxseq, :integer)
     field(:feed, :integer)
     field(:stitched, TinyInt)
     field(:nvol, :integer)
@@ -53,6 +58,12 @@ defmodule OpenRtbEcto.V2.BidRequest.Audio do
       :rqddurs,
       :protocols,
       :startdelay,
+      :maxseq,
+      :poddur,
+      :podid,
+      :podseq,
+      :mincpmpersec,
+      :slotinpod,
       :sequence,
       :battr,
       :maxextended,
@@ -61,7 +72,6 @@ defmodule OpenRtbEcto.V2.BidRequest.Audio do
       :delivery,
       :api,
       :companiontype,
-      :maxseq,
       :feed,
       :stitched,
       :nvol,

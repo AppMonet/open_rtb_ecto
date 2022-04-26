@@ -37,6 +37,8 @@ defmodule OpenRtbEcto.V2.BidRequest.Imp do
     field(:clickbrowser, TinyInt)
     field(:secure, TinyInt)
     field(:iframebuster, {:array, :string})
+    field(:rwdd, TinyInt)
+    field(:ssai, :integer)
     field(:exp, :integer)
     field(:ext, :map, default: %{})
   end
@@ -54,6 +56,8 @@ defmodule OpenRtbEcto.V2.BidRequest.Imp do
       :clickbrowser,
       :secure,
       :iframebuster,
+      :rwdd,
+      :ssai,
       :exp,
       :ext
     ])

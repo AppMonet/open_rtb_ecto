@@ -30,6 +30,12 @@ defmodule OpenRtbEcto.V2.BidRequest.Video do
     field(:w, :integer)
     field(:h, :integer)
     field(:startdelay, :integer)
+    field(:maxseq, :integer)
+    field(:poddur, :integer)
+    field(:podid, :integer)
+    field(:podseq, :integer)
+    field(:mincpmpersec, :float)
+    field(:slotinpod, :integer)
     field(:placement, :integer)
     field(:linearity, :integer)
     field(:skip, TinyInt)
@@ -63,6 +69,12 @@ defmodule OpenRtbEcto.V2.BidRequest.Video do
       :w,
       :h,
       :startdelay,
+      :maxseq,
+      :poddur,
+      :podid,
+      :podseq,
+      :mincpmpersec,
+      :slotinpod,
       :placement,
       :linearity,
       :skip,
