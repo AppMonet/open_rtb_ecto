@@ -2,7 +2,7 @@ defmodule OpenRtbEcto.MixProject do
   use Mix.Project
 
   @name "OpenRtbEcto"
-  @version "0.2.0"
+  @version "0.3.0"
   @repo_url "https://github.com/AppMonet/open_rtb_ecto"
 
   def project do
@@ -10,7 +10,7 @@ defmodule OpenRtbEcto.MixProject do
       app: :open_rtb_ecto,
       version: @version,
       elixir: "~> 1.7",
-      description: "OpenRTB 2.5 Ecto schemas",
+      description: "OpenRTB Ecto schemas",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       elixirc_paths: elixirc_paths(Mix.env()),

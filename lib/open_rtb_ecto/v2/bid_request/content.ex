@@ -11,7 +11,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Content do
   import Ecto.Changeset
 
   alias OpenRtbEcto.Types.TinyInt
-  alias OpenRtbEcto.V2.BidRequest.{Producer, Data}
+  alias OpenRtbEcto.V2.BidRequest.{Producer, Data, Network, Channel}
 
   @type t :: %__MODULE__{}
 
@@ -28,6 +28,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Content do
     field(:isrc)
     embeds_one(:producer, Producer)
     field(:url)
+    field(:cattax, :integer)
     field(:cat, {:array, :string})
     field(:prodq, :integer)
     field(:videoquality, :integer)
@@ -40,9 +41,12 @@ defmodule OpenRtbEcto.V2.BidRequest.Content do
     field(:sourcerelationship, TinyInt)
     field(:len, :integer)
     field(:language)
+    field(:langb)
     field(:embeddable, TinyInt)
     embeds_many(:data, Data)
     field(:ext, :map, default: %{})
+    embeds_one(:network, Network)
+    embeds_one(:channel, Channel)
   end
 
   def changeset(content, attrs \\ %{}) do
@@ -58,6 +62,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Content do
       :album,
       :isrc,
       :url,
+      :cattax,
       :cat,
       :prodq,
       :videoquality,
@@ -70,10 +75,14 @@ defmodule OpenRtbEcto.V2.BidRequest.Content do
       :sourcerelationship,
       :len,
       :language,
+      :langb,
       :embeddable,
       :ext
     ])
     |> cast_embed(:producer)
+    |> cast_embed(:data)
+    |> cast_embed(:network)
+    |> cast_embed(:channel)
     |> validate_inclusion(:videoquality, 0..3)
     |> validate_inclusion(:prodq, 0..3)
     |> validate_inclusion(:context, 1..7)

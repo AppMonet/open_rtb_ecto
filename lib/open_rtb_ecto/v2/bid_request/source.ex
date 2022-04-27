@@ -12,6 +12,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Source do
   import Ecto.Changeset
 
   alias OpenRtbEcto.Types.TinyInt
+  alias OpenRtbEcto.V2.SupplyChain
 
   @type t :: %__MODULE__{}
 
@@ -20,11 +21,13 @@ defmodule OpenRtbEcto.V2.BidRequest.Source do
     field(:fd, TinyInt)
     field(:tid)
     field(:pchain)
+    embeds_one(:schain, SupplyChain)
     field(:ext, :map, default: %{})
   end
 
   def changeset(source, attrs \\ %{}) do
     source
     |> cast(attrs, [:fd, :tid, :pchain, :ext])
+    |> cast_embed(:schain)
   end
 end

@@ -13,6 +13,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Publisher do
   embedded_schema do
     field(:id)
     field(:name)
+    field(:cattax, :integer)
     field(:cat, {:array, :string})
     field(:domain)
     field(:ext, :map, default: %{})
@@ -20,6 +21,6 @@ defmodule OpenRtbEcto.V2.BidRequest.Publisher do
 
   def changeset(publisher, attrs \\ %{}) do
     publisher
-    |> cast(attrs, [:id, :name, :cat, :domain, :ext])
+    |> cast(attrs, [:id, :name, :cattax, :cat, :domain, :ext])
   end
 end

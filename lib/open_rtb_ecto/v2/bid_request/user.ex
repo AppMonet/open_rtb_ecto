@@ -9,7 +9,7 @@ defmodule OpenRtbEcto.V2.BidRequest.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias OpenRtbEcto.V2.BidRequest.{Geo, Data}
+  alias OpenRtbEcto.V2.BidRequest.{Geo, Data, Eids}
 
   @type t :: %__MODULE__{}
 
@@ -23,6 +23,7 @@ defmodule OpenRtbEcto.V2.BidRequest.User do
     field(:customdata)
     embeds_one(:geo, Geo)
     embeds_many(:data, Data)
+    embeds_many(:eids, Eids)
     field(:ext, :map, default: %{})
   end
 
@@ -31,5 +32,6 @@ defmodule OpenRtbEcto.V2.BidRequest.User do
     |> cast(attrs, [:id, :buyeruid, :yob, :gender, :keywords, :customdata, :ext])
     |> cast_embed(:geo)
     |> cast_embed(:data)
+    |> cast_embed(:eids)
   end
 end

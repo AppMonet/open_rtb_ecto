@@ -18,6 +18,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Site do
     field(:id)
     field(:name)
     field(:domain)
+    field(:cattax, :integer)
     field(:cat, {:array, :string})
     field(:sectioncat, {:array, :string})
     field(:pagecat, {:array, :string})
@@ -38,6 +39,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Site do
       :id,
       :name,
       :domain,
+      :cattax,
       :cat,
       :sectioncat,
       :pagecat,
