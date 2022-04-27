@@ -24,7 +24,7 @@ defmodule OpenRtbEcto.V2.BidRequest.SupplyChain do
   def changeset(schain, attrs \\ %{}) do
     schain
     |> cast(attrs, [:complete, :ver, :ext])
-    |> cast_embed(:nodes)
-    |> validate_required([:complete, :ver, :nodes])
+    |> cast_embed(:nodes, required: true)
+    |> validate_required([:complete, :ver])
   end
 end

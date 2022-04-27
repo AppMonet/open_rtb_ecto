@@ -12,7 +12,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Source do
   import Ecto.Changeset
 
   alias OpenRtbEcto.Types.TinyInt
-  alias OpenRtbEcto.V2.SupplyChain
+  alias OpenRtbEcto.V2.BidRequest.SupplyChain
 
   @type t :: %__MODULE__{}
 
