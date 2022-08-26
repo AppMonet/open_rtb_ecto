@@ -1,10 +1,12 @@
-defmodule OpenRtbEcto.V2.Native.Request.Assets do
+defmodule OpenRtbEcto.V2.Native.Request.Asset do
   @moduledoc """
   The main container object for each asset requested or supported by Exchange on behalf of the rendering client.
   """
 
   use Ecto.Schema
   import Ecto.Changeset
+
+  alias OpenRtbEcto.V2.Native.Helper
   alias OpenRtbEcto.V2.Native.Request.{Title, Img, Video, Data}
 
   @type t :: %__MODULE__{}
@@ -20,8 +22,8 @@ defmodule OpenRtbEcto.V2.Native.Request.Assets do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(request, attrs \\ %{}) do
-    request
+  def changeset(asset, attrs \\ %{}) do
+    asset
     |> cast(attrs, [
       :id,
       :required,
@@ -32,24 +34,6 @@ defmodule OpenRtbEcto.V2.Native.Request.Assets do
     |> cast_embed(:video)
     |> cast_embed(:data)
     |> validate_required(:id)
-    |> validate_media()
-  end
-
-  defp validate_media(request) do
-    # Each asset object may contain only one of title, img, data or video.
-    media = [:title, :img, :data, :video]
-
-    total =
-      media
-      |> Enum.each(fn field -> if get_field(request, field), do: 1, else: 0 end)
-      |> Enum.sum()
-
-    if total > 1,
-      do:
-        add_error(
-          request,
-          :media,
-          "asset object may contain only one of title, img, data or video"
-        )
+    |> Helper.validate_media()
   end
 end

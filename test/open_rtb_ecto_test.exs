@@ -1,18 +1,19 @@
 defmodule OpenRtbEctoTest do
-  use OpenRtbEcto.OpenRtbCase, async: true
+  use ExUnit.Case, async: true
   doctest OpenRtbEcto
 
+  alias OpenRtbEcto.Support.TestHelper
   alias OpenRtbEcto.V2.BidRequest
   alias OpenRtbEcto.V2.BidRequest.Video
 
   describe "cast/2" do
     test "valid map" do
-      data = test_data("v2/request", "example-request-app-android-1.json", :map)
+      data = TestHelper.test_data("v2/request", "example-request-app-android-1.json", :map)
       assert {:ok, %BidRequest{}} = OpenRtbEcto.cast(BidRequest, data)
     end
 
     test "valid json" do
-      data = test_data("v2/request", "example-request-app-android-1.json", :json)
+      data = TestHelper.test_data("v2/request", "example-request-app-android-1.json", :json)
       assert {:ok, %BidRequest{}} = OpenRtbEcto.cast(BidRequest, data)
     end
 

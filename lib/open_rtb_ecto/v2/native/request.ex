@@ -1,11 +1,11 @@
 defmodule OpenRtbEcto.V2.Native.Request do
   @moduledoc """
-  The Native Object defines the native advertising opportunity available for bid via this bid request. It will be included as a JSON-encoded string in the bid request’s imp.native field or as a direct JSON object, depending on the choice of the exchange.
+  The Native Object defines the native advertising opportunity available for bid via this bid request.
   """
 
   use Ecto.Schema
   import Ecto.Changeset
-  alias OpenRtbEcto.V2.Native.Request.{Assets, EventTrackers}
+  alias OpenRtbEcto.V2.Native.Request.{Asset, EventTracker}
 
   @type t :: %__MODULE__{}
 
@@ -16,10 +16,10 @@ defmodule OpenRtbEcto.V2.Native.Request do
     field(:plcmttype, :integer)
     field(:plcmtcnt, :integer, default: 1)
     field(:seq, :integer, default: 0)
-    embeds_many(:assets, Assets)
+    embeds_many(:assets, Asset)
     field(:aurlsupport, :integer, default: 0)
     field(:durlsupport, :integer, default: 0)
-    embeds_many(:eventtrackers, EventTrackers)
+    embeds_many(:eventtrackers, EventTracker)
     field(:privacy, :integer, default: 0)
     field(:ext, :map, default: %{})
   end
@@ -32,7 +32,6 @@ defmodule OpenRtbEcto.V2.Native.Request do
       :contextsubtype,
       :plcmttype,
       :plcmtcnt,
-      :bseat,
       :seq,
       :aurlsupport,
       :durlsupport,

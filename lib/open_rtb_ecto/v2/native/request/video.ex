@@ -1,10 +1,13 @@
 defmodule OpenRtbEcto.V2.Native.Request.Video do
   @moduledoc """
-  The video object to be used for all video elements supported in the Native Ad. This corresponds to the Video object of OpenRTB.
+  The video object to be used for all video elements supported in the Native Ad.
+  This corresponds to the Video object of OpenRTB.
   """
 
   use Ecto.Schema
   import Ecto.Changeset
+
+  @type t :: %__MODULE__{}
 
   embedded_schema do
     field(:mimes, {:array, :string})
@@ -14,14 +17,20 @@ defmodule OpenRtbEcto.V2.Native.Request.Video do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(request, attrs \\ %{}) do
-    request
+  def changeset(video, attrs \\ %{}) do
+    video
     |> cast(attrs, [
       :mimes,
       :minduration,
       :maxduration,
       :protocols,
       :ext
+    ])
+    |> validate_required([
+      :mimes,
+      :minduration,
+      :maxduration,
+      :protocols
     ])
   end
 end

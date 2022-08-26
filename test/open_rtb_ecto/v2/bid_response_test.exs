@@ -1,10 +1,11 @@
 defmodule OpenRtbEcto.V2.BidResponseTest do
-  use OpenRtbEcto.OpenRtbCase, async: true
+  use ExUnit.Case, async: true
 
   alias OpenRtbEcto.V2.BidResponse
+  alias OpenRtbEcto.Support.TestHelper
 
   test "mobile" do
-    data = test_data("v2/response", "mobile.json")
+    data = TestHelper.test_data("v2/response", "mobile.json")
     assert {:ok, %BidResponse{seatbid: [%{bid: [bid]}]}} = OpenRtbEcto.cast(BidResponse, data)
     assert bid.id == "1"
     assert bid.impid == "1"
@@ -23,13 +24,13 @@ defmodule OpenRtbEcto.V2.BidResponseTest do
   end
 
   test "single vast response" do
-    data = test_data("v2/response", "vast.json")
+    data = TestHelper.test_data("v2/response", "vast.json")
     assert {:ok, %BidResponse{}} = OpenRtbEcto.cast(BidResponse, data)
   end
 
   test "multi vast response" do
     # https://github.com/openrtb/examples/blob/master/spotxchange/example-video-response-multiple_vast_inline_simple.md
-    data = test_data("v2/response", "multi-vast.json")
+    data = TestHelper.test_data("v2/response", "multi-vast.json")
     assert {:ok, %BidResponse{seatbid: seatbids}} = OpenRtbEcto.cast(BidResponse, data)
     assert length(seatbids) == 3
   end
