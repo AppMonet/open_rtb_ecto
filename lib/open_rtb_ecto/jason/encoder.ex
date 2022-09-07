@@ -1,4 +1,4 @@
-alias OpenRtbEcto.V2.{BidRequest, BidResponse}
+alias OpenRtbEcto.V2.{BidRequest, BidResponse, Native}
 
 alias OpenRtbEcto.V2.BidRequest.{
   App,
@@ -34,6 +34,7 @@ alias OpenRtbEcto.V2.BidRequest.{
 
 alias OpenRtbEcto.V2.BidResponse.{Bid, SeatBid}
 
+# TODO: programmatically find all modules rather than manually adding them here
 defimpl Jason.Encoder,
   for: [
     BidRequest,
@@ -68,7 +69,22 @@ defimpl Jason.Encoder,
     SupplyChainNode,
     Uid,
     Eids,
-    UserAgent
+    UserAgent,
+    Native.Request,
+    Native.Request.Asset,
+    Native.Request.Data,
+    Native.Request.EventTracker,
+    Native.Request.Img,
+    Native.Request.Title,
+    Native.Request.Video,
+    Native.Response,
+    Native.Response.Asset,
+    Native.Response.Data,
+    Native.Response.EventTracker,
+    Native.Response.Img,
+    Native.Response.Title,
+    Native.Response.Video,
+    Native.Response.Link
   ] do
   def encode(struct, opts) do
     struct

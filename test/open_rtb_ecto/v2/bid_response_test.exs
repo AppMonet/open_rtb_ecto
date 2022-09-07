@@ -2,6 +2,7 @@ defmodule OpenRtbEcto.V2.BidResponseTest do
   use ExUnit.Case, async: true
 
   alias OpenRtbEcto.V2.BidResponse
+  alias OpenRtbEcto.V2.Native
   alias OpenRtbEcto.Support.TestHelper
 
   test "mobile" do
@@ -33,5 +34,14 @@ defmodule OpenRtbEcto.V2.BidResponseTest do
     data = TestHelper.test_data("v2/response", "multi-vast.json")
     assert {:ok, %BidResponse{seatbid: seatbids}} = OpenRtbEcto.cast(BidResponse, data)
     assert length(seatbids) == 3
+  end
+
+  test "supports BidSwitch format with native_adm field" do
+    data = TestHelper.test_data("v2/response", "bid_switch_native.json")
+    assert {:ok, %BidResponse{seatbid: [%{bid: [bid]}]}} = OpenRtbEcto.cast(BidResponse, data)
+    assert %Native.Response{} = response = bid.adm_native
+    assert response.ver == "1.2"
+    assert %{assets: [%Native.Response.Asset{title: title}]} = response
+    assert %Native.Response.Title{text: "A test Native Ad"} = title
   end
 end
