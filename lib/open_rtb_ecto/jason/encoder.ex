@@ -1,4 +1,4 @@
-alias OpenRtbEcto.V2.{BidRequest, BidResponse, Native}
+alias OpenRtbEcto.V2.{BidRequest, BidResponse}
 
 alias OpenRtbEcto.V2.BidRequest.{
   App,
@@ -70,21 +70,21 @@ defimpl Jason.Encoder,
     Uid,
     Eids,
     UserAgent,
-    Native.Request,
-    Native.Request.Asset,
-    Native.Request.Data,
-    Native.Request.EventTracker,
-    Native.Request.Img,
-    Native.Request.Title,
-    Native.Request.Video,
-    Native.Response,
-    Native.Response.Asset,
-    Native.Response.Data,
-    Native.Response.EventTracker,
-    Native.Response.Img,
-    Native.Response.Title,
-    Native.Response.Video,
-    Native.Response.Link
+    OpenRtbEcto.V2.Native.Request,
+    OpenRtbEcto.V2.Native.Request.Asset,
+    OpenRtbEcto.V2.Native.Request.Data,
+    OpenRtbEcto.V2.Native.Request.EventTracker,
+    OpenRtbEcto.V2.Native.Request.Img,
+    OpenRtbEcto.V2.Native.Request.Title,
+    OpenRtbEcto.V2.Native.Request.Video,
+    OpenRtbEcto.V2.Native.Response,
+    OpenRtbEcto.V2.Native.Response.Asset,
+    OpenRtbEcto.V2.Native.Response.Data,
+    OpenRtbEcto.V2.Native.Response.EventTracker,
+    OpenRtbEcto.V2.Native.Response.Img,
+    OpenRtbEcto.V2.Native.Response.Title,
+    OpenRtbEcto.V2.Native.Response.Video,
+    OpenRtbEcto.V2.Native.Response.Link
   ] do
   def encode(struct, opts) do
     struct

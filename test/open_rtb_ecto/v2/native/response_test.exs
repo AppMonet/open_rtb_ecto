@@ -10,4 +10,8 @@ defmodule OpenRtbEcto.V2.Native.ResponseTest do
       assert {:ok, %Response{}} = OpenRtbEcto.cast(Response, data)
     end
   end
+
+  describe "Jason Encoder protocol is implemented" do
+    assert Jason.encode!(%Response{})
+  end
 end
