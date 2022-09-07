@@ -5,6 +5,7 @@ defmodule OpenRtbEcto.V2.BidResponse.Bid do
   given price.
   """
 
+  alias OpenRtbEcto.V2.Native
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -20,6 +21,7 @@ defmodule OpenRtbEcto.V2.BidResponse.Bid do
     field(:burl)
     field(:lurl)
     field(:adm)
+    embeds_one(:adm_native, Native.Response)
     field(:adid)
     field(:adomain, {:array, :string})
     field(:bundle)
@@ -87,6 +89,7 @@ defmodule OpenRtbEcto.V2.BidResponse.Bid do
     ])
     |> validate_required([:id, :impid, :price])
     |> ensure_crid()
+    |> cast_embed(:adm_native)
   end
 
   defp ensure_crid(changeset) do
