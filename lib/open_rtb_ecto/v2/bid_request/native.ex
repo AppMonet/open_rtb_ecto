@@ -18,12 +18,14 @@ defmodule OpenRtbEcto.V2.BidRequest.Native do
 
   use Ecto.Schema
   import Ecto.Changeset
+  alias OpenRtbEcto.V2.Native
 
   @type t :: %__MODULE__{}
 
   @primary_key false
   embedded_schema do
     field(:request)
+    embeds_one(:request_native, Native.Request)
     field(:ver)
     field(:api, {:array, :integer})
     field(:battr, {:array, :integer})
@@ -36,5 +38,6 @@ defmodule OpenRtbEcto.V2.BidRequest.Native do
     |> validate_required(:request)
     |> validate_subset(:api, 1..6)
     |> validate_subset(:battr, 1..17)
+    |> cast_embed(:request_native)
   end
 end
