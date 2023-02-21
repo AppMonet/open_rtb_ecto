@@ -3,7 +3,7 @@ defmodule OpenRtbEcto.V2.BidRequestTest do
 
   alias OpenRtbEcto.Support.TestHelper
   alias OpenRtbEcto.V2.BidRequest
-  alias OpenRtbEcto.V2.BidRequest.{App, Imp, Device, User, Pmp, Video}
+  alias OpenRtbEcto.V2.BidRequest.{App, Imp, Device, User, Pmp, Video, UserAgent}
 
   describe "valid data" do
     test "android requests" do
@@ -22,6 +22,21 @@ defmodule OpenRtbEcto.V2.BidRequestTest do
     test "iphone request" do
       data = TestHelper.test_data("v2/request", "iphone.json")
       assert {:ok, %BidRequest{}} = OpenRtbEcto.cast(BidRequest, data)
+    end
+
+    test "structured user-agent" do
+      data = TestHelper.test_data("v2/request", "structured-ua.json")
+
+      assert {:ok,
+              %BidRequest{
+                device: %Device{
+                  sua: %UserAgent{
+                    browsers: [%{brand: "Chrome", version: ["1.2"]}],
+                    architecture: "aarch64",
+                    platform: %{brand: "iOS", version: ["15.0"]}
+                  }
+                }
+              }} = OpenRtbEcto.cast(BidRequest, data)
     end
 
     test "multiple imps" do

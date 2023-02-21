@@ -5,7 +5,7 @@ defmodule OpenRtbEcto.V2.Native.Helper do
   Validates that there is max one item from the media list present in the changeset of the response and request
   asset objects.
   """
-  @spec validate_media(Ecto.Changeset.t) :: Ecto.Changeset.t
+  @spec validate_media(Ecto.Changeset.t()) :: Ecto.Changeset.t()
   def validate_media(changeset) do
     media = [:title, :img, :data, :video]
 
