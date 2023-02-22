@@ -10,6 +10,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Device do
 
   alias OpenRtbEcto.Types.TinyInt
   alias OpenRtbEcto.V2.BidRequest.Geo
+  alias OpenRtbEcto.V2.BidRequest.UserAgent
 
   @type t :: %__MODULE__{}
 
@@ -17,6 +18,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Device do
   embedded_schema do
     field(:ua)
     embeds_one(:geo, Geo)
+    embeds_one(:sua, UserAgent)
     field(:dnt, TinyInt)
     field(:lmt, TinyInt)
     field(:ip)
@@ -84,6 +86,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Device do
       :macmd5
     ])
     |> cast_embed(:geo)
+    |> cast_embed(:sua)
     |> validate_inclusion(:devicetype, 1..7)
     |> validate_inclusion(:connectiontype, 0..6)
   end
