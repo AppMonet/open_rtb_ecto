@@ -3,7 +3,106 @@ defmodule OpenRtbEcto.V2.BidRequestTest do
 
   alias OpenRtbEcto.Support.TestHelper
   alias OpenRtbEcto.V2.BidRequest
-  alias OpenRtbEcto.V2.BidRequest.{App, Imp, Device, User, Pmp, Video, UserAgent}
+
+  alias OpenRtbEcto.V2.BidRequest.{
+    App,
+    Imp,
+    Device,
+    User,
+    Pmp,
+    Video,
+    UserAgent,
+    Site,
+    Banner,
+    Regs,
+    Publisher
+  }
+
+  # all of the fields that are required anywhere
+  @globally_required_defaults %{
+    imp: [%{id: "1", banner: %{w: 300, h: 250}}],
+    request: "{}",
+    mimes: ["video/mp4"],
+    ver: "1.0",
+    complete: 1,
+    id: "1234",
+    sid: "one",
+    asi: "one",
+    nodes: [%{hp: 1, asi: "example", sid: "one"}],
+    brand: "MyGreatBrand"
+  }
+
+  describe "changeset setup" do
+    test "changeset will cast all fields" do
+      global_required_defaults_set = MapSet.new(Map.keys(@globally_required_defaults))
+
+      all_structs =
+        :application.get_key(:open_rtb_ecto, :modules)
+        |> elem(1)
+        |> Enum.filter(&(&1 |> Module.split() |> Enum.take(3) == ~w|OpenRtbEcto V2 BidRequest|))
+
+      structs = Enum.map(all_structs, &struct/1)
+      structs = Enum.map(structs, fn s -> {s, Map.keys(s)} end)
+
+      # assert that if we applied a change containing this key,
+      # it would be reflected in the struct
+      for {struct_name, fields} <- structs, k <- fields, k != :__struct__ do
+        struct_tag = Map.get(struct_name, :__struct__)
+
+        new_value =
+          case struct_tag.__schema__(:type, k) do
+            :string ->
+              "example"
+
+            :integer ->
+              1
+
+            :float ->
+              1.1
+
+            :map ->
+              %{test: %{value: 1}}
+
+            OpenRtbEcto.Types.TinyInt ->
+              0
+
+            {:array, :string} ->
+              ["test"]
+
+            {:array, :integer} ->
+              [1]
+
+            {:parameterized, _, _} ->
+              :skip
+
+            _other ->
+              :skip
+          end
+
+        if new_value != :skip do
+          input = %{k => new_value}
+          required = MapSet.intersection(MapSet.new(fields), global_required_defaults_set)
+
+          input =
+            Enum.reduce(required, input, fn
+              ^k, input ->
+                input
+
+              rf, input ->
+                Map.put(
+                  input,
+                  rf,
+                  Map.get(@globally_required_defaults, rf)
+                )
+            end)
+            |> Map.delete(:__struct__)
+
+          assert {:ok, %{:__struct__ => ^struct_tag, ^k => ^new_value}} =
+                   OpenRtbEcto.cast(struct_tag, input)
+        end
+      end
+    end
+  end
 
   describe "valid data" do
     test "android requests" do

@@ -78,7 +78,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Audio do
       :ext
     ])
     |> cast_embed(:companionad)
-    |> validate_required([:mimes, :linearity, :minduration, :maxduration, :protocol])
+    |> validate_required([:mimes])
     |> validate_subset(:protocols, 1..10)
     |> validate_number(:startdelay, greater_than_or_equal_to: -2)
     |> validate_number(:maxextended, greater_than_or_equal_to: -1)
