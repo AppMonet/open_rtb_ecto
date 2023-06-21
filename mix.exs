@@ -33,7 +33,7 @@ defmodule OpenRtbEcto.MixProject do
   defp deps do
     [
       {:ecto, "~> 3.0"},
-      {:jason, "~> 1.1"},
+      {:jsonrs, "~> 0.3.1"},
       {:ex_doc, "~> 0.19", only: :dev, runtime: false}
     ]
   end

@@ -8,6 +8,6 @@ defmodule OpenRtbEcto.Support.TestHelper do
 
   def test_data(type, filename, :map) do
     test_data(type, filename, :json)
-    |> Jason.decode!()
+    |> Jsonrs.decode!()
   end
 end

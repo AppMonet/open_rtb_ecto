@@ -167,7 +167,7 @@ defmodule OpenRtbEcto.V2.BidRequestTest do
 
   describe "json encoding" do
     test "fields with nil values are omitted" do
-      assert "{\"allimps\":0,\"at\":2,\"test\":0}" == Jason.encode!(%BidRequest{})
+      assert "{\"allimps\":0,\"at\":2,\"test\":0}" == Jsonrs.encode!(%BidRequest{})
     end
   end
 end
