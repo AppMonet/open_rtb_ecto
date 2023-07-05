@@ -11,11 +11,7 @@ defmodule OpenRtbEcto.V2.BidRequestTest do
     User,
     Pmp,
     Video,
-    UserAgent,
-    Site,
-    Banner,
-    Regs,
-    Publisher
+    UserAgent
   }
 
   # all of the fields that are required anywhere
@@ -167,7 +163,7 @@ defmodule OpenRtbEcto.V2.BidRequestTest do
 
   describe "json encoding" do
     test "fields with nil values are omitted" do
-      assert "{\"allimps\":0,\"at\":2,\"test\":0}" == Jason.encode!(%BidRequest{})
+      assert "{\"at\":2,\"test\":0,\"allimps\":0}" == Jason.encode!(%BidRequest{})
     end
   end
 end
