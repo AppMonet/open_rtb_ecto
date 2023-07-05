@@ -14,11 +14,15 @@ defmodule OpenRtbEcto.V2.BidRequest.Regs do
   @primary_key false
   embedded_schema do
     field(:coppa, TinyInt)
+    field(:gdpr, TinyInt)
+    field(:us_privacy)
+    field(:gpp)
+    field(:gpp_sid, {:array, :integer})
     field(:ext, :map, default: %{})
   end
 
   def changeset(regs, attrs \\ %{}) do
     regs
-    |> cast(attrs, [:coppa, :ext])
+    |> cast(attrs, [:coppa, :gdpr, :us_privacy, :gpp, :gpp_sid, :ext])
   end
 end
