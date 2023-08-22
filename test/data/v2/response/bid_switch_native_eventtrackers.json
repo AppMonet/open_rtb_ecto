@@ -1,0 +1,49 @@
+{
+  "id": "1234567890",
+  "seatbid": [
+    {
+      "bid": [
+        {
+          "id": "1",
+          "impid": "102",
+          "price": 9.43,
+          "crid": "314",
+          "cid": "42",
+          "language": "en",
+          "burl": "https://adserver.com/imp?impid=102&winprice=${AUCTION_PRICE}",
+          "adomain": ["advertiserdomain.com"],
+          "ext": {
+            "advertiser_name": "Coca-Cola",
+            "agency_name": "CC-advertising",
+            "agency_id": "abcd1234"
+          },
+          "adm_native": {
+            "ver": "1.2",
+            "jstracker": "<html></head><body></body><script src='./jquery.js'></script></html>",
+            "privacy": "https://www.example.com/privacy-notice",
+            "link": {
+              "url": "http://adserver.com/click?impid=102"
+            },
+            "eventtrackers": [
+              {
+                "url": "http://adserver.com/native?impid=102",
+                "event": 1,
+                "method": 1
+              }
+            ],
+            "assets": [
+              {
+                "id": 1,
+                "required": 1,
+                "title": {
+                  "text": "A test Native Ad"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "seat": "58"
+    }
+  ]
+}

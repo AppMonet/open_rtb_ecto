@@ -29,6 +29,6 @@ defmodule OpenRtbEcto.V2.Native.Response.EventTracker do
       :customdata,
       :ext
     ])
-    |> validate_required([:event, :methods])
+    |> validate_required([:event, :method])
   end
 end
