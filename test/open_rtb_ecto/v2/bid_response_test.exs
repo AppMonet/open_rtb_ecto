@@ -44,4 +44,12 @@ defmodule OpenRtbEcto.V2.BidResponseTest do
     assert %{assets: [%Native.Response.Asset{title: title}]} = response
     assert %Native.Response.Title{text: "A test Native Ad"} = title
   end
+
+  test "supports BidSwitch format with native_adm field with eventtrackers instead of imptrackers" do
+    data = TestHelper.test_data("v2/response", "bid_switch_native_eventtrackers.json")
+    assert {:ok, %BidResponse{seatbid: [%{bid: [bid]}]}} = OpenRtbEcto.cast(BidResponse, data)
+    assert %Native.Response{} = response = bid.adm_native
+    assert response.ver == "1.2"
+    assert %{eventtrackers: [%{event: 1, method: 1}]} = response
+  end
 end
