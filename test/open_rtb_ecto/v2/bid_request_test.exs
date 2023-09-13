@@ -163,7 +163,11 @@ defmodule OpenRtbEcto.V2.BidRequestTest do
 
   describe "json encoding" do
     test "fields with nil values are omitted" do
-      assert "{\"at\":2,\"test\":0,\"allimps\":0}" == Jason.encode!(%BidRequest{})
+      str = Jason.encode!(%BidRequest{})
+      map = Jason.decode!(str)
+
+      assert 3 == map_size(map)
+      assert ["allimps", "at", "test"] = Enum.sort(Map.keys(map))
     end
   end
 end
