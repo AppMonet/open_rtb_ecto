@@ -37,6 +37,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Video do
     field(:mincpmpersec, :float)
     field(:slotinpod, :integer)
     field(:placement, :integer)
+    field(:plcmt, :integer)
     field(:linearity, :integer)
     field(:skip, TinyInt)
     field(:skipmin, :integer, default: 0)
@@ -76,6 +77,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Video do
       :mincpmpersec,
       :slotinpod,
       :placement,
+      :plcmt,
       :linearity,
       :skip,
       :skipmin,
@@ -100,6 +102,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Video do
     |> validate_inclusion(:protocol, 1..10)
     |> validate_subset(:protocols, 1..10)
     |> validate_inclusion(:placement, 1..5)
+    |> validate_inclusion(:plcmt, 1..4)
     |> validate_number(:startdelay, greater_than_or_equal_to: -2)
     |> validate_number(:pos, greater_than: -1, less_than: 8)
     |> validate_number(:maxextended, greater_than_or_equal_to: -1)

@@ -7,4 +7,9 @@ defmodule OpenRtbEcto.V2.BidRequest.VideoTest do
     assert {:error, %{api: errors}} = OpenRtbEcto.cast(Video, "{\"api\":[-7]}")
     assert ["has an invalid entry, got [-7]"] = errors
   end
+
+  test "video.plcmt must be 1..4" do
+    assert {:ok, _} = OpenRtbEcto.cast(Video, "{\"plcmt\":3,\"mimes\":[\"video/mp4\"]}")
+    assert {:error, %{plcmt: [_]}} = OpenRtbEcto.cast(Video, "{\"plcmt\":-1}")
+  end
 end
