@@ -33,7 +33,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Imp do
     field(:instl, TinyInt, default: 0)
     field(:tagid)
     field(:bidfloor, :float, default: 0.0)
-    field(:bidfloorcur, :string, default: "USD")
+    field(:bidfloorcur, :string)
     field(:clickbrowser, TinyInt)
     field(:secure, TinyInt)
     field(:iframebuster, {:array, :string})
