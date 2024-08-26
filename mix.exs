@@ -34,7 +34,8 @@ defmodule OpenRtbEcto.MixProject do
     [
       {:ecto, "~> 3.0"},
       {:jason, "~> 1.1"},
-      {:ex_doc, "~> 0.19", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.19", only: :dev, runtime: false},
+      {:poison, "~> 6.0"}
     ]
   end
 

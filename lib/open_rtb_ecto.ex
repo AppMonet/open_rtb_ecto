@@ -23,7 +23,7 @@ defmodule OpenRtbEcto do
   end
 
   def cast(schema, json) when is_binary(json) do
-    with {:ok, decoded} <- Jason.decode(json) do
+    with {:ok, decoded} <- Poison.decode(json) do
       cast(schema, decoded)
     end
   end
