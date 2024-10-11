@@ -30,6 +30,10 @@ defmodule OpenRtbEcto.V2.BidRequest.App do
     embeds_one(:publisher, Publisher)
     embeds_one(:content, Content)
     field(:keywords)
+    # Magnite XAPI extension:
+    # An array of string identifiers denoting the advertiser blocklist
+    # relevant for this impression.
+    field(:blocklists, {:array, :string})
     field(:ext, :map, default: %{})
   end
 
@@ -49,6 +53,7 @@ defmodule OpenRtbEcto.V2.BidRequest.App do
       :privacypolicy,
       :paid,
       :keywords,
+      :blocklists,
       :ext
     ])
     |> cast_embed(:publisher)
