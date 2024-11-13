@@ -13,7 +13,7 @@ defmodule OpenRtbEcto.V2.BidRequest.VideoTest do
     assert {:error, %{protocols: [_]}} = OpenRtbEcto.cast(Video, "{\"protocols\":[\"a\"], \"mimes\":[\"video/mp4\"]}")
   end
 
-  test "video.protocols can be up to 7" do
+  test "video.playbackmethod can be up to 7" do
     assert {:ok, _} = OpenRtbEcto.cast(Video, "{\"playbackmethod\":[7], \"mimes\":[\"video/mp4\"]}")
     assert {:error, %{playbackmethod: [_]}} = OpenRtbEcto.cast(Video, "{\"playbackmethod\":[8], \"mimes\":[\"video/mp4\"]}")
   end
