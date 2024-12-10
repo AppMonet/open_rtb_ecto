@@ -11,7 +11,7 @@ defmodule OpenRtbEcto.V2.Native.ResponseTest do
     end
   end
 
-  describe "Jason Encoder protocol is implemented" do
-    assert Jason.encode!(%Response{})
+  describe "JSON Encoder protocol is implemented" do
+    assert JSON.encode!(%Response{})
   end
 end

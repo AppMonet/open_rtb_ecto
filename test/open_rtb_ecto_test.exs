@@ -18,7 +18,7 @@ defmodule OpenRtbEctoTest do
     end
 
     test "invalid json" do
-      assert {:error, %Jason.DecodeError{}} = OpenRtbEcto.cast(BidRequest, "blarg{")
+      assert {:error, {:invalid_byte, _, _}} = OpenRtbEcto.cast(BidRequest, "blarg{")
     end
 
     test "charlists in errors are displayed as lists" do
@@ -28,11 +28,11 @@ defmodule OpenRtbEctoTest do
   end
 
   describe "json encoding" do
-    test "all structs have Jason.Encoder implementations" do
+    test "all structs have JSON.Encoder implementations" do
       {:ok, all} = :application.get_key(:open_rtb_ecto, :modules)
       mods = for mod <- all, String.starts_with?(to_string(mod), "Elixir.OpenRtbEcto.V"), do: mod
       assert length(mods) > 1
-      assert Enum.all?(mods, &Jason.encode!/1)
+      assert Enum.all?(mods, &JSON.encode!/1)
     end
   end
 end
