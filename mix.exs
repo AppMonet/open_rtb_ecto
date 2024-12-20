@@ -2,14 +2,14 @@ defmodule OpenRtbEcto.MixProject do
   use Mix.Project
 
   @name "OpenRtbEcto"
-  @version "0.9.0"
+  @version "1.0.0"
   @repo_url "https://github.com/AppMonet/open_rtb_ecto"
 
   def project do
     [
       app: :open_rtb_ecto,
       version: @version,
-      elixir: "~> 1.7",
+      elixir: "~> 1.18.0-rc.0",
       description: "OpenRTB Ecto schemas",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -33,7 +33,6 @@ defmodule OpenRtbEcto.MixProject do
   defp deps do
     [
       {:ecto, "~> 3.0"},
-      {:jason, "~> 1.1"},
       {:ex_doc, "~> 0.19", only: :dev, runtime: false}
     ]
   end
