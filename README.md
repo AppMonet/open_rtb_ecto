@@ -10,6 +10,8 @@ Also supports Bid
 [OpenRTB 2.6 Spec](https://iabtechlab.com/wp-content/uploads/2022/04/OpenRTB-2-6_FINAL.pdf)
 [OpenRTB 3.0 Spec](https://github.com/InteractiveAdvertisingBureau/openrtb/blob/master/OpenRTB%20v3.0%20FINAL.md)
 
+Starting from version 1.0, this library requires Elixir 1.18.0 and above as it uses the new JSON module.
+
 ## Installation
 
 The package can be installed by adding `open_rtb_ecto` to your list of dependencies in `mix.exs`:
@@ -17,7 +19,7 @@ The package can be installed by adding `open_rtb_ecto` to your list of dependenc
 ```elixir
 def deps do
   [
-    {:open_rtb_ecto, "~> 0.9"}
+    {:open_rtb_ecto, "~> 1.0"}
   ]
 end
 ```
