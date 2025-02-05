@@ -34,6 +34,22 @@ alias OpenRtbEcto.V2.BidRequest.{
 
 alias OpenRtbEcto.V2.BidResponse.{Bid, SeatBid}
 
+defmodule OpenRtbEcto.JSON.Encoder do
+  def encode(struct, encoder) do
+    struct
+    |> Map.from_struct()
+    |> Enum.reduce(%{}, fn {k, v}, acc ->
+      case v do
+        nil -> acc
+        [] -> acc
+        %{} = map when map_size(map) == 0 -> acc
+        _ -> Map.put(acc, k, v)
+      end
+    end)
+    |> encoder.(encoder)
+  end
+end
+
 # TODO: programmatically find all modules rather than manually adding them here
 defimpl JSON.Encoder,
   for: [
@@ -86,17 +102,5 @@ defimpl JSON.Encoder,
     OpenRtbEcto.V2.Native.Response.Video,
     OpenRtbEcto.V2.Native.Response.Link
   ] do
-  def encode(struct, encoder) do
-    struct
-    |> Map.from_struct()
-    |> Enum.reduce(%{}, fn {k, v}, acc ->
-      case v do
-        nil -> acc
-        [] -> acc
-        %{} = map when map_size(map) == 0 -> acc
-        _ -> Map.put(acc, k, v)
-      end
-    end)
-    |> encoder.(encoder)
-  end
+  defdelegate encode(struct, encoder), to: OpenRtbEcto.JSON.Encoder
 end
