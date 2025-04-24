@@ -15,8 +15,12 @@ defmodule OpenRtbEcto.V2.BidRequest.Uid do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(uid, attrs \\ %{}) do
+  def changeset(uid, attrs \\ %{})
+
+  def changeset(uid, attrs) when is_map(attrs) do
     uid
     |> cast(attrs, [:id, :atype, :ext])
   end
+
+  def changeset(uid, _), do: cast(uid, %{}, [])
 end
