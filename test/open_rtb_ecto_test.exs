@@ -67,6 +67,16 @@ defmodule OpenRtbEctoTest do
           "uids" => [[]]
         },
         %{
+          "source" => "sourcewithinvalidext.com",
+          "uids" => [
+            %{
+              "id" => "32b89953-0f9a-4fb3-981a-2ad9041ff027",
+              "atype" => 1,
+              "ext" => "string_instead_of_map"
+            }
+          ]
+        },
+        %{
           "source" => "pubcid.org",
           "uids" => [%{"id" => "32b89953-0f9a-4fb3-981a-2ad9041ff027", "atype" => 1}]
         }
@@ -74,9 +84,14 @@ defmodule OpenRtbEctoTest do
 
       data = put_in(data, ["user", "eids"], eids)
       assert {:ok, %BidRequest{user: %{eids: eids}}} = OpenRtbEcto.cast(BidRequest, data)
-      assert 4 == Enum.count(eids)
+
+      assert 5 == Enum.count(eids)
       invalid_entry = Enum.find(eids, &(&1.source == "sourcewithinvaliduids.com"))
       assert [%BidRequest.Uid{}] == invalid_entry.uids
+
+      invalid_ext = Enum.find(eids, &(&1.source == "sourcewithinvalidext.com"))
+      uid = hd(invalid_ext.uids)
+      assert %{} == uid.ext
     end
   end
 end
