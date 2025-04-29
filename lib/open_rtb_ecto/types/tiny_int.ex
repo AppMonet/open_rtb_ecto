@@ -15,6 +15,9 @@ defmodule OpenRtbEcto.Types.TinyInt do
   def cast(false), do: {:ok, 0}
   def cast("0"), do: {:ok, 0}
   def cast(0), do: {:ok, 0}
+  # Return nil for invalid values to allow our cast functions to discard them
+  def cast(nil), do: {:ok, nil}
+  # Error is used for invalid values - will be discarded for optional fields
   def cast(_), do: :error
 
   def embed_as(_), do: :self
@@ -23,5 +26,6 @@ defmodule OpenRtbEcto.Types.TinyInt do
 
   def load(val), do: {:ok, val}
 
+  def dump(nil), do: {:ok, nil}
   def dump(val), do: {:ok, val}
 end

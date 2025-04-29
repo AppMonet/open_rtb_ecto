@@ -148,7 +148,30 @@ defmodule OpenRtbEcto.V2.BidRequestTest do
   end
 
   describe "invalid data" do
-    test "returns error tuple with friendly error map" do
+    test "valid allimps but missing required id returns error" do
+      data = TestHelper.test_data("v2/request", "example-request-app-android-1.json")
+
+      invalid =
+        data
+        |> Map.delete("id")
+
+      assert {:error, reasons} = OpenRtbEcto.cast(BidRequest, invalid)
+      assert %{id: ["can't be blank, got nil"]} = reasons
+    end
+
+    test "invalid allimps value is discarded but valid request is accepted" do
+      data = TestHelper.test_data("v2/request", "example-request-app-android-1.json")
+
+      invalid_but_non_required =
+        data
+        |> Map.put("allimps", 1_000)
+
+      assert {:ok, result} = OpenRtbEcto.cast(BidRequest, invalid_but_non_required)
+      # The invalid allimps value should be discarded, falling back to default
+      assert result.allimps == 0
+    end
+
+    test "invalid optional fields are discarded but required fields still validated" do
       data = TestHelper.test_data("v2/request", "example-request-app-android-1.json")
 
       invalid =
@@ -157,7 +180,10 @@ defmodule OpenRtbEcto.V2.BidRequestTest do
         |> Map.delete("id")
 
       assert {:error, reasons} = OpenRtbEcto.cast(BidRequest, invalid)
-      assert %{allimps: ["is invalid, got 0"], id: ["can't be blank, got nil"]} = reasons
+      # Only required field errors should be reported
+      assert %{id: ["can't be blank, got nil"]} = reasons
+      # Optional field errors should not be included
+      refute Map.has_key?(reasons, :allimps)
     end
   end
 

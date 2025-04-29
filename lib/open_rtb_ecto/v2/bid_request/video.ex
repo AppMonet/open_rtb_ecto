@@ -7,13 +7,12 @@ defmodule OpenRtbEcto.V2.BidRequest.Video do
   Section 3.2.6) that define these companion ads.
 
   The presence of a Video as a subordinate of the Imp object indicates that this impression is
-  offered as a video type impression. At the publisher’s discretion, that same impression may also
+  offered as a video type impression. At the publisher's discretion, that same impression may also
   be offered as banner, audio, and/or native by also including as Imp subordinates objects of those
   types. However, any given bid for the impression must conform to one of the offered types.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   alias OpenRtbEcto.Types.TinyInt
   alias OpenRtbEcto.V2.BidRequest.Banner
@@ -60,7 +59,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Video do
 
   def changeset(video, attrs \\ %{}) do
     video
-    |> cast(attrs, [
+    |> safe_cast(attrs, [
       :mimes,
       :minduration,
       :maxduration,
@@ -96,34 +95,11 @@ defmodule OpenRtbEcto.V2.BidRequest.Video do
       :companiontype,
       :ext
     ])
-    |> cast_embed(:companionad)
+    |> safe_cast_embed(:companionad)
     |> validate_required([:mimes])
-    |> validate_inclusion(:linearity, 1..2)
-    |> validate_inclusion(:protocol, 1..10)
-    |> validate_inclusion(:placement, 1..5)
-    |> validate_inclusion(:plcmt, 1..4)
-    |> validate_number(:startdelay, greater_than_or_equal_to: -2)
-    |> validate_number(:pos, greater_than: -1, less_than: 8)
-    |> validate_number(:maxextended, greater_than_or_equal_to: -1)
-    |> validate_subset(:battr, 1..17)
-    |> validate_subset(:playbackmethod, 1..7)
-    |> validate_inclusion(:playbackend, 1..3)
-    |> validate_subset(:delivery, 1..3)
-    |> validate_list_of_pos_ints(:api)
-    |> validate_subset(:companiontype, 1..3)
-  end
 
-  defp validate_list_of_pos_ints(changeset, field) do
-    case get_change(changeset, field) do
-      nil ->
-        changeset
-
-      values ->
-        if Enum.all?(values, fn v -> is_integer(v) and v > 0 end) do
-          changeset
-        else
-          add_error(changeset, field, "has an invalid entry")
-        end
-    end
+    # Range validations are removed, but basic type casting is maintained through safe_cast
+    # This means fields with invalid types will be discarded,
+    # but we won't validate numeric ranges, etc.
   end
 end

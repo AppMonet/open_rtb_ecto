@@ -10,8 +10,7 @@ defmodule OpenRtbEcto.V2.BidRequest do
   on whether the media is browser-based web content or a non-browser application, respectively.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   alias OpenRtbEcto.Types.TinyInt
   alias OpenRtbEcto.V2.BidRequest.{Imp, Site, App, Device, User, Source, Regs}
@@ -46,39 +45,48 @@ defmodule OpenRtbEcto.V2.BidRequest do
 
   def changeset(request, attrs \\ %{}) do
     request
-    |> cast(attrs, [
-      :id,
-      :test,
-      :at,
-      :tmax,
-      :wseat,
-      :bseat,
-      :allimps,
-      :cur,
-      :wlang,
-      :wlangb,
-      :bcat,
-      :badv,
-      :bapp,
-      :ext,
-      :cattax
-    ])
+    |> safe_cast(
+      attrs,
+      [
+        :id,
+        :test,
+        :at,
+        :tmax,
+        :wseat,
+        :bseat,
+        :allimps,
+        :cur,
+        :wlang,
+        :wlangb,
+        :bcat,
+        :badv,
+        :bapp,
+        :ext,
+        :cattax
+      ]
+    )
     |> cast_embed(:imp, required: true)
-    |> cast_embed(:site)
-    |> cast_embed(:app)
-    |> cast_embed(:device)
-    |> cast_embed(:user)
-    |> cast_embed(:source)
-    |> cast_embed(:regs)
+    |> safe_cast_embed(:site)
+    |> safe_cast_embed(:app)
+    |> safe_cast_embed(:device)
+    |> safe_cast_embed(:user)
+    |> safe_cast_embed(:source)
+    |> safe_cast_embed(:regs)
     |> validate_required(:id)
     |> validate_auction_type()
   end
 
   defp validate_auction_type(changeset) do
     case get_change(changeset, :at) do
-      nil -> changeset
-      val when val in 1..2 or val > 500 -> changeset
-      _ -> add_error(changeset, :at, "must equal 1, 2 or be greater than 500")
+      nil ->
+        changeset
+
+      val when val in 1..2 or val > 500 ->
+        changeset
+
+      _ ->
+        # Invalid auction type is an optional field, so discard instead of error
+        delete_change(changeset, :at)
     end
   end
 end

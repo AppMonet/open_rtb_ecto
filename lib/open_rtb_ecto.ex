@@ -14,11 +14,19 @@ defmodule OpenRtbEcto do
 
   @spec cast(open_rtb_schema(), map() | binary()) :: {:ok, struct()} | {:error, map()}
   def cast(schema, %{} = data) do
-    with %{valid?: true} = changeset <- schema.changeset(struct(schema, %{}), data) do
+    changeset = schema.changeset(struct(schema, %{}), data)
+
+    if changeset.valid? do
       {:ok, Ecto.Changeset.apply_changes(changeset)}
     else
-      %Ecto.Changeset{} = invalid_changeset ->
-        {:error, format_invalid_changeset(invalid_changeset)}
+      # Check if errors are only on optional fields
+      if has_required_field_errors?(changeset) do
+        {:error, format_invalid_changeset(changeset)}
+      else
+        # If only optional fields had errors, they've been discarded
+        # by our safe_cast functions, so we can apply the changes
+        {:ok, Ecto.Changeset.apply_changes(changeset)}
+      end
     end
   end
 
@@ -26,6 +34,16 @@ defmodule OpenRtbEcto do
     with {:ok, decoded} <- JSON.decode(json) do
       cast(schema, decoded)
     end
+  end
+
+  defp has_required_field_errors?(changeset) do
+    # First, get all fields marked as required via validate_required
+    required_fields = changeset.required
+
+    # Next, check if any required field has errors
+    Enum.any?(changeset.errors, fn {field, _error} ->
+      field in required_fields
+    end)
   end
 
   defp format_invalid_changeset(changeset) do

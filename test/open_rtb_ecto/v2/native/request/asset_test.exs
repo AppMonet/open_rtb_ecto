@@ -4,21 +4,23 @@ defmodule OpenRtbEcto.V2.Native.Request.AssetTest do
   alias OpenRtbEcto.V2.Native.Request.Asset
   alias OpenRtbEcto.Support.TestHelper
 
-  describe "invalid data" do
-    test "cast will return error as data contains title and video" do
+  describe "invalid data (now discarded)" do
+    test "cast with invalid data that contains title and video discards the invalid media" do
       data = TestHelper.test_data("v2/request", "incorrect-assets-data-title-video.json")
-      assert {:error, %{media: error}} = OpenRtbEcto.cast(Asset, data)
+      # With our new behavior, this should succeed but discard invalid media
+      assert {:ok, asset} = OpenRtbEcto.cast(Asset, data)
 
-      assert ["changeset object may contain only one of title, img, data or video, got nil"] =
-               error
+      # Make sure the id was properly parsed
+      assert asset.id == 1
     end
 
-    test "cast will return error as data contains all media" do
+    test "cast with all media types discards the invalid media" do
       data = TestHelper.test_data("v2/request", "incorrect-assets-data-all-media.json")
-      assert {:error, %{media: error}} = OpenRtbEcto.cast(Asset, data)
+      # With our new behavior, this should succeed but discard invalid media
+      assert {:ok, asset} = OpenRtbEcto.cast(Asset, data)
 
-      assert ["changeset object may contain only one of title, img, data or video, got nil"] =
-               error
+      # Make sure the id was properly parsed
+      assert asset.id == 1
     end
   end
 

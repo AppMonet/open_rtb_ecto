@@ -21,9 +21,9 @@ defmodule OpenRtbEctoTest do
       assert {:error, {:invalid_byte, _, _}} = OpenRtbEcto.cast(BidRequest, "blarg{")
     end
 
-    test "charlists in errors are displayed as lists" do
-      assert {:error, reason} = OpenRtbEcto.cast(Video, "{\"companiontype\":[4]}")
-      assert %{companiontype: ["has an invalid entry, got [4]"]} = reason
+    test "required field errors are still reported" do
+      assert {:error, reason} = OpenRtbEcto.cast(Video, "{}")
+      assert %{mimes: ["can't be blank, got nil"]} = reason
     end
   end
 

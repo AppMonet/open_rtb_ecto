@@ -5,8 +5,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Device do
   refer to a mobile handset, a desktop computer, set top box, or other digital device.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   alias OpenRtbEcto.Types.TinyInt
   alias OpenRtbEcto.V2.BidRequest.Geo
@@ -53,7 +52,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Device do
 
   def changeset(device, attrs \\ %{}) do
     device
-    |> cast(attrs, [
+    |> safe_cast(attrs, [
       :ua,
       :dnt,
       :lmt,
@@ -86,9 +85,27 @@ defmodule OpenRtbEcto.V2.BidRequest.Device do
       :macmd5,
       :ext
     ])
-    |> cast_embed(:geo)
-    |> cast_embed(:sua)
-    |> validate_inclusion(:devicetype, 1..7)
-    |> validate_inclusion(:connectiontype, 0..6)
+    |> safe_cast_embed(:geo)
+    |> safe_cast_embed(:sua)
+    |> validate_device_type()
+    |> validate_connection_type()
+  end
+
+  # Instead of validate_inclusion which adds errors and invalidates the changeset,
+  # we'll use custom validators that discard invalid values
+  defp validate_device_type(changeset) do
+    case get_change(changeset, :devicetype) do
+      nil -> changeset
+      val when val in 1..7 -> changeset
+      _ -> delete_change(changeset, :devicetype)
+    end
+  end
+
+  defp validate_connection_type(changeset) do
+    case get_change(changeset, :connectiontype) do
+      nil -> changeset
+      val when val in 0..6 -> changeset
+      _ -> delete_change(changeset, :connectiontype)
+    end
   end
 end
