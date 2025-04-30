@@ -4,8 +4,7 @@ defmodule OpenRtbEcto.V2.Native.Response.Img do
   image elements of the Native ad such as Icons, Main Image, etc.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @type t :: %__MODULE__{}
 
@@ -19,7 +18,7 @@ defmodule OpenRtbEcto.V2.Native.Response.Img do
 
   def changeset(img, attrs \\ %{}) do
     img
-    |> cast(attrs, [
+    |> safe_cast(attrs, [
       :type,
       :url,
       :w,

@@ -6,8 +6,7 @@ defmodule OpenRtbEcto.V2.BidRequest.User do
   the basis for frequency capping and retargeting.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   alias OpenRtbEcto.V2.BidRequest.{Geo, Data, Eids}
 
@@ -29,9 +28,9 @@ defmodule OpenRtbEcto.V2.BidRequest.User do
 
   def changeset(user, attrs \\ %{}) do
     user
-    |> cast(attrs, [:id, :buyeruid, :yob, :gender, :keywords, :customdata, :ext])
-    |> cast_embed(:geo)
-    |> cast_embed(:data)
-    |> cast_embed(:eids)
+    |> safe_cast(attrs, [:id, :buyeruid, :yob, :gender, :keywords, :customdata, :ext])
+    |> safe_cast_embed(:geo)
+    |> safe_cast_embed(:data)
+    |> safe_cast_embed(:eids)
   end
 end

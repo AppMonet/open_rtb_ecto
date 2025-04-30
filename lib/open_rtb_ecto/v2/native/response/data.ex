@@ -6,8 +6,7 @@ defmodule OpenRtbEcto.V2.Native.Response.Data do
   future native elements not contemplated at the time of the writing of this document.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @type t :: %__MODULE__{}
 
@@ -20,7 +19,7 @@ defmodule OpenRtbEcto.V2.Native.Response.Data do
 
   def changeset(data, attrs \\ %{}) do
     data
-    |> cast(attrs, [
+    |> safe_cast(attrs, [
       :type,
       :len,
       :value,

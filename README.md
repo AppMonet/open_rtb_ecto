@@ -36,3 +36,6 @@ https://wiki.smaato.com/pages/viewpage.action?pageId=1770079
 1. In these [examples](https://github.com/openrtb/examples/tree/master/spotxchange):
    - the deprecated `protocol` field is used, but the data is an int array, like the new `protocols` field...
    - `content.season` is sent as an int instead of a string
+1. Invalid data in optional fields is discarded rather than causing the entire changeset to be invalid
+   - Required fields are still validated as before
+   - For assets, having multiple media types still marks the entire asset as invalid

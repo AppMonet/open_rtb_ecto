@@ -13,8 +13,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Banner do
   types.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   alias OpenRtbEcto.Types.TinyInt
   alias OpenRtbEcto.V2.BidRequest.Format
@@ -44,7 +43,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Banner do
 
   def changeset(banner, attrs \\ %{}) do
     banner
-    |> cast(attrs, [
+    |> safe_cast(attrs, [
       :w,
       :h,
       :wmax,
@@ -62,7 +61,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Banner do
       :vcm,
       :ext
     ])
-    |> cast_embed(:format)
+    |> safe_cast_embed(:format)
     |> validate_subset(:btype, 1..4)
     |> validate_subset(:expdir, 1..4)
     |> validate_number(:pos, greater_than: -1, less_than: 8)

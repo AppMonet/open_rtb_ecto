@@ -7,8 +7,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Content do
   example might be a video impression embedded in an iframe on an unknown web property or device.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   alias OpenRtbEcto.Types.TinyInt
   alias OpenRtbEcto.V2.BidRequest.{Producer, Data, Network, Channel}
@@ -51,7 +50,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Content do
 
   def changeset(content, attrs \\ %{}) do
     content
-    |> cast(attrs, [
+    |> safe_cast(attrs, [
       :id,
       :episode,
       :title,
@@ -79,10 +78,10 @@ defmodule OpenRtbEcto.V2.BidRequest.Content do
       :embeddable,
       :ext
     ])
-    |> cast_embed(:producer)
-    |> cast_embed(:data)
-    |> cast_embed(:network)
-    |> cast_embed(:channel)
+    |> safe_cast_embed(:producer)
+    |> safe_cast_embed(:data)
+    |> safe_cast_embed(:network)
+    |> safe_cast_embed(:channel)
     |> validate_inclusion(:videoquality, 0..3)
     |> validate_inclusion(:prodq, 0..3)
     |> validate_inclusion(:context, 1..7)

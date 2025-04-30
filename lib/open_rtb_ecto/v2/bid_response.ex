@@ -11,8 +11,7 @@ defmodule OpenRtbEcto.V2.BidResponse do
   returned with a reason code in the nbr attribute.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   alias OpenRtbEcto.V2.BidResponse.SeatBid
 
@@ -31,8 +30,8 @@ defmodule OpenRtbEcto.V2.BidResponse do
 
   def changeset(response, attrs \\ %{}) do
     response
-    |> cast(attrs, [:id, :bidid, :cur, :customdata, :nbr, :ext])
-    |> cast_embed(:seatbid)
+    |> safe_cast(attrs, [:id, :bidid, :cur, :customdata, :nbr, :ext])
+    |> safe_cast_embed(:seatbid)
     |> validate_required(:id)
   end
 end

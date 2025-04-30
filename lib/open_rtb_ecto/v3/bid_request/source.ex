@@ -54,8 +54,7 @@ defmodule OpenRtbEcto.V3.BidRequest.Source do
     </tr>
   </table>
   """
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @primary_key false
   embedded_schema do
@@ -71,6 +70,6 @@ defmodule OpenRtbEcto.V3.BidRequest.Source do
 
   def changeset(source, attrs \\ %{}) do
     source
-    |> cast(attrs, [:tid, :ts, :ds, :dsmap, :cert, :digest, :pchain, :ext])
+    |> safe_cast(attrs, [:tid, :ts, :ds, :dsmap, :cert, :digest, :pchain, :ext])
   end
 end

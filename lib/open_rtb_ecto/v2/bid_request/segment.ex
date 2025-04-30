@@ -5,8 +5,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Segment do
   options must be published by the exchange a priori to its bidders.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @primary_key false
   embedded_schema do
@@ -19,6 +18,6 @@ defmodule OpenRtbEcto.V2.BidRequest.Segment do
   #
   def changeset(producer, attrs \\ %{}) do
     producer
-    |> cast(attrs, [:id, :name, :value, :ext])
+    |> safe_cast(attrs, [:id, :name, :value, :ext])
   end
 end

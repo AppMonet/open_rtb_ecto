@@ -14,19 +14,24 @@ defmodule OpenRtbEcto do
 
   @spec cast(open_rtb_schema(), map() | binary()) :: {:ok, struct()} | {:error, map()}
   def cast(schema, %{} = data) do
-    changeset = schema.changeset(struct(schema, %{}), data)
-
-    if changeset.valid? do
-      {:ok, Ecto.Changeset.apply_changes(changeset)}
-    else
-      # Check if errors are only on optional fields
-      if has_required_field_errors?(changeset) do
-        {:error, format_invalid_changeset(changeset)}
-      else
-        # If only optional fields had errors, they've been discarded
-        # by our safe_cast functions, so we can apply the changes
-        {:ok, Ecto.Changeset.apply_changes(changeset)}
-      end
+    case schema.changeset(struct(schema, %{}), data) do
+      changeset = %Ecto.Changeset{} ->
+        if changeset.valid? do
+          {:ok, Ecto.Changeset.apply_changes(changeset)}
+        else
+          # Check if errors are only on optional fields
+          if has_required_field_errors?(changeset) do
+            {:error, format_invalid_changeset(changeset)}
+          else
+            # If only optional fields had errors, they've been discarded
+            # by our safe_cast functions, so we can apply the changes
+            {:ok, Ecto.Changeset.apply_changes(changeset)}
+          end
+        end
+      
+      # Handle other return values from changeset functions
+      other ->
+        {:error, "Unexpected changeset result: #{inspect(other)}"}
     end
   end
 
@@ -37,13 +42,12 @@ defmodule OpenRtbEcto do
   end
 
   defp has_required_field_errors?(changeset) do
-    # First, get all fields marked as required via validate_required
     required_fields = changeset.required
     
     # Special case: Treat media validation errors as required field errors
     # This ensures that assets with multiple media types are considered invalid
     has_media_error = Enum.any?(changeset.errors, fn {field, _error} -> 
-      field == :media
+      field == :media or field == :asset
     end)
     
     # Check for either required field errors or media errors

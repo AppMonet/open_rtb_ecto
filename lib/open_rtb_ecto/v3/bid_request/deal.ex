@@ -46,8 +46,7 @@ defmodule OpenRtbEcto.V3.BidRequest.Deal do
   </table>
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @primary_key false
   embedded_schema do
@@ -62,7 +61,7 @@ defmodule OpenRtbEcto.V3.BidRequest.Deal do
 
   def changeset(deal, attrs \\ %{}) do
     deal
-    |> cast(attrs, [:id, :qty, :flr, :flrcur, :at, :wseat, :wadomain, :ext])
+    |> safe_cast(attrs, [:id, :qty, :flr, :flrcur, :at, :wseat, :wadomain, :ext])
     |> validate_required(:id)
     |> validate_number(:qty, greater_than: 0)
     |> validate_number(:flr, greater_than: 0)

@@ -7,8 +7,7 @@ defmodule OpenRtbEcto.V2.BidRequest.SupplyChainNode do
   """
   alias OpenRtbEcto.Types.TinyInt
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @type t :: %__MODULE__{}
 
@@ -24,7 +23,7 @@ defmodule OpenRtbEcto.V2.BidRequest.SupplyChainNode do
 
   def changeset(node, attrs \\ %{}) do
     node
-    |> cast(attrs, [:asi, :sid, :rid, :name, :domain, :hp])
+    |> safe_cast(attrs, [:asi, :sid, :rid, :name, :domain, :hp])
     |> validate_required([:asi, :sid])
   end
 end

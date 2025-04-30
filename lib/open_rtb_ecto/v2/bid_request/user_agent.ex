@@ -8,8 +8,7 @@ defmodule OpenRtbEcto.V2.BidRequest.UserAgent do
   alias OpenRtbEcto.Types.TinyInt
   alias OpenRtbEcto.V2.BidRequest.BrandVersion
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @type t :: %__MODULE__{}
 
@@ -27,8 +26,8 @@ defmodule OpenRtbEcto.V2.BidRequest.UserAgent do
 
   def changeset(user_agent, attrs \\ %{}) do
     user_agent
-    |> cast(attrs, [:mobile, :architecture, :bitness, :model, :source, :ext])
-    |> cast_embed(:browsers)
-    |> cast_embed(:platform)
+    |> safe_cast(attrs, [:mobile, :architecture, :bitness, :model, :source, :ext])
+    |> safe_cast_embed(:browsers)
+    |> safe_cast_embed(:platform)
   end
 end

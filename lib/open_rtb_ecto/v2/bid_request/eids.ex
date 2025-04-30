@@ -6,8 +6,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Eids do
   """
   alias OpenRtbEcto.V2.BidRequest.Uid
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @type t :: %__MODULE__{}
 
@@ -20,7 +19,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Eids do
 
   def changeset(eids, attrs \\ %{}) do
     eids
-    |> cast(attrs, [:source, :ext])
-    |> cast_embed(:uids)
+    |> safe_cast(attrs, [:source, :ext])
+    |> safe_cast_embed(:uids)
   end
 end

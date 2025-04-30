@@ -4,8 +4,7 @@ defmodule OpenRtbEcto.V2.BidRequest.BrandVersion do
   device’s browser or similar software component, and the user agent’s execution platform or operating
   system.
   """
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @type t :: %__MODULE__{}
 
@@ -18,7 +17,7 @@ defmodule OpenRtbEcto.V2.BidRequest.BrandVersion do
 
   def changeset(version, attrs \\ %{}) do
     version
-    |> cast(attrs, [:brand, :version, :ext])
+    |> safe_cast(attrs, [:brand, :version, :ext])
     |> validate_required([:brand])
   end
 end

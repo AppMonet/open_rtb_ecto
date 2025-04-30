@@ -6,8 +6,7 @@ defmodule OpenRtbEcto.V2.BidResponse.SeatBid do
   can win (default) or if it is only interested in winning any if it can win them all as a group.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   alias OpenRtbEcto.Types.TinyInt
   alias OpenRtbEcto.V2.BidResponse.Bid
@@ -24,7 +23,7 @@ defmodule OpenRtbEcto.V2.BidResponse.SeatBid do
 
   def changeset(seat_bid, attrs \\ %{}) do
     seat_bid
-    |> cast(attrs, [:seat, :group, :ext])
-    |> cast_embed(:bid, required: true)
+    |> safe_cast(attrs, [:seat, :group, :ext])
+    |> safe_cast_embed(:bid, required: true)
   end
 end

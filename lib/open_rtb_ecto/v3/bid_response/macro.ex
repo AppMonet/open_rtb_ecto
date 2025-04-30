@@ -26,8 +26,7 @@ defmodule OpenRtbEcto.V3.BidResponse.Macro do
   </table>
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @primary_key false
   embedded_schema do
@@ -38,7 +37,7 @@ defmodule OpenRtbEcto.V3.BidResponse.Macro do
 
   def changeset(macro, attrs \\ %{}) do
     macro
-    |> cast(attrs, [:key, :value, :ext])
+    |> safe_cast(attrs, [:key, :value, :ext])
     |> validate_required(:key)
   end
 end

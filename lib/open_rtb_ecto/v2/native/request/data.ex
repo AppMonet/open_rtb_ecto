@@ -6,8 +6,7 @@ defmodule OpenRtbEcto.V2.Native.Request.Data do
   additional recommendations are also included in the Data Asset Types table.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @type t :: %__MODULE__{}
 
@@ -19,7 +18,7 @@ defmodule OpenRtbEcto.V2.Native.Request.Data do
 
   def changeset(data, attrs \\ %{}) do
     data
-    |> cast(attrs, [
+    |> safe_cast(attrs, [
       :type,
       :len,
       :ext

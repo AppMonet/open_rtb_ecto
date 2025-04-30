@@ -94,4 +94,26 @@ defmodule OpenRtbEctoTest do
       assert %{} == uid.ext
     end
   end
+
+  test "schain without nodes casts safely" do
+    schain = %{
+      ver: "1.2",
+      complete: 1,
+      nodes: nil
+    }
+
+    assert {:ok, result} = OpenRtbEcto.cast(OpenRtbEcto.V2.BidRequest.SupplyChain, schain)
+    assert result.ver == "1.2"
+    assert result.complete == 1
+    assert result.nodes == []
+
+    bid_request =
+      TestHelper.test_data("v2/request", "example-request-app-android-1.json", :map)
+      |> put_in(["source"], %{"schain" => schain})
+
+    assert {:ok, casted} = OpenRtbEcto.cast(OpenRtbEcto.V2.BidRequest, bid_request)
+    assert casted.source.schain.ver == "1.2"
+    assert casted.source.schain.complete == 1
+    assert casted.source.schain.nodes == []
+  end
 end

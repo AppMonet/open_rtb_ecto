@@ -6,8 +6,7 @@ defmodule OpenRtbEcto.V2.Native.Response.Asset do
   The id is to be unique within the AssetObject array so that the response can be aligned.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   alias OpenRtbEcto.V2.Native.Helper
   alias OpenRtbEcto.V2.Native.Response.{Title, Img, Video, Data, Link}
@@ -28,16 +27,16 @@ defmodule OpenRtbEcto.V2.Native.Response.Asset do
 
   def changeset(asset, attrs \\ %{}) do
     asset
-    |> cast(attrs, [
+    |> safe_cast(attrs, [
       :id,
       :required,
       :ext
     ])
-    |> cast_embed(:title)
-    |> cast_embed(:img)
-    |> cast_embed(:video)
-    |> cast_embed(:data)
-    |> cast_embed(:link)
+    |> safe_cast_embed(:title)
+    |> safe_cast_embed(:img)
+    |> safe_cast_embed(:video)
+    |> safe_cast_embed(:data)
+    |> safe_cast_embed(:link)
     |> Helper.validate_media()
   end
 end

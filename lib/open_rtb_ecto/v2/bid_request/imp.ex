@@ -11,8 +11,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Imp do
   However, any given bid for the impression must conform to one of the offered types.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   alias OpenRtbEcto.Types.TinyInt
   alias OpenRtbEcto.V2.BidRequest.{Metric, Banner, Video, Audio, Native, Pmp}
@@ -45,7 +44,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Imp do
 
   def changeset(impression, attrs \\ %{}) do
     impression
-    |> cast(attrs, [
+    |> safe_cast(attrs, [
       :id,
       :displaymanager,
       :displaymanagerver,
@@ -61,12 +60,12 @@ defmodule OpenRtbEcto.V2.BidRequest.Imp do
       :exp,
       :ext
     ])
-    |> cast_embed(:metric)
-    |> cast_embed(:banner)
-    |> cast_embed(:video)
-    |> cast_embed(:audio)
-    |> cast_embed(:native)
-    |> cast_embed(:pmp)
+    |> safe_cast_embed(:metric)
+    |> safe_cast_embed(:banner)
+    |> safe_cast_embed(:video)
+    |> safe_cast_embed(:audio)
+    |> safe_cast_embed(:native)
+    |> safe_cast_embed(:pmp)
     |> validate_required(:id)
   end
 end

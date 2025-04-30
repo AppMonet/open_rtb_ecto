@@ -7,8 +7,7 @@ defmodule OpenRtbEcto.V2.Native.Response.EventTracker do
   other events, but the appropriateness of this is up to each buyer.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @type t :: %__MODULE__{}
 
@@ -22,7 +21,7 @@ defmodule OpenRtbEcto.V2.Native.Response.EventTracker do
 
   def changeset(event_tracker, attrs \\ %{}) do
     event_tracker
-    |> cast(attrs, [
+    |> safe_cast(attrs, [
       :event,
       :method,
       :url,

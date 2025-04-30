@@ -6,8 +6,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Format do
   specified.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @type t :: %__MODULE__{}
 
@@ -23,6 +22,6 @@ defmodule OpenRtbEcto.V2.BidRequest.Format do
 
   def changeset(format, attrs \\ %{}) do
     format
-    |> cast(attrs, [:w, :h, :wratio, :hratio, :wmin, :ext])
+    |> safe_cast(attrs, [:w, :h, :wratio, :hratio, :wmin, :ext])
   end
 end

@@ -8,8 +8,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Source do
   party demand in decisioning.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   alias OpenRtbEcto.Types.TinyInt
   alias OpenRtbEcto.V2.BidRequest.SupplyChain
@@ -27,7 +26,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Source do
 
   def changeset(source, attrs \\ %{}) do
     source
-    |> cast(attrs, [:fd, :tid, :pchain, :ext])
-    |> cast_embed(:schain)
+    |> safe_cast(attrs, [:fd, :tid, :pchain, :ext])
+    |> safe_cast_embed(:schain)
   end
 end

@@ -3,8 +3,7 @@ defmodule OpenRtbEcto.V2.Native.Request do
   The Native Object defines the native advertising opportunity available for bid via this bid request.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
   alias OpenRtbEcto.V2.Native.Request.{Asset, EventTracker}
 
   @type t :: %__MODULE__{}
@@ -26,7 +25,7 @@ defmodule OpenRtbEcto.V2.Native.Request do
 
   def changeset(request, attrs \\ %{}) do
     request
-    |> cast(attrs, [
+    |> safe_cast(attrs, [
       :ver,
       :context,
       :contextsubtype,
@@ -39,6 +38,6 @@ defmodule OpenRtbEcto.V2.Native.Request do
       :ext
     ])
     |> cast_embed(:assets, required: true)
-    |> cast_embed(:eventtrackers)
+    |> safe_cast_embed(:eventtrackers)
   end
 end

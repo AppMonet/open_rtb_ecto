@@ -77,8 +77,7 @@ defmodule OpenRtbEcto.V3.BidRequest.Request do
   </table>
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   alias OpenRtbEcto.Types.TinyInt
   alias OpenRtbEcto.V3.BidRequest.{Source, Item}
@@ -102,9 +101,9 @@ defmodule OpenRtbEcto.V3.BidRequest.Request do
 
   def changeset(request, attrs \\ %{}) do
     request
-    |> cast(attrs, [:id, :test, :tmax, :at, :cur, :wcurs, :seat, :wseat, :cdata, :package])
-    |> cast_embed(:source)
-    |> cast_embed(:item, required: true)
+    |> safe_cast(attrs, [:id, :test, :tmax, :at, :cur, :wcurs, :seat, :wseat, :cdata, :package])
+    |> safe_cast_embed(:source)
+    |> safe_cast_embed(:item, required: true)
     |> validate_required(:id)
     |> validate_auction_type()
   end

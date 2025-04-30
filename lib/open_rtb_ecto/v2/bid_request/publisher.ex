@@ -4,8 +4,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Publisher do
   is typically the seller in an OpenRTB transaction.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @type t :: %__MODULE__{}
 
@@ -21,6 +20,6 @@ defmodule OpenRtbEcto.V2.BidRequest.Publisher do
 
   def changeset(publisher, attrs \\ %{}) do
     publisher
-    |> cast(attrs, [:id, :name, :cattax, :cat, :domain, :ext])
+    |> safe_cast(attrs, [:id, :name, :cattax, :cat, :domain, :ext])
   end
 end

@@ -3,8 +3,7 @@ defmodule OpenRtbEcto.V2.Native.Response do
   The native object is the top level JSON object which identifies a native response.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
   alias OpenRtbEcto.V2.Native.Response.{Asset, EventTracker, Link}
 
   @type t :: %__MODULE__{}
@@ -24,7 +23,7 @@ defmodule OpenRtbEcto.V2.Native.Response do
 
   def changeset(response, attrs \\ %{}) do
     response
-    |> cast(attrs, [
+    |> safe_cast(attrs, [
       :ver,
       :assetsurl,
       :dcourl,
@@ -33,8 +32,8 @@ defmodule OpenRtbEcto.V2.Native.Response do
       :privacy,
       :ext
     ])
-    |> cast_embed(:assets)
-    |> cast_embed(:link, required: true)
-    |> cast_embed(:eventtrackers)
+    |> safe_cast_embed(:assets)
+    |> safe_cast_embed(:link, required: true)
+    |> safe_cast_embed(:eventtrackers)
   end
 end

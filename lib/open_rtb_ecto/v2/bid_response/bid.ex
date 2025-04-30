@@ -6,8 +6,7 @@ defmodule OpenRtbEcto.V2.BidResponse.Bid do
   """
 
   alias OpenRtbEcto.V2.Native
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @type t :: %__MODULE__{}
   @default_crid "1"
@@ -52,7 +51,7 @@ defmodule OpenRtbEcto.V2.BidResponse.Bid do
 
   def changeset(bid, attrs \\ %{}) do
     bid
-    |> cast(attrs, [
+    |> safe_cast(attrs, [
       :id,
       :impid,
       :price,
@@ -89,7 +88,7 @@ defmodule OpenRtbEcto.V2.BidResponse.Bid do
     ])
     |> validate_required([:id, :impid, :price])
     |> ensure_crid()
-    |> cast_embed(:adm_native)
+    |> safe_cast_embed(:adm_native)
   end
 
   defp ensure_crid(changeset) do

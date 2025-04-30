@@ -9,7 +9,7 @@ defmodule OpenRtbEcto.V2.Native.Request.AssetTest do
       data = TestHelper.test_data("v2/request", "incorrect-assets-data-title-video.json")
       assert {:error, %{media: error}} = OpenRtbEcto.cast(Asset, data)
 
-      assert ["asset may contain only one of title, img, data or video, got nil"] =
+      assert ["changeset object may contain only one of title, img, data or video, got nil"] =
                error
     end
 
@@ -17,7 +17,7 @@ defmodule OpenRtbEcto.V2.Native.Request.AssetTest do
       data = TestHelper.test_data("v2/request", "incorrect-assets-data-all-media.json")
       assert {:error, %{media: error}} = OpenRtbEcto.cast(Asset, data)
 
-      assert ["asset may contain only one of title, img, data or video, got nil"] =
+      assert ["changeset object may contain only one of title, img, data or video, got nil"] =
                error
     end
   end

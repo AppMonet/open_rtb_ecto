@@ -97,9 +97,5 @@ defmodule OpenRtbEcto.V2.BidRequest.Video do
     ])
     |> safe_cast_embed(:companionad)
     |> validate_required([:mimes])
-
-    # Range validations are removed, but basic type casting is maintained through safe_cast
-    # This means fields with invalid types will be discarded,
-    # but we won't validate numeric ranges, etc.
   end
 end

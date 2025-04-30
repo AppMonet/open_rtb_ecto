@@ -10,8 +10,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Geo do
   passed.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @type t :: %__MODULE__{}
 
@@ -35,7 +34,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Geo do
 
   def changeset(geo, attrs \\ %{}) do
     geo
-    |> cast(attrs, [
+    |> safe_cast(attrs, [
       :lat,
       :lon,
       :type,

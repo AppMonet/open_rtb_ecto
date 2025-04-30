@@ -82,8 +82,7 @@ defmodule OpenRtbEcto.V3.BidResponse.Bid do
   </table>
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   alias OpenRtbEcto.V3.BidResponse.Macro
 
@@ -108,7 +107,7 @@ defmodule OpenRtbEcto.V3.BidResponse.Bid do
 
   def changeset(bid, attrs \\ %{}) do
     bid
-    |> cast(attrs, [
+    |> safe_cast(attrs, [
       :id,
       :item,
       :price,
@@ -123,7 +122,7 @@ defmodule OpenRtbEcto.V3.BidResponse.Bid do
       :media,
       :ext
     ])
-    |> cast_embed(:macro)
+    |> safe_cast_embed(:macro)
     |> validate_required([:item, :price])
   end
 end

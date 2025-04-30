@@ -5,8 +5,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Site do
   minimum, it is useful to provide a site ID or page URL, but this is not strictly required.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   alias OpenRtbEcto.Types.TinyInt
   alias OpenRtbEcto.V2.BidRequest.{Publisher, Content}
@@ -39,7 +38,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Site do
 
   def changeset(site, attrs \\ %{}) do
     site
-    |> cast(attrs, [
+    |> safe_cast(attrs, [
       :id,
       :name,
       :domain,
@@ -56,7 +55,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Site do
       :blocklists,
       :ext
     ])
-    |> cast_embed(:publisher)
-    |> cast_embed(:content)
+    |> safe_cast_embed(:publisher)
+    |> safe_cast_embed(:content)
   end
 end

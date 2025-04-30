@@ -7,8 +7,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Data do
   bidders.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   alias OpenRtbEcto.V2.BidRequest.Segment
 
@@ -24,7 +23,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Data do
 
   def changeset(data, attrs \\ %{}) do
     data
-    |> cast(attrs, [:id, :name, :ext])
-    |> cast_embed(:segment)
+    |> safe_cast(attrs, [:id, :name, :ext])
+    |> safe_cast_embed(:segment)
   end
 end

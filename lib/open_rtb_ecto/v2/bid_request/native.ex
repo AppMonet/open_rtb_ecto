@@ -16,8 +16,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Native do
   types. However, any given bid for the impression must conform to one of the offered types.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
   alias OpenRtbEcto.V2.Native
 
   @type t :: %__MODULE__{}
@@ -34,10 +33,10 @@ defmodule OpenRtbEcto.V2.BidRequest.Native do
 
   def changeset(native, attrs \\ %{}) do
     native
-    |> cast(attrs, [:request, :ver, :api, :battr, :ext])
+    |> safe_cast(attrs, [:request, :ver, :api, :battr, :ext])
     |> validate_required(:request)
     |> validate_subset(:api, 1..6)
     |> validate_subset(:battr, 1..17)
-    |> cast_embed(:request_native)
+    |> safe_cast_embed(:request_native)
   end
 end

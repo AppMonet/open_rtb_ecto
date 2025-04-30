@@ -77,8 +77,7 @@ defmodule OpenRtbEcto.V3.BidRequest.Item do
   </table>
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   alias OpenRtbEcto.V3.BidRequest.{Deal, Metric}
 
@@ -102,9 +101,9 @@ defmodule OpenRtbEcto.V3.BidRequest.Item do
 
   def changeset(item, attrs \\ %{}) do
     item
-    |> cast(attrs, [:id, :qty, :seq, :flr, :flrcur, :exp, :dt, :dlvy, :private, :spec, :ext])
-    |> cast_embed(:metric)
-    |> cast_embed(:deal)
+    |> safe_cast(attrs, [:id, :qty, :seq, :flr, :flrcur, :exp, :dt, :dlvy, :private, :spec, :ext])
+    |> safe_cast_embed(:metric)
+    |> safe_cast_embed(:deal)
     |> validate_required([:id, :spec])
     |> validate_inclusion(:dlvy, 0..2)
   end

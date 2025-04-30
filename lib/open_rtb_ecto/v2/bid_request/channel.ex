@@ -6,8 +6,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Channel do
   audio content commonly called ‘stations.’ Name is a human-readable field while domain and id can be used
   for reporting and targeting purposes. See 7.6 for further examples.
   """
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @type t :: %__MODULE__{}
 
@@ -21,7 +20,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Channel do
 
   def changeset(channel, attrs \\ %{}) do
     channel
-    |> cast(attrs, [
+    |> safe_cast(attrs, [
       :id,
       :name,
       :domain,

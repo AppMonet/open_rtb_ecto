@@ -12,8 +12,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Audio do
   given bid for the impression must conform to one of the offered types.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   alias OpenRtbEcto.Types.TinyInt
   alias OpenRtbEcto.V2.BidRequest.Banner
@@ -51,7 +50,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Audio do
 
   def changeset(video, attrs \\ %{}) do
     video
-    |> cast(attrs, [
+    |> safe_cast(attrs, [
       :mimes,
       :minduration,
       :maxduration,
@@ -77,16 +76,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Audio do
       :nvol,
       :ext
     ])
-    |> cast_embed(:companionad)
+    |> safe_cast_embed(:companionad)
     |> validate_required([:mimes])
-    |> validate_subset(:protocols, 1..10)
-    |> validate_number(:startdelay, greater_than_or_equal_to: -2)
-    |> validate_number(:maxextended, greater_than_or_equal_to: -1)
-    |> validate_subset(:battr, 1..17)
-    |> validate_subset(:delivery, 1..3)
-    |> validate_subset(:api, 1..6)
-    |> validate_subset(:companiontype, 1..3)
-    |> validate_inclusion(:feed, 1..3)
-    |> validate_inclusion(:nvol, 0..4)
   end
 end

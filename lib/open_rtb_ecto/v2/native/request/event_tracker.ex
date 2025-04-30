@@ -4,8 +4,7 @@ defmodule OpenRtbEcto.V2.Native.Request.EventTracker do
   and which types of tracking are available for each event type, and is included as an array in the request.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @type t :: %__MODULE__{}
 
@@ -17,7 +16,7 @@ defmodule OpenRtbEcto.V2.Native.Request.EventTracker do
 
   def changeset(event_tracker, attrs \\ %{}) do
     event_tracker
-    |> cast(attrs, [
+    |> safe_cast(attrs, [
       :event,
       :methods,
       :ext

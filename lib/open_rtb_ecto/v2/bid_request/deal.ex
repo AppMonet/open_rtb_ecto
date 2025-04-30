@@ -5,8 +5,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Deal do
   terms of that deal. Refer to Section 7.3 for more details.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @type t :: %__MODULE__{}
 
@@ -23,7 +22,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Deal do
 
   def changeset(deal, attrs \\ %{}) do
     deal
-    |> cast(attrs, [:id, :bidfloor, :bidfloorcur, :at, :wseat, :wadomain, :ext])
+    |> safe_cast(attrs, [:id, :bidfloor, :bidfloorcur, :at, :wseat, :wadomain, :ext])
     |> validate_inclusion(:at, 1..3)
   end
 end

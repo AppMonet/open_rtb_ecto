@@ -3,8 +3,7 @@ defmodule OpenRtbEcto.V2.Native.Response.Title do
   Corresponds to the Title Object in the request, with the value filled in.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @type t :: %__MODULE__{}
 
@@ -16,7 +15,7 @@ defmodule OpenRtbEcto.V2.Native.Response.Title do
 
   def changeset(title, attrs \\ %{}) do
     title
-    |> cast(attrs, [:text, :len, :ext])
+    |> safe_cast(attrs, [:text, :len, :ext])
     |> validate_required(:text)
   end
 end

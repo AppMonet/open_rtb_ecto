@@ -4,8 +4,7 @@ defmodule OpenRtbEcto.V2.Native.Request.Video do
   This corresponds to the Video object of OpenRTB.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @type t :: %__MODULE__{}
 
@@ -19,7 +18,7 @@ defmodule OpenRtbEcto.V2.Native.Request.Video do
 
   def changeset(video, attrs \\ %{}) do
     video
-    |> cast(attrs, [
+    |> safe_cast(attrs, [
       :mimes,
       :minduration,
       :maxduration,

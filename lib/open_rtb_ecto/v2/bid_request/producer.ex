@@ -5,8 +5,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Producer do
   and thus when the producer and publisher are not necessarily the same entity.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @type t :: %__MODULE__{}
 
@@ -22,6 +21,6 @@ defmodule OpenRtbEcto.V2.BidRequest.Producer do
 
   def changeset(producer, attrs \\ %{}) do
     producer
-    |> cast(attrs, [:id, :name, :cattax, :cat, :domain, :ext])
+    |> safe_cast(attrs, [:id, :name, :cattax, :cat, :domain, :ext])
   end
 end

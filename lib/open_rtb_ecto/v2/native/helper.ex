@@ -18,7 +18,7 @@ defmodule OpenRtbEcto.V2.Native.Helper do
       add_error(
         changeset,
         :media,
-        "asset may contain only one of title, img, data or video"
+        "changeset object may contain only one of title, img, data or video"
       )
     else
       changeset

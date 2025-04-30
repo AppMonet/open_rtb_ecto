@@ -3,8 +3,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Uid do
   This object contains a single user identifier provided as part of extended identifiers. The exchange should
   ensure that business agreements allow for the sending of this data.
   """
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @type t :: %__MODULE__{}
 
@@ -23,7 +22,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Uid do
 
   def changeset(uid, attrs) when is_map(attrs) do
     uid
-    |> cast(attrs, [:id, :atype])
+    |> safe_cast(attrs, [:id, :atype])
     |> cast_ext(attrs)
   end
 

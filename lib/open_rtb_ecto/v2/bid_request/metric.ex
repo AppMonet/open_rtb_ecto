@@ -5,8 +5,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Metric do
   click-through rate, etc. Each metric is identified by its type, reports the value of the metric,
   and optionally identifies the source or vendor measuring the value.
   """
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @type t :: %__MODULE__{}
 
@@ -20,6 +19,6 @@ defmodule OpenRtbEcto.V2.BidRequest.Metric do
 
   def changeset(metric, attrs \\ %{}) do
     metric
-    |> cast(attrs, [:type, :value, :vendor, :ext])
+    |> safe_cast(attrs, [:type, :value, :vendor, :ext])
   end
 end

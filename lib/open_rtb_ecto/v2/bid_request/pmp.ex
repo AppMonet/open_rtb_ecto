@@ -5,8 +5,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Pmp do
   Refer to Section 7.3 for more details.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   alias OpenRtbEcto.V2.BidRequest.Deal
 
@@ -21,7 +20,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Pmp do
 
   def changeset(pmp, attrs \\ %{}) do
     pmp
-    |> cast(attrs, [:private_auction, :ext])
-    |> cast_embed(:deals)
+    |> safe_cast(attrs, [:private_auction, :ext])
+    |> safe_cast_embed(:deals)
   end
 end

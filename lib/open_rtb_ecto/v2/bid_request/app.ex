@@ -5,8 +5,7 @@ defmodule OpenRtbEcto.V2.BidRequest.App do
   minimum, it is useful to provide an App ID or bundle, but this is not strictly required.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   alias OpenRtbEcto.Types.TinyInt
   alias OpenRtbEcto.V2.BidRequest.{Publisher, Content}
@@ -39,7 +38,7 @@ defmodule OpenRtbEcto.V2.BidRequest.App do
 
   def changeset(app, attrs \\ %{}) do
     app
-    |> cast(attrs, [
+    |> safe_cast(attrs, [
       :id,
       :name,
       :bundle,
@@ -56,7 +55,7 @@ defmodule OpenRtbEcto.V2.BidRequest.App do
       :blocklists,
       :ext
     ])
-    |> cast_embed(:publisher)
-    |> cast_embed(:content)
+    |> safe_cast_embed(:publisher)
+    |> safe_cast_embed(:content)
   end
 end

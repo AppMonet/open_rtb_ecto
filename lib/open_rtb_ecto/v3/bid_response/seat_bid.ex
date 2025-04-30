@@ -31,8 +31,7 @@ defmodule OpenRtbEcto.V3.BidResponse.SeatBid do
   </table>
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   alias OpenRtbEcto.Types.TinyInt
   alias OpenRtbEcto.BidResponse.Bid
@@ -47,7 +46,7 @@ defmodule OpenRtbEcto.V3.BidResponse.SeatBid do
 
   def changeset(seat_bid, attrs \\ %{}) do
     seat_bid
-    |> cast(attrs, [:seat, :package, :ext])
-    |> cast_embed(:bid, required: true)
+    |> safe_cast(attrs, [:seat, :package, :ext])
+    |> safe_cast_embed(:bid, required: true)
   end
 end

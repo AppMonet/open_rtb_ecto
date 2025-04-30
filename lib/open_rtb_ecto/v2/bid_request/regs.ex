@@ -4,8 +4,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Regs do
   The coppa flag signals whether or not the request falls under the United States Federal Trade
   Commission’s regulations for the United States Children’s Online Privacy Protection Act (“COPPA”).
   """
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   alias OpenRtbEcto.Types.TinyInt
 
@@ -23,6 +22,6 @@ defmodule OpenRtbEcto.V2.BidRequest.Regs do
 
   def changeset(regs, attrs \\ %{}) do
     regs
-    |> cast(attrs, [:coppa, :gdpr, :us_privacy, :gpp, :gpp_sid, :ext])
+    |> safe_cast(attrs, [:coppa, :gdpr, :us_privacy, :gpp, :gpp_sid, :ext])
   end
 end

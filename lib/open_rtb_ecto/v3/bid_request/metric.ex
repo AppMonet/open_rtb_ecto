@@ -31,8 +31,7 @@ defmodule OpenRtbEcto.V3.BidRequest.Metric do
   </table>
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @primary_key false
   embedded_schema do
@@ -44,7 +43,7 @@ defmodule OpenRtbEcto.V3.BidRequest.Metric do
 
   def changeset(metric, attrs \\ %{}) do
     metric
-    |> cast(attrs, [:type, :value, :vendor, :ext])
+    |> safe_cast(attrs, [:type, :value, :vendor, :ext])
     |> validate_required([:type, :value])
   end
 end

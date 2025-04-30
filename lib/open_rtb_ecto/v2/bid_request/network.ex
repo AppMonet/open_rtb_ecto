@@ -6,8 +6,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Network do
   or studio that creates such content and self-distributes content. Name is a human-readable field while
   domain and id can be used for reporting and targeting purposes. See 7.6 for further examples.
   """
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @type t :: %__MODULE__{}
 
@@ -21,7 +20,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Network do
 
   def changeset(network, attrs \\ %{}) do
     network
-    |> cast(attrs, [
+    |> safe_cast(attrs, [
       :id,
       :name,
       :domain,

@@ -48,8 +48,7 @@ defmodule OpenRtbEcto.V3.BidResponse.Response do
   </table>
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @primary_key false
   embedded_schema do
@@ -64,8 +63,8 @@ defmodule OpenRtbEcto.V3.BidResponse.Response do
 
   def changeset(response, attrs \\ %{}) do
     response
-    |> cast(attrs, [:id, :bidid, :nbr, :cur, :cdata, :ext])
-    |> cast_embed(:seatbid)
+    |> safe_cast(attrs, [:id, :bidid, :nbr, :cur, :cdata, :ext])
+    |> safe_cast_embed(:seatbid)
     |> validate_required(:id)
     |> validate_nbr()
   end

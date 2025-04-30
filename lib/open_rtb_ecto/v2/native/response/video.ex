@@ -3,8 +3,7 @@ defmodule OpenRtbEcto.V2.Native.Response.Video do
   Corresponds to the Video Object in the request, yet containing a value of a conforming VAST tag as a value.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use OpenRtbEcto.SafeSchema
 
   @type t :: %__MODULE__{}
 
@@ -14,7 +13,7 @@ defmodule OpenRtbEcto.V2.Native.Response.Video do
 
   def changeset(video, attrs \\ %{}) do
     video
-    |> cast(attrs, :vasttag)
+    |> safe_cast(attrs, :vasttag)
     |> validate_required(:vasttag)
   end
 end
