@@ -39,9 +39,15 @@ defmodule OpenRtbEcto do
   defp has_required_field_errors?(changeset) do
     # First, get all fields marked as required via validate_required
     required_fields = changeset.required
-
-    # Next, check if any required field has errors
-    Enum.any?(changeset.errors, fn {field, _error} ->
+    
+    # Special case: Treat media validation errors as required field errors
+    # This ensures that assets with multiple media types are considered invalid
+    has_media_error = Enum.any?(changeset.errors, fn {field, _error} -> 
+      field == :media
+    end)
+    
+    # Check for either required field errors or media errors
+    has_media_error || Enum.any?(changeset.errors, fn {field, _error} ->
       field in required_fields
     end)
   end

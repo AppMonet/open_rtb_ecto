@@ -35,5 +35,7 @@ defmodule OpenRtbEcto.V2.Native.Request.Asset do
     |> cast_embed(:data)
     |> validate_required(:id)
     |> Helper.validate_media()
+    # Using regular Ecto.Schema and not SafeSchema for this module ensures that
+    # media validation errors will cause the asset to be rejected
   end
 end

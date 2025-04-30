@@ -4,23 +4,21 @@ defmodule OpenRtbEcto.V2.Native.Request.AssetTest do
   alias OpenRtbEcto.V2.Native.Request.Asset
   alias OpenRtbEcto.Support.TestHelper
 
-  describe "invalid data (now discarded)" do
-    test "cast with invalid data that contains title and video discards the invalid media" do
+  describe "invalid data" do
+    test "cast will return error as data contains title and video" do
       data = TestHelper.test_data("v2/request", "incorrect-assets-data-title-video.json")
-      # With our new behavior, this should succeed but discard invalid media
-      assert {:ok, asset} = OpenRtbEcto.cast(Asset, data)
+      assert {:error, %{media: error}} = OpenRtbEcto.cast(Asset, data)
 
-      # Make sure the id was properly parsed
-      assert asset.id == 1
+      assert ["asset may contain only one of title, img, data or video, got nil"] =
+               error
     end
 
-    test "cast with all media types discards the invalid media" do
+    test "cast will return error as data contains all media" do
       data = TestHelper.test_data("v2/request", "incorrect-assets-data-all-media.json")
-      # With our new behavior, this should succeed but discard invalid media
-      assert {:ok, asset} = OpenRtbEcto.cast(Asset, data)
+      assert {:error, %{media: error}} = OpenRtbEcto.cast(Asset, data)
 
-      # Make sure the id was properly parsed
-      assert asset.id == 1
+      assert ["asset may contain only one of title, img, data or video, got nil"] =
+               error
     end
   end
 
