@@ -25,10 +25,12 @@ defmodule OpenRtbEcto.V2.BidRequest.UserAgent do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(user_agent, attrs \\ %{}) do
+  def changeset(user_agent, attrs) when is_map(attrs) do
     user_agent
     |> cast(attrs, [:mobile, :architecture, :bitness, :model, :source, :ext])
     |> cast_embed(:browsers)
     |> cast_embed(:platform)
   end
+
+  def changeset(user_agent, _), do: change(user_agent)
 end

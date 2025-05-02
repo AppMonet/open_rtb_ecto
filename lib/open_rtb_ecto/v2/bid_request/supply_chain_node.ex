@@ -22,9 +22,11 @@ defmodule OpenRtbEcto.V2.BidRequest.SupplyChainNode do
     field(:hp, TinyInt)
   end
 
-  def changeset(node, attrs \\ %{}) do
+  def changeset(node, attrs) when is_map(attrs) do
     node
     |> cast(attrs, [:asi, :sid, :rid, :name, :domain, :hp])
     |> validate_required([:asi, :sid])
   end
+
+  def changeset(node, _), do: change(node)
 end

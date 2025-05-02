@@ -33,7 +33,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Geo do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(geo, attrs \\ %{}) do
+  def changeset(geo, attrs) when is_map(attrs) do
     geo
     |> cast(attrs, [
       :lat,
@@ -57,4 +57,6 @@ defmodule OpenRtbEcto.V2.BidRequest.Geo do
     |> validate_inclusion(:type, 1..3)
     |> validate_inclusion(:ipservice, 1..4)
   end
+
+  def changeset(geo, _), do: change(geo)
 end

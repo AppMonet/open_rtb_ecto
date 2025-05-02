@@ -49,7 +49,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Audio do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(video, attrs \\ %{}) do
+  def changeset(video, attrs) when is_map(attrs) do
     video
     |> cast(attrs, [
       :mimes,
@@ -89,4 +89,6 @@ defmodule OpenRtbEcto.V2.BidRequest.Audio do
     |> validate_inclusion(:feed, 1..3)
     |> validate_inclusion(:nvol, 0..4)
   end
+
+  def changeset(audio, _), do: change(audio)
 end

@@ -16,9 +16,10 @@ defmodule OpenRtbEcto.V2.BidRequest.Segment do
     field(:ext, :map, default: %{})
   end
 
-  #
-  def changeset(producer, attrs \\ %{}) do
-    producer
+  def changeset(segment, attrs) when is_map(attrs) do
+    segment
     |> cast(attrs, [:id, :name, :value, :ext])
   end
+
+  def changeset(segment, _), do: change(segment)
 end

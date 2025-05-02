@@ -16,9 +16,11 @@ defmodule OpenRtbEcto.V2.BidRequest.BrandVersion do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(version, attrs \\ %{}) do
+  def changeset(version, attrs) when is_map(attrs) do
     version
     |> cast(attrs, [:brand, :version, :ext])
     |> validate_required([:brand])
   end
+
+  def changeset(version, _), do: change(version)
 end

@@ -19,9 +19,11 @@ defmodule OpenRtbEcto.V2.BidRequest.Pmp do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(pmp, attrs \\ %{}) do
+  def changeset(pmp, attrs) when is_map(attrs) do
     pmp
     |> cast(attrs, [:private_auction, :ext])
     |> cast_embed(:deals)
   end
+
+  def changeset(pmp, _), do: change(pmp)
 end

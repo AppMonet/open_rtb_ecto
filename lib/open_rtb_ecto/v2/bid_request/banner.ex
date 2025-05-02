@@ -42,7 +42,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Banner do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(banner, attrs \\ %{}) do
+  def changeset(banner, attrs) when is_map(attrs) do
     banner
     |> cast(attrs, [
       :w,
@@ -66,7 +66,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Banner do
     |> validate_subset(:btype, 1..4)
     |> validate_subset(:expdir, 1..4)
     |> validate_number(:pos, greater_than: -1, less_than: 8)
-
-    # |> validate_subset(:battr, 1..17)
   end
+
+  def changeset(banner, _), do: change(banner)
 end

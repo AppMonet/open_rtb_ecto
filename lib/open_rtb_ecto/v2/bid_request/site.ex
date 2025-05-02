@@ -37,7 +37,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Site do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(site, attrs \\ %{}) do
+  def changeset(site, attrs) when is_map(attrs) do
     site
     |> cast(attrs, [
       :id,
@@ -59,4 +59,6 @@ defmodule OpenRtbEcto.V2.BidRequest.Site do
     |> cast_embed(:publisher)
     |> cast_embed(:content)
   end
+
+  def changeset(site, _), do: change(site)
 end

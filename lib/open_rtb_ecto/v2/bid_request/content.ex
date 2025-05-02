@@ -49,7 +49,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Content do
     embeds_one(:channel, Channel)
   end
 
-  def changeset(content, attrs \\ %{}) do
+  def changeset(content, attrs) when is_map(content) do
     content
     |> cast(attrs, [
       :id,
@@ -88,4 +88,6 @@ defmodule OpenRtbEcto.V2.BidRequest.Content do
     |> validate_inclusion(:context, 1..7)
     |> validate_inclusion(:qagmediarating, 1..3)
   end
+
+  def changeset(content, _), do: change(content)
 end

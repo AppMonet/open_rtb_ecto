@@ -20,8 +20,10 @@ defmodule OpenRtbEcto.V2.BidRequest.Producer do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(producer, attrs \\ %{}) do
+  def changeset(producer, attrs) when is_map(attrs) do
     producer
     |> cast(attrs, [:id, :name, :cattax, :cat, :domain, :ext])
   end
+
+  def changeset(producer, _), do: change(producer)
 end

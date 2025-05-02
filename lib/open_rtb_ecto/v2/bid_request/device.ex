@@ -51,7 +51,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Device do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(device, attrs \\ %{}) do
+  def changeset(device, attrs) when is_map(attrs) do
     device
     |> cast(attrs, [
       :ua,
@@ -91,4 +91,6 @@ defmodule OpenRtbEcto.V2.BidRequest.Device do
     |> validate_inclusion(:devicetype, 1..7)
     |> validate_inclusion(:connectiontype, 0..6)
   end
+
+  def changeset(device, _), do: change(device)
 end

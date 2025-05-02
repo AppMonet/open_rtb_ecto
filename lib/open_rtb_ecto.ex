@@ -28,6 +28,13 @@ defmodule OpenRtbEcto do
     end
   end
 
+  def safe_cast_ext(changeset, attrs) do
+    case Map.get(attrs, :ext) do
+      ext when is_map(ext) -> Ecto.Changeset.put_change(changeset, :ext, ext)
+      _ -> changeset
+    end
+  end
+
   defp format_invalid_changeset(changeset) do
     Ecto.Changeset.traverse_errors(changeset, fn chg, atom, {msg, opts} ->
       input = Ecto.Changeset.get_field(chg, atom)

@@ -19,7 +19,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Channel do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(channel, attrs \\ %{}) do
+  def changeset(channel, attrs) when is_map(attrs) do
     channel
     |> cast(attrs, [
       :id,
@@ -28,4 +28,6 @@ defmodule OpenRtbEcto.V2.BidRequest.Channel do
       :ext
     ])
   end
+
+  def changeset(channel, _), do: change(channel)
 end

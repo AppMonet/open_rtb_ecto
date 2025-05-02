@@ -19,7 +19,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Network do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(network, attrs \\ %{}) do
+  def changeset(network, attrs) when is_map(attrs) do
     network
     |> cast(attrs, [
       :id,
@@ -28,4 +28,6 @@ defmodule OpenRtbEcto.V2.BidRequest.Network do
       :ext
     ])
   end
+
+  def changeset(network, _), do: change(network)
 end

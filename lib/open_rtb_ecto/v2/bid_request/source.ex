@@ -25,9 +25,11 @@ defmodule OpenRtbEcto.V2.BidRequest.Source do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(source, attrs \\ %{}) do
+  def changeset(source, attrs) when is_map(attrs) do
     source
     |> cast(attrs, [:fd, :tid, :pchain, :ext])
     |> cast_embed(:schain)
   end
+
+  def changeset(source, _), do: change(source)
 end

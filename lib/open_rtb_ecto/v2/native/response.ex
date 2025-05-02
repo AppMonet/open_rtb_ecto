@@ -22,7 +22,7 @@ defmodule OpenRtbEcto.V2.Native.Response do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(response, attrs \\ %{}) do
+  def changeset(response, attrs) when is_map(attrs) do
     response
     |> cast(attrs, [
       :ver,
@@ -37,4 +37,6 @@ defmodule OpenRtbEcto.V2.Native.Response do
     |> cast_embed(:link, required: true)
     |> cast_embed(:eventtrackers)
   end
+
+  def changeset(response, _attrs), do: change(response)
 end
