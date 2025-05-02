@@ -91,7 +91,18 @@ defmodule OpenRtbEctoTest do
 
       invalid_ext = Enum.find(eids, &(&1.source == "sourcewithinvalidext.com"))
       uid = hd(invalid_ext.uids)
+      assert "32b89953-0f9a-4fb3-981a-2ad9041ff027" == uid.id
       assert %{} == uid.ext
+    end
+
+    test "schain with no nodes" do
+      schain = %{schain: %{complete: 1, nodes: nil, ver: "1.0"}}
+
+      data =
+        TestHelper.test_data("v2/request", "example-request-app-android-1.json", :map)
+        |> put_in(["source"], schain)
+
+      assert {:ok, %BidRequest{}} = OpenRtbEcto.cast(BidRequest, data)
     end
   end
 end

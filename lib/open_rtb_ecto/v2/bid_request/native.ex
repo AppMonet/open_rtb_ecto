@@ -34,7 +34,8 @@ defmodule OpenRtbEcto.V2.BidRequest.Native do
 
   def changeset(native, attrs) when is_map(attrs) do
     native
-    |> cast(attrs, [:request, :ver, :api, :battr, :ext])
+    |> cast(attrs, [:request, :ver, :api, :battr])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
     |> validate_required(:request)
     |> validate_subset(:api, 1..6)
     |> validate_subset(:battr, 1..17)

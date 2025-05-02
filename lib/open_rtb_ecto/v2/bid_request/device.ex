@@ -83,9 +83,9 @@ defmodule OpenRtbEcto.V2.BidRequest.Device do
       :dpidsha1,
       :dpidmd5,
       :macsha1,
-      :macmd5,
-      :ext
+      :macmd5
     ])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
     |> cast_embed(:geo)
     |> cast_embed(:sua)
     |> validate_inclusion(:devicetype, 1..7)

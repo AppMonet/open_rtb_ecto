@@ -18,7 +18,8 @@ defmodule OpenRtbEcto.V2.BidRequest.Segment do
 
   def changeset(segment, attrs) when is_map(attrs) do
     segment
-    |> cast(attrs, [:id, :name, :value, :ext])
+    |> cast(attrs, [:id, :name, :value])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
   end
 
   def changeset(segment, _), do: change(segment)

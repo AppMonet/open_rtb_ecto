@@ -53,9 +53,9 @@ defmodule OpenRtbEcto.V2.BidRequest.Site do
       :mobile,
       :privacypolicy,
       :keywords,
-      :blocklists,
-      :ext
+      :blocklists
     ])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
     |> cast_embed(:publisher)
     |> cast_embed(:content)
   end

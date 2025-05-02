@@ -84,9 +84,9 @@ defmodule OpenRtbEcto.V2.BidResponse.Bid do
       :exp,
       :dur,
       :mtype,
-      :slotinpod,
-      :ext
+      :slotinpod
     ])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
     |> validate_required([:id, :impid, :price])
     |> ensure_crid()
     |> cast_embed(:adm_native)

@@ -20,7 +20,8 @@ defmodule OpenRtbEcto.V2.BidRequest.Metric do
 
   def changeset(metric, attrs) when is_map(attrs) do
     metric
-    |> cast(attrs, [:type, :value, :vendor, :ext])
+    |> cast(attrs, [:type, :value, :vendor])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
   end
 
   def changeset(metric, _), do: change(metric)

@@ -24,9 +24,9 @@ defmodule OpenRtbEcto.V2.BidRequest.Channel do
     |> cast(attrs, [
       :id,
       :name,
-      :domain,
-      :ext
+      :domain
     ])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
   end
 
   def changeset(channel, _), do: change(channel)

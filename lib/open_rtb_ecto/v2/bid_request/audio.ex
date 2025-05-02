@@ -74,9 +74,9 @@ defmodule OpenRtbEcto.V2.BidRequest.Audio do
       :companiontype,
       :feed,
       :stitched,
-      :nvol,
-      :ext
+      :nvol
     ])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
     |> cast_embed(:companionad)
     |> validate_required([:mimes])
     |> validate_subset(:protocols, 1..10)

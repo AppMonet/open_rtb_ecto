@@ -58,9 +58,9 @@ defmodule OpenRtbEcto.V2.BidRequest.Imp do
       :iframebuster,
       :rwdd,
       :ssai,
-      :exp,
-      :ext
+      :exp
     ])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
     |> cast_embed(:metric)
     |> cast_embed(:banner)
     |> cast_embed(:video)

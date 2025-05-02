@@ -31,7 +31,8 @@ defmodule OpenRtbEcto.V2.BidResponse do
 
   def changeset(response, attrs \\ %{}) do
     response
-    |> cast(attrs, [:id, :bidid, :cur, :customdata, :nbr, :ext])
+    |> cast(attrs, [:id, :bidid, :cur, :customdata, :nbr])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
     |> cast_embed(:seatbid)
     |> validate_required(:id)
   end

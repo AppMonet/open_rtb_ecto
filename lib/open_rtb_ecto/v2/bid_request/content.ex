@@ -76,9 +76,9 @@ defmodule OpenRtbEcto.V2.BidRequest.Content do
       :len,
       :language,
       :langb,
-      :embeddable,
-      :ext
+      :embeddable
     ])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
     |> cast_embed(:producer)
     |> cast_embed(:data)
     |> cast_embed(:network)

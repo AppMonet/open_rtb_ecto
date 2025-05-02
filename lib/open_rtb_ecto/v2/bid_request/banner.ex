@@ -59,9 +59,9 @@ defmodule OpenRtbEcto.V2.BidRequest.Banner do
       :expdir,
       :api,
       :id,
-      :vcm,
-      :ext
+      :vcm
     ])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
     |> cast_embed(:format)
     |> validate_subset(:btype, 1..4)
     |> validate_subset(:expdir, 1..4)

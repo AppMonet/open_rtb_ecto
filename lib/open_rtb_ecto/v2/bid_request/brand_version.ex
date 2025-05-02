@@ -18,7 +18,8 @@ defmodule OpenRtbEcto.V2.BidRequest.BrandVersion do
 
   def changeset(version, attrs) when is_map(attrs) do
     version
-    |> cast(attrs, [:brand, :version, :ext])
+    |> cast(attrs, [:brand, :version])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
     |> validate_required([:brand])
   end
 

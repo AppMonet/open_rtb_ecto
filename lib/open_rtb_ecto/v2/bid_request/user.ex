@@ -29,7 +29,8 @@ defmodule OpenRtbEcto.V2.BidRequest.User do
 
   def changeset(user, attrs) when is_map(user) do
     user
-    |> cast(attrs, [:id, :buyeruid, :yob, :gender, :keywords, :customdata, :ext])
+    |> cast(attrs, [:id, :buyeruid, :yob, :gender, :keywords, :customdata])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
     |> cast_embed(:geo)
     |> cast_embed(:data)
     |> cast_embed(:eids)

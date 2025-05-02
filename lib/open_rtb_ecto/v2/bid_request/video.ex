@@ -93,9 +93,9 @@ defmodule OpenRtbEcto.V2.BidRequest.Video do
       :delivery,
       :pos,
       :api,
-      :companiontype,
-      :ext
+      :companiontype
     ])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
     |> cast_embed(:companionad)
     |> validate_required([:mimes])
     |> validate_inclusion(:linearity, 1..2)

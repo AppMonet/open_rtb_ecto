@@ -49,9 +49,9 @@ defmodule OpenRtbEcto.V2.BidRequest.Geo do
       :city,
       :zip,
       :type,
-      :utcoffset,
-      :ext
+      :utcoffset
     ])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
     |> validate_number(:lat, greater_than_or_equal_to: -90, less_than_or_equal_to: 90)
     |> validate_number(:lon, greater_than_or_equal_to: -180, less_than_or_equal_to: 180)
     |> validate_inclusion(:type, 1..3)

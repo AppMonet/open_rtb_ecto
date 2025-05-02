@@ -23,7 +23,8 @@ defmodule OpenRtbEcto.V2.BidRequest.Format do
 
   def changeset(format, attrs) when is_map(attrs) do
     format
-    |> cast(attrs, [:w, :h, :wratio, :hratio, :wmin, :ext])
+    |> cast(attrs, [:w, :h, :wratio, :hratio, :wmin])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
   end
 
   def changeset(format, _), do: change(format)
