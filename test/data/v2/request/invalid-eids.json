@@ -1,0 +1,195 @@
+{
+  "at": 1,
+  "bcat": [
+    "IAB24",
+    "IAB26",
+    "IAB7-28",
+    "IAB25-2",
+    "IAB25-3",
+    "IAB25-5",
+    "IAB23"
+  ],
+  "cur": ["USD"],
+  "device": {
+    "devicetype": 4,
+    "geo": {
+      "country": "US",
+      "ipservice": 3,
+      "lat": 41.9769,
+      "lon": -91.7084,
+      "metro": "637",
+      "region": "IA",
+      "type": 2,
+      "zip": "52405"
+    },
+    "h": 780,
+    "ip": "166.181.88.105",
+    "js": 1,
+    "language": "en",
+    "make": "Samsung",
+    "model": "SM-S906U",
+    "os": "Android",
+    "osv": "14",
+    "ua": "Mozilla/5.0 (Linux; Android 14; SM-S906U Build/UP1A.231005.007; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/135.0.7049.105 Mobile Safari/537.36 [FB_IAB/FB4A;FBAV/510.0.0.72.41;IABMV/1;]",
+    "w": 360
+  },
+  "id": "ea2d4310-4162-4755-91e3-3222eb9305aa",
+  "imp": [
+    {
+      "banner": { "format": [{ "h": 50, "w": 320 }], "h": 50, "w": 320 },
+      "bidfloor": 0.22,
+      "bidfloorcur": "USD",
+      "id": "452758ea-1a12-4824-8dfa-a483522df4bf",
+      "instl": 0,
+      "secure": 1
+    }
+  ],
+  "regs": { "coppa": 0, "gdpr": 0 },
+  "site": {
+    "cat": ["IAB1"],
+    "domain": "channel3000.com",
+    "id": "39603",
+    "keywords": "inventory_test=1",
+    "name": "channel3000.com",
+    "page": "https://www.channel3000.com/news/money/trump-eases-auto-tariffs/article_f7d6c5e0-043e-5778-be4c-f44798033e26.html?fbclid=IwZXh0bgNhZW0CMTEAAR6ZHTnKd9TpJn7J7CCXyxc1oInDuhLIiXaDv-LNH54-ZIj0PLjkuS3wnrVLPw_aem_vwdgkUzfbhYcYIMwKrNe_w",
+    "publisher": { "id": "105199841" },
+    "ref": "channel3000.com"
+  },
+  "source": {
+    "ext": {
+      "schain": {
+        "complete": 1,
+        "nodes": [{ "asi": "yieldlift.com", "hp": 1, "sid": "6123" }],
+        "ver": "1.0"
+      }
+    },
+    "fd": 1,
+    "schain": {
+      "complete": 1,
+      "nodes": [
+        { "asi": "yieldlift.com", "hp": 1, "sid": "6123" },
+        {
+          "asi": "smilewanted.com",
+          "hp": 1,
+          "rid": "ea2d4310-4162-4755-91e3-3222eb9305aa",
+          "sid": "5517"
+        }
+      ],
+      "ver": "1.0"
+    },
+    "tid": "ea2d4310-4162-4755-91e3-3222eb9305aa"
+  },
+  "tmax": 1925,
+  "user": {
+    "buyeruid": "5df0d67febe0ad1a42fa9520ffb3e7c1",
+    "eids": [
+      {
+        "source": "33across.com",
+        "uids": [
+          {
+            "atype": 1,
+            "id": "v1.0013300001badlYAAQ.1041.7bYvZsM49AOohN36Ll46CIYLDx92lLz2vOCIM9OO33FjNFyrDp3rj420Kw9RbyYNMkugki09BUpjPv9jasR6ftc0MtiqGikLJoVA+iLAb6VUaW8zj64DZbWUM8rIdUBABY9+PmSLr+MkSeFQKPu6bFYzFIMnRkSowXdE2vRvHNuOvZveQMerg6qx0XFOQg6UU3YTNL34msjzEeGTrZOhVxDQQXWY7/fW4XgpeJ3pSSkN5WabykGf/bd+eVujxmWtsxm7bpzbrFyvmCysc5tOyCvBJswTgf9gW0qkG6J34Zj88zzq6eSKSIg9QZP5WfcUGKTgpom/U7qhgKqd0VvWJ1NjaXJJ5At9Wd2goxHYO+h/7W4znaf1aPUveM8YZ44oGF8OtOv3T2K3Wqb2QhumAMsaBs7VtbGoda4uk7roMeo33WSpVyUdt7r+JGvXbz7wSd8a2rSu+CALejlBcngmgb4qUawn5S9Wv+/cTNSseGFuqpyXrn9BnjXbJTNy+4upydarKsQtiWRstaaJ1stk+CSKgcNWq6CphT0o4cAgcWphJ6QIWIFDuU+dRoYl6pGYuS986czNLFNVrxymJRxZtaOPVHKg3mHN9I6yLbuva5Yh67lYb8nev4oGvOyMpf7oDeebX44hehC2g8eGcZtZfhEybZswTp0tDDDopfm8+2He0oDd1xNCaZlWM0atlMyYaKw9R7BYyDm9dNX3pQGMN/P6wi44Fzex6vy711gx3xvifT1hkkIQfH/pmKedNZ7z7il44JxEF2VAJVFFKQbRJBkF0a+1WZs0J9mDFrXeiZ/yhFrW2qzFbCwGQYrH4ej2YQ1XMJJqzTeK59WXmlQzHsSr9Wv9km2v9uwvp6LJIcod12vv4x0hnNWyfK5CgY5tON04tvlBQdTuR+0stwgrQpR2CKjFQCYh+8fiYf6d+cWYzjkUVfemsxx6CLQotzZy+uLPsDM4SGyzq45ZCewRcJBxVCZSmxamf8akJ2soCx/uFjZW3CnAPhGLrg7Kr5wYSd/p2nI0LWxuJqQwttIezOsNzfv6y9nPM4TMe2H0PpSVb0R4kW/QR47pw12zR5+z6DCxh94z5Po1HWqjH6X4mzmjU7lri7l8Cebqc8LB7YUuiuSpIOHMuvLKZZXSJ96819TCGebhM3VoVBDBtAs3euLOE+rHOtx1I9LFcFJm80c5G1opn3ZsjOOHjsN4x9teuUjFk3WZRv1Lh/ukOaYfvgrw6VLWvPGqeudk3EyYa4/rLZI7TDf74Py1SD9ok/r0G4I0s9xnIzVbM6RLNIaP8HqJdV9jTo1hsOOA0gJbQ5QHHgfnOzHpDT2XuhHJfaemgi4xeyFguzzaT+hkvHCnQWU++J7/pl903EjFLf8eVcQq6NBIW8S0Xl2p08ui4V+FREf6ZLYJjJK491O2mynr1A=="
+          }
+        ]
+      },
+      {
+        "source": "criteo.com",
+        "uids": [
+          {
+            "atype": 1,
+            "id": "rw-bcl91VlkxeWExYjA3OExmU0slMkJmSnY2cXF4bmZ1N3Q1aGdydkxOQUtEbmdnQk9pNm9CVW9DcVVBNE5hMThvaHM4Q0o3VTclMkJPOXlMUmklMkZTTmpMRVRwM3Y5Z29BVyUyRlo4cml1UUFWNTVOTE9LTzREaDdMY3pIaGRzT0ZDVGRNbCUyRkxzWGY"
+          }
+        ]
+      },
+      {
+        "source": "id5-sync.com",
+        "uids": [
+          {
+            "atype": 1,
+            "ext": "{\"linkType\":2,\"pba\":\"bo99E8R1MVAEt/wTwTw3gtLwRaaiVUG1I/qhcfL9iT4=\"}",
+            "id": "ID5*8VZuH2cJhY3dk6ghwC89AVqWpAGrd_RfT-9L5yttV1YS7vahNbNpNZBr8vjjWmIJ"
+          }
+        ]
+      },
+      {
+        "source": "crwdcntrl.net",
+        "uids": [
+          {
+            "atype": 1,
+            "id": "040189611b876a279473a873655716d53938f876e732f1bb80e188304658cee3"
+          }
+        ]
+      },
+      [],
+      {
+        "source": "33across.com",
+        "uids": [
+          {
+            "atype": 1,
+            "id": "v1.0013300001badlYAAQ.1041.7bYvZsM49AOohN36Ll46CIYLDx92lLz2vOCIM9OO33FjNFyrDp3rj420Kw9RbyYNMkugki09BUpjPv9jasR6ftc0MtiqGikLJoVA+iLAb6VUaW8zj64DZbWUM8rIdUBABY9+PmSLr+MkSeFQKPu6bFYzFIMnRkSowXdE2vRvHNuOvZveQMerg6qx0XFOQg6UU3YTNL34msjzEeGTrZOhVxDQQXWY7/fW4XgpeJ3pSSkN5WabykGf/bd+eVujxmWtsxm7bpzbrFyvmCysc5tOyCvBJswTgf9gW0qkG6J34Zj88zzq6eSKSIg9QZP5WfcUGKTgpom/U7qhgKqd0VvWJ1NjaXJJ5At9Wd2goxHYO+h/7W4znaf1aPUveM8YZ44oGF8OtOv3T2K3Wqb2QhumAMsaBs7VtbGoda4uk7roMeo33WSpVyUdt7r+JGvXbz7wSd8a2rSu+CALejlBcngmgb4qUawn5S9Wv+/cTNSseGFuqpyXrn9BnjXbJTNy+4upydarKsQtiWRstaaJ1stk+CSKgcNWq6CphT0o4cAgcWphJ6QIWIFDuU+dRoYl6pGYuS986czNLFNVrxymJRxZtaOPVHKg3mHN9I6yLbuva5Yh67lYb8nev4oGvOyMpf7oDeebX44hehC2g8eGcZtZfhEybZswTp0tDDDopfm8+2He0oDd1xNCaZlWM0atlMyYaKw9R7BYyDm9dNX3pQGMN/P6wi44Fzex6vy711gx3xvifT1hkkIQfH/pmKedNZ7z7il44JxEF2VAJVFFKQbRJBkF0a+1WZs0J9mDFrXeiZ/yhFrW2qzFbCwGQYrH4ej2YQ1XMJJqzTeK59WXmlQzHsSr9Wv9km2v9uwvp6LJIcod12vv4x0hnNWyfK5CgY5tON04tvlBQdTuR+0stwgrQpR2CKjFQCYh+8fiYf6d+cWYzjkUVfemsxx6CLQotzZy+uLPsDM4SGyzq45ZCewRcJBxVCZSmxamf8akJ2soCx/uFjZW3CnAPhGLrg7Kr5wYSd/p2nI0LWxuJqQwttIezOsNzfv6y9nPM4TMe2H0PpSVb0R4kW/QR47pw12zR5+z6DCxh94z5Po1HWqjH6X4mzmjU7lri7l8Cebqc8LB7YUuiuSpIOHMuvLKZZXSJ96819TCGebhM3VoVBDBtAs3euLOE+rHOtx1I9LFcFJm80c5G1opn3ZsjOOHjsN4x9teuUjFk3WZRv1Lh/ukOaYfvgrw6VLWvPGqeudk3EyYa4/rLZI7TDf74Py1SD9ok/r0G4I0s9xnIzVbM6RLNIaP8HqJdV9jTo1hsOOA0gJbQ5QHHgfnOzHpDT2XuhHJfaemgi4xeyFguzzaT+hkvHCnQWU++J7/pl903EjFLf8eVcQq6NBIW8S0Xl2p08ui4V+FREf6ZLYJjJK491O2mynr1A=="
+          }
+        ]
+      },
+      {
+        "source": "criteo.com",
+        "uids": [
+          {
+            "atype": 1,
+            "id": "rw-bcl91VlkxeWExYjA3OExmU0slMkJmSnY2cXF4bmZ1N3Q1aGdydkxOQUtEbmdnQk9pNm9CVW9DcVVBNE5hMThvaHM4Q0o3VTclMkJPOXlMUmklMkZTTmpMRVRwM3Y5Z29BVyUyRlo4cml1UUFWNTVOTE9LTzREaDdMY3pIaGRzT0ZDVGRNbCUyRkxzWGY"
+          }
+        ]
+      },
+      {
+        "source": "id5-sync.com",
+        "uids": [
+          {
+            "atype": 1,
+            "ext": "{\"linkType\":2,\"pba\":\"bo99E8R1MVAEt/wTwTw3gtLwRaaiVUG1I/qhcfL9iT4=\"}",
+            "id": "ID5*8VZuH2cJhY3dk6ghwC89AVqWpAGrd_RfT-9L5yttV1YS7vahNbNpNZBr8vjjWmIJ"
+          }
+        ]
+      },
+      {
+        "source": "crwdcntrl.net",
+        "uids": [
+          {
+            "atype": 1,
+            "id": "040189611b876a279473a873655716d53938f876e732f1bb80e188304658cee3"
+          }
+        ]
+      },
+      []
+    ],
+    "ext": {
+      "eids": [
+        {
+          "source": "33across.com",
+          "uids": [
+            "{\"atype\":1,\"id\":\"v1.0013300001badlYAAQ.1041.7bYvZsM49AOohN36Ll46CIYLDx92lLz2vOCIM9OO33FjNFyrDp3rj420Kw9RbyYNMkugki09BUpjPv9jasR6ftc0MtiqGikLJoVA+iLAb6VUaW8zj64DZbWUM8rIdUBABY9+PmSLr+MkSeFQKPu6bFYzFIMnRkSowXdE2vRvHNuOvZveQMerg6qx0XFOQg6UU3YTNL34msjzEeGTrZOhVxDQQXWY7/fW4XgpeJ3pSSkN5WabykGf/bd+eVujxmWtsxm7bpzbrFyvmCysc5tOyCvBJswTgf9gW0qkG6J34Zj88zzq6eSKSIg9QZP5WfcUGKTgpom/U7qhgKqd0VvWJ1NjaXJJ5At9Wd2goxHYO+h/7W4znaf1aPUveM8YZ44oGF8OtOv3T2K3Wqb2QhumAMsaBs7VtbGoda4uk7roMeo33WSpVyUdt7r+JGvXbz7wSd8a2rSu+CALejlBcngmgb4qUawn5S9Wv+/cTNSseGFuqpyXrn9BnjXbJTNy+4upydarKsQtiWRstaaJ1stk+CSKgcNWq6CphT0o4cAgcWphJ6QIWIFDuU+dRoYl6pGYuS986czNLFNVrxymJRxZtaOPVHKg3mHN9I6yLbuva5Yh67lYb8nev4oGvOyMpf7oDeebX44hehC2g8eGcZtZfhEybZswTp0tDDDopfm8+2He0oDd1xNCaZlWM0atlMyYaKw9R7BYyDm9dNX3pQGMN/P6wi44Fzex6vy711gx3xvifT1hkkIQfH/pmKedNZ7z7il44JxEF2VAJVFFKQbRJBkF0a+1WZs0J9mDFrXeiZ/yhFrW2qzFbCwGQYrH4ej2YQ1XMJJqzTeK59WXmlQzHsSr9Wv9km2v9uwvp6LJIcod12vv4x0hnNWyfK5CgY5tON04tvlBQdTuR+0stwgrQpR2CKjFQCYh+8fiYf6d+cWYzjkUVfemsxx6CLQotzZy+uLPsDM4SGyzq45ZCewRcJBxVCZSmxamf8akJ2soCx/uFjZW3CnAPhGLrg7Kr5wYSd/p2nI0LWxuJqQwttIezOsNzfv6y9nPM4TMe2H0PpSVb0R4kW/QR47pw12zR5+z6DCxh94z5Po1HWqjH6X4mzmjU7lri7l8Cebqc8LB7YUuiuSpIOHMuvLKZZXSJ96819TCGebhM3VoVBDBtAs3euLOE+rHOtx1I9LFcFJm80c5G1opn3ZsjOOHjsN4x9teuUjFk3WZRv1Lh/ukOaYfvgrw6VLWvPGqeudk3EyYa4/rLZI7TDf74Py1SD9ok/r0G4I0s9xnIzVbM6RLNIaP8HqJdV9jTo1hsOOA0gJbQ5QHHgfnOzHpDT2XuhHJfaemgi4xeyFguzzaT+hkvHCnQWU++J7/pl903EjFLf8eVcQq6NBIW8S0Xl2p08ui4V+FREf6ZLYJjJK491O2mynr1A==\"}"
+          ]
+        },
+        {
+          "source": "criteo.com",
+          "uids": [
+            "{\"atype\":1,\"id\":\"rw-bcl91VlkxeWExYjA3OExmU0slMkJmSnY2cXF4bmZ1N3Q1aGdydkxOQUtEbmdnQk9pNm9CVW9DcVVBNE5hMThvaHM4Q0o3VTclMkJPOXlMUmklMkZTTmpMRVRwM3Y5Z29BVyUyRlo4cml1UUFWNTVOTE9LTzREaDdMY3pIaGRzT0ZDVGRNbCUyRkxzWGY\"}"
+          ]
+        },
+        {
+          "source": "id5-sync.com",
+          "uids": [
+            "{\"atype\":1,\"ext\":{\"linkType\":2,\"pba\":\"bo99E8R1MVAEt/wTwTw3gtLwRaaiVUG1I/qhcfL9iT4=\"},\"id\":\"ID5*8VZuH2cJhY3dk6ghwC89AVqWpAGrd_RfT-9L5yttV1YS7vahNbNpNZBr8vjjWmIJ\"}"
+          ]
+        },
+        {
+          "source": "crwdcntrl.net",
+          "uids": [
+            "{\"atype\":1,\"id\":\"040189611b876a279473a873655716d53938f876e732f1bb80e188304658cee3\"}"
+          ]
+        },
+        []
+      ]
+    },
+    "geo": { "country": "USA" }
+  },
+  "v": "rtbx_0.21.6_3"
+}

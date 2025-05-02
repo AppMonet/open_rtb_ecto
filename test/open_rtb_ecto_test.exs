@@ -93,27 +93,49 @@ defmodule OpenRtbEctoTest do
       uid = hd(invalid_ext.uids)
       assert %{} == uid.ext
     end
-  end
 
-  test "schain without nodes casts safely" do
-    schain = %{
-      ver: "1.2",
-      complete: 1,
-      nodes: nil
-    }
+    test "schain without nodes casts safely" do
+      schain = %{
+        ver: "1.2",
+        complete: 1,
+        nodes: nil
+      }
 
-    assert {:ok, result} = OpenRtbEcto.cast(OpenRtbEcto.V2.BidRequest.SupplyChain, schain)
-    assert result.ver == "1.2"
-    assert result.complete == 1
-    assert result.nodes == []
+      assert {:ok, result} = OpenRtbEcto.cast(OpenRtbEcto.V2.BidRequest.SupplyChain, schain)
+      assert result.ver == "1.2"
+      assert result.complete == 1
+      assert result.nodes == []
 
-    bid_request =
-      TestHelper.test_data("v2/request", "example-request-app-android-1.json", :map)
-      |> put_in(["source"], %{"schain" => schain})
+      bid_request =
+        TestHelper.test_data("v2/request", "example-request-app-android-1.json", :map)
+        |> put_in(["source"], %{"schain" => schain})
 
-    assert {:ok, casted} = OpenRtbEcto.cast(OpenRtbEcto.V2.BidRequest, bid_request)
-    assert casted.source.schain.ver == "1.2"
-    assert casted.source.schain.complete == 1
-    assert casted.source.schain.nodes == []
+      assert {:ok, casted} = OpenRtbEcto.cast(OpenRtbEcto.V2.BidRequest, bid_request)
+      assert casted.source.schain.ver == "1.2"
+      assert casted.source.schain.complete == 1
+      assert casted.source.schain.nodes == []
+    end
+
+    test "real example with empty arrays in eids list" do
+      bid_request =
+        TestHelper.test_data("v2/request", "invalid-eids.json", :map)
+
+      assert {:ok, casted} = OpenRtbEcto.cast(OpenRtbEcto.V2.BidRequest, bid_request)
+
+      # Ensure that the empty arrays in eids are handled gracefully
+      # (they are converted to empty eids objects with default values)
+      assert casted.user.eids != nil
+      dbg(casted.user.eids)
+      assert is_list(casted.user.eids)
+
+      # Check if there are any eids entries that came from empty arrays
+      empty_eids =
+        Enum.filter(casted.user.eids, fn eid ->
+          eid.source == nil && eid.uids == [] && eid.ext == %{}
+        end)
+
+      # We should have at least one entry that came from an empty array
+      assert length(empty_eids) > 0
+    end
   end
 end

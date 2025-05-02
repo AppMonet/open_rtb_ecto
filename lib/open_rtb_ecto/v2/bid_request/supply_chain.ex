@@ -23,7 +23,8 @@ defmodule OpenRtbEcto.V2.BidRequest.SupplyChain do
   def changeset(schain, attrs \\ %{}) do
     schain
     |> safe_cast(attrs, [:complete, :ver, :ext])
-    |> safe_cast_embed(:nodes)  # Make nodes optional
+    # Make nodes optional
+    |> safe_cast_embed(:nodes)
     |> validate_required([:complete, :ver])
   end
 end

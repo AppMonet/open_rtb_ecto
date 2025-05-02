@@ -28,7 +28,7 @@ defmodule OpenRtbEcto do
             {:ok, Ecto.Changeset.apply_changes(changeset)}
           end
         end
-      
+
       # Handle other return values from changeset functions
       other ->
         {:error, "Unexpected changeset result: #{inspect(other)}"}
@@ -43,17 +43,19 @@ defmodule OpenRtbEcto do
 
   defp has_required_field_errors?(changeset) do
     required_fields = changeset.required
-    
+
     # Special case: Treat media validation errors as required field errors
     # This ensures that assets with multiple media types are considered invalid
-    has_media_error = Enum.any?(changeset.errors, fn {field, _error} -> 
-      field == :media or field == :asset
-    end)
-    
+    has_media_error =
+      Enum.any?(changeset.errors, fn {field, _error} ->
+        field == :media or field == :asset
+      end)
+
     # Check for either required field errors or media errors
-    has_media_error || Enum.any?(changeset.errors, fn {field, _error} ->
-      field in required_fields
-    end)
+    has_media_error ||
+      Enum.any?(changeset.errors, fn {field, _error} ->
+        field in required_fields
+      end)
   end
 
   defp format_invalid_changeset(changeset) do

@@ -88,6 +88,13 @@ defmodule OpenRtbEcto.SafeSchema do
             result
         end
       end
+
+      # Handle other types (including empty arrays, strings, etc.)
+      def safe_cast(changeset, _attrs, _permitted) do
+        # For non-map attrs, just return the changeset unchanged
+        # This ensures that invalid data doesn't cause errors
+        changeset
+      end
     end
   end
 end

@@ -17,9 +17,15 @@ defmodule OpenRtbEcto.V2.BidRequest.Eids do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(eids, attrs \\ %{}) do
+  def changeset(eids, attrs) when is_map(attrs) do
     eids
     |> safe_cast(attrs, [:source, :ext])
     |> safe_cast_embed(:uids)
+  end
+
+  # Handle non-map attrs (like empty arrays or other unexpected types)
+  def changeset(eids, _attrs) do
+    # Just return an unchanged changeset for invalid attribute types
+    Ecto.Changeset.change(eids)
   end
 end
