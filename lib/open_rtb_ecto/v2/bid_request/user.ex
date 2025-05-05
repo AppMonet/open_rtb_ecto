@@ -31,9 +31,9 @@ defmodule OpenRtbEcto.V2.BidRequest.User do
     user
     |> cast(attrs, [:id, :buyeruid, :yob, :gender, :keywords, :customdata])
     |> OpenRtbEcto.safe_cast_ext(attrs)
+    |> OpenRtbEcto.safe_cast_embeds_many(:eids, attrs)
     |> cast_embed(:geo)
     |> cast_embed(:data)
-    |> cast_embed(:eids)
   end
 
   def changeset(user, _), do: change(user)

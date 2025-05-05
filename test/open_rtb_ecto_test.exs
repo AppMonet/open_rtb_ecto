@@ -63,6 +63,8 @@ defmodule OpenRtbEctoTest do
             }
           ]
         },
+        # random empty list in the middle is discarded...
+        [],
         %{
           "source" => "sourcewithinvaliduids.com",
           "uids" => [[]]
@@ -86,7 +88,7 @@ defmodule OpenRtbEctoTest do
       data = put_in(data, ["user", "eids"], eids)
       assert {:ok, %BidRequest{user: %{eids: eids}}} = OpenRtbEcto.cast(BidRequest, data)
 
-      assert 5 == Enum.count(eids)
+      assert 6 == Enum.count(eids)
       valid_entry = Enum.find(eids, &(&1.source == "id5-sync.com"))
       assert [%BidRequest.Uid{ext: valid_ext}] = valid_entry.uids
 

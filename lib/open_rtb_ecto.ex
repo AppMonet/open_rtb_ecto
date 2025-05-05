@@ -38,8 +38,10 @@ defmodule OpenRtbEcto do
   end
 
   def safe_cast_embeds_many(changeset, field, attrs) do
-    with {:ok, embedded} when is_list(embedded) <- fetch_field(attrs, field) do
-      Ecto.Changeset.cast_embed(changeset, field, embedded)
+    with {:ok, [_ | _] = embedded} <- fetch_field(attrs, field) do
+      # Filter out any non-map entries from the embedded array
+      valid_embedded = Enum.filter(embedded, &is_map/1)
+      Ecto.Changeset.cast_embed(changeset, field, valid_embedded)
     else
       _ -> changeset
     end

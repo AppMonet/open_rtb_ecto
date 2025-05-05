@@ -18,11 +18,11 @@ defmodule OpenRtbEcto.V2.BidRequest.Eids do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(eids, attrs) when is_map(eids) do
+  def changeset(eids, attrs) when is_map(attrs) do
     eids
     |> cast(attrs, [:source])
     |> OpenRtbEcto.safe_cast_ext(attrs)
-    |> cast_embed(:uids)
+    |> OpenRtbEcto.safe_cast_embeds_many(:uids, attrs)
   end
 
   def changeset(eids, _), do: change(eids)
