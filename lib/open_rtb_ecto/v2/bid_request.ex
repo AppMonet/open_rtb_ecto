@@ -60,9 +60,9 @@ defmodule OpenRtbEcto.V2.BidRequest do
       :bcat,
       :badv,
       :bapp,
-      :ext,
       :cattax
     ])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
     |> cast_embed(:imp, required: true)
     |> cast_embed(:site)
     |> cast_embed(:app)

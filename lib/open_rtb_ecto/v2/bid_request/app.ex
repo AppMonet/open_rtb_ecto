@@ -37,7 +37,7 @@ defmodule OpenRtbEcto.V2.BidRequest.App do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(app, attrs \\ %{}) do
+  def changeset(app, attrs) when is_map(attrs) do
     app
     |> cast(attrs, [
       :id,
@@ -53,10 +53,12 @@ defmodule OpenRtbEcto.V2.BidRequest.App do
       :privacypolicy,
       :paid,
       :keywords,
-      :blocklists,
-      :ext
+      :blocklists
     ])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
     |> cast_embed(:publisher)
     |> cast_embed(:content)
   end
+
+  def changeset(app, _), do: change(app)
 end

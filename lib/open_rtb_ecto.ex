@@ -28,6 +28,33 @@ defmodule OpenRtbEcto do
     end
   end
 
+  def safe_cast_ext(changeset, attrs) do
+    with {:ok, ext} when is_map(ext) <- fetch_field(attrs, :ext),
+         {:ok, casted} <- Ecto.Type.cast(:map, ext) do
+      Ecto.Changeset.put_change(changeset, :ext, casted)
+    else
+      _ -> changeset
+    end
+  end
+
+  def safe_cast_embeds_many(changeset, field, attrs) do
+    with {:ok, embedded} when is_list(embedded) <- fetch_field(attrs, field) do
+      Ecto.Changeset.cast_embed(changeset, field, embedded)
+    else
+      _ -> changeset
+    end
+  end
+
+  defp fetch_field(attrs, field_as_atom) do
+    field_as_string = Atom.to_string(field_as_atom)
+
+    case attrs do
+      %{^field_as_atom => val} -> {:ok, val}
+      %{^field_as_string => val} -> {:ok, val}
+      _ -> :error
+    end
+  end
+
   defp format_invalid_changeset(changeset) do
     Ecto.Changeset.traverse_errors(changeset, fn chg, atom, {msg, opts} ->
       input = Ecto.Changeset.get_field(chg, atom)

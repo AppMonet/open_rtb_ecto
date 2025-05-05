@@ -33,7 +33,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Geo do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(geo, attrs \\ %{}) do
+  def changeset(geo, attrs) when is_map(attrs) do
     geo
     |> cast(attrs, [
       :lat,
@@ -49,12 +49,14 @@ defmodule OpenRtbEcto.V2.BidRequest.Geo do
       :city,
       :zip,
       :type,
-      :utcoffset,
-      :ext
+      :utcoffset
     ])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
     |> validate_number(:lat, greater_than_or_equal_to: -90, less_than_or_equal_to: 90)
     |> validate_number(:lon, greater_than_or_equal_to: -180, less_than_or_equal_to: 180)
     |> validate_inclusion(:type, 1..3)
     |> validate_inclusion(:ipservice, 1..4)
   end
+
+  def changeset(geo, _), do: change(geo)
 end

@@ -21,8 +21,11 @@ defmodule OpenRtbEcto.V2.BidRequest.Regs do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(regs, attrs \\ %{}) do
+  def changeset(regs, attrs) when is_map(attrs) do
     regs
-    |> cast(attrs, [:coppa, :gdpr, :us_privacy, :gpp, :gpp_sid, :ext])
+    |> cast(attrs, [:coppa, :gdpr, :us_privacy, :gpp, :gpp_sid])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
   end
+
+  def changeset(regs, _), do: change(regs)
 end

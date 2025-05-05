@@ -19,8 +19,11 @@ defmodule OpenRtbEcto.V2.BidRequest.Publisher do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(publisher, attrs \\ %{}) do
+  def changeset(publisher, attrs) when is_map(attrs) do
     publisher
-    |> cast(attrs, [:id, :name, :cattax, :cat, :domain, :ext])
+    |> cast(attrs, [:id, :name, :cattax, :cat, :domain])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
   end
+
+  def changeset(publisher, _), do: change(publisher)
 end

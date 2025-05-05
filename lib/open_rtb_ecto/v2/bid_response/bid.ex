@@ -50,7 +50,7 @@ defmodule OpenRtbEcto.V2.BidResponse.Bid do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(bid, attrs \\ %{}) do
+  def changeset(bid, attrs) when is_map(attrs) do
     bid
     |> cast(attrs, [
       :id,
@@ -84,13 +84,15 @@ defmodule OpenRtbEcto.V2.BidResponse.Bid do
       :exp,
       :dur,
       :mtype,
-      :slotinpod,
-      :ext
+      :slotinpod
     ])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
     |> validate_required([:id, :impid, :price])
     |> ensure_crid()
     |> cast_embed(:adm_native)
   end
+
+  def changeset(eids, _attrs), do: change(eids)
 
   defp ensure_crid(changeset) do
     case get_field(changeset, :crid) do

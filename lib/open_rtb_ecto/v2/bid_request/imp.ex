@@ -43,7 +43,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Imp do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(impression, attrs \\ %{}) do
+  def changeset(impression, attrs) when is_map(attrs) do
     impression
     |> cast(attrs, [
       :id,
@@ -58,9 +58,9 @@ defmodule OpenRtbEcto.V2.BidRequest.Imp do
       :iframebuster,
       :rwdd,
       :ssai,
-      :exp,
-      :ext
+      :exp
     ])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
     |> cast_embed(:metric)
     |> cast_embed(:banner)
     |> cast_embed(:video)
@@ -69,4 +69,6 @@ defmodule OpenRtbEcto.V2.BidRequest.Imp do
     |> cast_embed(:pmp)
     |> validate_required(:id)
   end
+
+  def changeset(imp, _), do: change(imp)
 end

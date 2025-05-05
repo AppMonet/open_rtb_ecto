@@ -9,7 +9,8 @@ defmodule OpenRtbEctoTest do
   describe "cast/2" do
     test "valid map" do
       data = TestHelper.test_data("v2/request", "example-request-app-android-1.json", :map)
-      assert {:ok, %BidRequest{}} = OpenRtbEcto.cast(BidRequest, data)
+      assert {:ok, %BidRequest{source: source}} = OpenRtbEcto.cast(BidRequest, data)
+      assert 1 == length(source.schain.nodes)
     end
 
     test "valid json" do
@@ -86,12 +87,33 @@ defmodule OpenRtbEctoTest do
       assert {:ok, %BidRequest{user: %{eids: eids}}} = OpenRtbEcto.cast(BidRequest, data)
 
       assert 5 == Enum.count(eids)
+      valid_entry = Enum.find(eids, &(&1.source == "id5-sync.com"))
+      assert [%BidRequest.Uid{ext: valid_ext}] = valid_entry.uids
+
+      assert %{"linkType" => 2, "pba" => "fXPUj6QUvbNGkLLpoWmisG2jmkEw9hlrmAjktZt2es8="} ==
+               valid_ext
+
       invalid_entry = Enum.find(eids, &(&1.source == "sourcewithinvaliduids.com"))
       assert [%BidRequest.Uid{}] == invalid_entry.uids
 
       invalid_ext = Enum.find(eids, &(&1.source == "sourcewithinvalidext.com"))
       uid = hd(invalid_ext.uids)
+      assert "32b89953-0f9a-4fb3-981a-2ad9041ff027" == uid.id
       assert %{} == uid.ext
+    end
+
+    test "schain with no nodes" do
+      schain = %{schain: %{complete: 1, nodes: nil, ver: "1.0"}}
+
+      schain_string_keys = schain |> JSON.encode!() |> JSON.decode!()
+
+      for s <- [schain, schain_string_keys] do
+        data =
+          TestHelper.test_data("v2/request", "example-request-app-android-1.json", :map)
+          |> put_in(["source"], s)
+
+        assert {:ok, %BidRequest{}} = OpenRtbEcto.cast(BidRequest, data)
+      end
     end
   end
 end

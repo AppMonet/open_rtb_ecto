@@ -21,9 +21,12 @@ defmodule OpenRtbEcto.V2.BidRequest.Deal do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(deal, attrs \\ %{}) do
+  def changeset(deal, attrs) when is_map(attrs) do
     deal
-    |> cast(attrs, [:id, :bidfloor, :bidfloorcur, :at, :wseat, :wadomain, :ext])
+    |> cast(attrs, [:id, :bidfloor, :bidfloorcur, :at, :wseat, :wadomain])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
     |> validate_inclusion(:at, 1..3)
   end
+
+  def changeset(deal, _), do: change(deal)
 end

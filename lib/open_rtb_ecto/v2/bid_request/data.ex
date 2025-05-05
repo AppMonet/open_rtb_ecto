@@ -22,9 +22,12 @@ defmodule OpenRtbEcto.V2.BidRequest.Data do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(data, attrs \\ %{}) do
+  def changeset(data, attrs) when is_map(data) do
     data
-    |> cast(attrs, [:id, :name, :ext])
+    |> cast(attrs, [:id, :name])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
     |> cast_embed(:segment)
   end
+
+  def changeset(data, _), do: change(data)
 end

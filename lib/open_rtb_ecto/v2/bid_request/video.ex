@@ -58,7 +58,7 @@ defmodule OpenRtbEcto.V2.BidRequest.Video do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(video, attrs \\ %{}) do
+  def changeset(video, attrs) when is_map(attrs) do
     video
     |> cast(attrs, [
       :mimes,
@@ -93,9 +93,9 @@ defmodule OpenRtbEcto.V2.BidRequest.Video do
       :delivery,
       :pos,
       :api,
-      :companiontype,
-      :ext
+      :companiontype
     ])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
     |> cast_embed(:companionad)
     |> validate_required([:mimes])
     |> validate_inclusion(:linearity, 1..2)
@@ -112,6 +112,8 @@ defmodule OpenRtbEcto.V2.BidRequest.Video do
     |> validate_list_of_pos_ints(:api)
     |> validate_subset(:companiontype, 1..3)
   end
+
+  def changeset(video, _), do: change(video)
 
   defp validate_list_of_pos_ints(changeset, field) do
     case get_change(changeset, field) do

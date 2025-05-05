@@ -21,10 +21,13 @@ defmodule OpenRtbEcto.V2.BidRequest.SupplyChain do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(schain, attrs \\ %{}) do
+  def changeset(schain, attrs) when is_map(attrs) do
     schain
-    |> cast(attrs, [:complete, :ver, :ext])
-    |> cast_embed(:nodes, required: true)
+    |> cast(attrs, [:complete, :ver])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
+    |> OpenRtbEcto.safe_cast_embeds_many(:nodes, attrs)
     |> validate_required([:complete, :ver])
   end
+
+  def changeset(schain, _), do: change(schain)
 end

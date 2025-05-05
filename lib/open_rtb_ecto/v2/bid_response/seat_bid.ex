@@ -22,9 +22,12 @@ defmodule OpenRtbEcto.V2.BidResponse.SeatBid do
     field(:ext, :map, default: %{})
   end
 
-  def changeset(seat_bid, attrs \\ %{}) do
+  def changeset(seat_bid, attrs) when is_map(attrs) do
     seat_bid
-    |> cast(attrs, [:seat, :group, :ext])
+    |> cast(attrs, [:seat, :group])
+    |> OpenRtbEcto.safe_cast_ext(attrs)
     |> cast_embed(:bid, required: true)
   end
+
+  def changeset(eids, _attrs), do: change(eids)
 end
