@@ -29,7 +29,7 @@ defmodule OpenRtbEcto do
   end
 
   def safe_cast_ext(changeset, attrs) do
-    with {:ok, ext} when is_map(ext) <- Map.fetch(attrs, :ext),
+    with {:ok, ext} when is_map(ext) <- fetch_ext(attrs),
          {:ok, casted} <- Ecto.Type.cast(:map, ext) do
       Ecto.Changeset.put_change(changeset, :ext, casted)
     else
@@ -42,6 +42,14 @@ defmodule OpenRtbEcto do
       Ecto.Changeset.cast_embed(changeset, field, embedded)
     else
       _ -> changeset
+    end
+  end
+
+  defp fetch_ext(attrs) do
+    case attrs do
+      %{"ext" => ext} -> {:ok, ext}
+      %{ext: ext} -> {:ok, ext}
+      _ -> :error
     end
   end
 

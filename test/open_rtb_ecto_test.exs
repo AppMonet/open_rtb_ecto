@@ -86,6 +86,12 @@ defmodule OpenRtbEctoTest do
       assert {:ok, %BidRequest{user: %{eids: eids}}} = OpenRtbEcto.cast(BidRequest, data)
 
       assert 5 == Enum.count(eids)
+      valid_entry = Enum.find(eids, &(&1.source == "id5-sync.com"))
+      assert [%BidRequest.Uid{ext: valid_ext}] = valid_entry.uids
+
+      assert %{"linkType" => 2, "pba" => "fXPUj6QUvbNGkLLpoWmisG2jmkEw9hlrmAjktZt2es8="} ==
+               valid_ext
+
       invalid_entry = Enum.find(eids, &(&1.source == "sourcewithinvaliduids.com"))
       assert [%BidRequest.Uid{}] == invalid_entry.uids
 
