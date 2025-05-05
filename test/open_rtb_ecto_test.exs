@@ -9,7 +9,8 @@ defmodule OpenRtbEctoTest do
   describe "cast/2" do
     test "valid map" do
       data = TestHelper.test_data("v2/request", "example-request-app-android-1.json", :map)
-      assert {:ok, %BidRequest{}} = OpenRtbEcto.cast(BidRequest, data)
+      assert {:ok, %BidRequest{source: source}} = OpenRtbEcto.cast(BidRequest, data)
+      assert 1 == length(source.schain.nodes)
     end
 
     test "valid json" do
@@ -104,11 +105,15 @@ defmodule OpenRtbEctoTest do
     test "schain with no nodes" do
       schain = %{schain: %{complete: 1, nodes: nil, ver: "1.0"}}
 
-      data =
-        TestHelper.test_data("v2/request", "example-request-app-android-1.json", :map)
-        |> put_in(["source"], schain)
+      schain_string_keys = schain |> JSON.encode!() |> JSON.decode!()
 
-      assert {:ok, %BidRequest{}} = OpenRtbEcto.cast(BidRequest, data)
+      for s <- [schain, schain_string_keys] do
+        data =
+          TestHelper.test_data("v2/request", "example-request-app-android-1.json", :map)
+          |> put_in(["source"], s)
+
+        assert {:ok, %BidRequest{}} = OpenRtbEcto.cast(BidRequest, data)
+      end
     end
   end
 end
