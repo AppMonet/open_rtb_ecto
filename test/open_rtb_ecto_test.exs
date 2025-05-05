@@ -82,13 +82,19 @@ defmodule OpenRtbEctoTest do
         %{
           "source" => "pubcid.org",
           "uids" => [%{"id" => "32b89953-0f9a-4fb3-981a-2ad9041ff027", "atype" => 1}]
+        },
+        %{
+          "source" => "uids_as_string.com",
+          "uids" => [
+            "{\"atype\":1,\"ext\":{\"linkType\":2,\"pba\":\"TXpCREGM0Y6V/01ikH2LwVT4jLui3UojSi+dIrgumsw=\"},\"id\":\"ID5*msev0ERmNPYEYSTI3fFcqOT1THLD-MbJ-ak98vZX_pcRGEni7p6xKWSa_ILlsPN1\"}"
+          ]
         }
       ]
 
       data = put_in(data, ["user", "eids"], eids)
       assert {:ok, %BidRequest{user: %{eids: eids}}} = OpenRtbEcto.cast(BidRequest, data)
 
-      assert 6 == Enum.count(eids)
+      assert 7 == Enum.count(eids)
       valid_entry = Enum.find(eids, &(&1.source == "id5-sync.com"))
       assert [%BidRequest.Uid{ext: valid_ext}] = valid_entry.uids
 
@@ -96,7 +102,7 @@ defmodule OpenRtbEctoTest do
                valid_ext
 
       invalid_entry = Enum.find(eids, &(&1.source == "sourcewithinvaliduids.com"))
-      assert [%BidRequest.Uid{}] == invalid_entry.uids
+      assert [] == invalid_entry.uids
 
       invalid_ext = Enum.find(eids, &(&1.source == "sourcewithinvalidext.com"))
       uid = hd(invalid_ext.uids)
