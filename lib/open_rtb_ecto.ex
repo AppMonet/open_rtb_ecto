@@ -28,7 +28,7 @@ defmodule OpenRtbEcto do
     end
   end
 
-  def safe_cast_ext(changeset, attrs) do
+  def safe_cast_ext(changeset, attrs) when is_map(attrs) do
     with {:ok, ext} when is_map(ext) <- fetch_field(attrs, :ext),
          {:ok, casted} <- Ecto.Type.cast(:map, ext) do
       Ecto.Changeset.put_change(changeset, :ext, casted)
@@ -37,15 +37,19 @@ defmodule OpenRtbEcto do
     end
   end
 
-  def safe_cast_embeds_many(changeset, field, attrs) do
-    with {:ok, [_ | _] = embedded} <- fetch_field(attrs, field) do
-      # Filter out any non-map entries from the embedded array
-      valid_embedded = Enum.filter(embedded, &is_map/1)
+  def safe_cast_ext(changeset, _), do: changeset
+
+  def safe_cast_embeds_many(changeset, field, attrs) when is_map(attrs) do
+    with {:ok, [_ | _] = embedded} <- fetch_field(attrs, field),
+         # Filter out any non-map entries from the embedded list
+         [_ | _] = valid_embedded <- Enum.filter(embedded, &is_map/1) do
       Ecto.Changeset.cast_embed(changeset, field, valid_embedded)
     else
       _ -> changeset
     end
   end
+
+  def safe_cast_embeds_many(changeset, _, _), do: changeset
 
   defp fetch_field(attrs, field_as_atom) do
     field_as_string = Atom.to_string(field_as_atom)
