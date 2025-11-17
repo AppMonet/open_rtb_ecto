@@ -3,7 +3,7 @@ defmodule OpenRtbEctoTest do
   doctest OpenRtbEcto
 
   alias OpenRtbEcto.Support.TestHelper
-  alias OpenRtbEcto.V2.BidRequest
+  alias OpenRtbEcto.V2.{BidRequest, BidResponse}
   alias OpenRtbEcto.V2.BidRequest.Video
 
   describe "cast/2" do
@@ -122,6 +122,14 @@ defmodule OpenRtbEctoTest do
 
         assert {:ok, %BidRequest{}} = OpenRtbEcto.cast(BidRequest, data)
       end
+    end
+
+    test "empty bid" do
+      input = """
+      {"id":"E7RI5JEZNNWDKYZP","seatbid":[{"bid":[]}],"bidid":"fa350ea2-e2ea-431c-aabe-39b33378c28f","nbr":1,"statuscode":0}
+      """
+
+      assert {:ok, %BidResponse{nbr: 1}} = OpenRtbEcto.cast(BidResponse, input)
     end
   end
 end

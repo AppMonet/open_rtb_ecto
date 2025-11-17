@@ -26,7 +26,7 @@ defmodule OpenRtbEcto.V2.BidResponse.SeatBid do
     seat_bid
     |> cast(attrs, [:seat, :group])
     |> OpenRtbEcto.safe_cast_ext(attrs)
-    |> cast_embed(:bid, required: true)
+    |> cast_embed(:bid)
   end
 
   def changeset(eids, _attrs), do: change(eids)
