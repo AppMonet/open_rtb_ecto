@@ -88,8 +88,6 @@ defmodule OpenRtbEcto.V2.BidRequest.Device do
     |> OpenRtbEcto.safe_cast_ext(attrs)
     |> cast_embed(:geo)
     |> cast_embed(:sua)
-    |> validate_inclusion(:devicetype, 1..7)
-    |> validate_inclusion(:connectiontype, 0..6)
   end
 
   def changeset(device, _), do: change(device)
