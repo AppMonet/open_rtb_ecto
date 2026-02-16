@@ -134,6 +134,20 @@ defmodule OpenRtbEcto.V2.BidRequestTest do
               }} = OpenRtbEcto.cast(BidRequest, data)
     end
 
+    test "structured user-agent with null browsers and empty brand" do
+      data = TestHelper.test_data("v2/request", "structured-ua.json")
+
+      data =
+        put_in(data, ["device", "sua"], %{
+          "browsers" => nil,
+          "platform" => %{"brand" => ""},
+          "source" => 0
+        })
+
+      assert {:ok, %BidRequest{device: %Device{sua: %UserAgent{browsers: [], source: 0}}}} =
+               OpenRtbEcto.cast(BidRequest, data)
+    end
+
     test "multiple imps" do
       data = TestHelper.test_data("v2/request", "multi-imp.json")
       assert {:ok, %BidRequest{} = req} = OpenRtbEcto.cast(BidRequest, data)

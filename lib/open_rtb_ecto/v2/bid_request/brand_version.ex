@@ -20,7 +20,6 @@ defmodule OpenRtbEcto.V2.BidRequest.BrandVersion do
     version
     |> cast(attrs, [:brand, :version])
     |> OpenRtbEcto.safe_cast_ext(attrs)
-    |> validate_required([:brand])
   end
 
   def changeset(version, _), do: change(version)
