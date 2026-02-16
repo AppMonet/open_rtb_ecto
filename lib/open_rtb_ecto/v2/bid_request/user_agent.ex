@@ -29,9 +29,17 @@ defmodule OpenRtbEcto.V2.BidRequest.UserAgent do
     user_agent
     |> cast(attrs, [:mobile, :architecture, :bitness, :model, :source])
     |> OpenRtbEcto.safe_cast_ext(attrs)
-    |> cast_embed(:browsers)
+    |> safe_cast_browsers(attrs)
     |> cast_embed(:platform)
   end
 
   def changeset(user_agent, _), do: change(user_agent)
+
+  defp safe_cast_browsers(changeset, %{"browsers" => browsers}) when is_list(browsers),
+    do: cast_embed(changeset, :browsers)
+
+  defp safe_cast_browsers(changeset, %{browsers: browsers}) when is_list(browsers),
+    do: cast_embed(changeset, :browsers)
+
+  defp safe_cast_browsers(changeset, _attrs), do: changeset
 end
