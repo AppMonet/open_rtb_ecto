@@ -37,8 +37,6 @@ defmodule OpenRtbEcto.V2.BidRequest.Native do
     |> cast(attrs, [:request, :ver, :api, :battr])
     |> OpenRtbEcto.safe_cast_ext(attrs)
     |> validate_required(:request)
-    |> validate_subset(:api, 1..6)
-    |> validate_subset(:battr, 1..17)
     |> cast_embed(:request_native)
   end
 
